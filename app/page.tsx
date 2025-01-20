@@ -33,13 +33,13 @@ export default function Home() {
         <Link href="https://github.com/hexgeta" target="_blank" className="hover:text-[#ff69b4] transition-colors">[Github]</Link>
       </nav>
 
-      <div className="max-w-4xl w-full flex-grow flex flex-col gap-8 p-4">
+      <div className="max-w-4xl w-full flex-grow flex flex-col gap-8 p-14">
         {/* Logo and Header */}
         <div className="flex justify-between items-start">
-          <h1 className="text-white text-4xl"><ScrambleText text="Hexgeta" /></h1>
-          <div className="text-right">
+          <h1 className="text-white text-4xl"><ScrambleText text="Full-stack crypto dev" /></h1>
+          <div className="text-left">
             <p className="text-white">Glad you're here!</p>
-            <p className="text-[#666] text-sm tracking-wider flex justify-end items-center gap-1">
+            <p className="text-[#666] text-sm tracking-wider flex justify-end items-center gap-1 whitespace-nowrap">
               <span>{currentDate}</span>
               <span className="flex">
                 <NumberFlow 
@@ -65,18 +65,32 @@ export default function Home() {
         </div>
 
         {/* Main Content */}
-        <div className="space-y-6 text-white">
+        <div className="space-y-8 text-white">
           <p><ScrambleText text="Hi, I'm Hexgeta." /></p>
-          <p><ScrambleText text="I'm a physicist, mathematician and crypto developer." /></p>
+          <p><ScrambleText text="I'm a, physisist, statistician, and front-end crypto engineer." /></p>
+          <p><ScrambleText text="I have 5 years experience building websites, dapps, and financial visualisations." /></p>
           <p><ScrambleText text="Feel free to DM me on X for enquiries." /></p>
 
           {/* Projects */}
           <div className="mt-8">
-            <h2 className="mb-4"><ScrambleText text="My projects" /></h2>
+            <h2 className="mb-4"><ScrambleText text="My projects:" /></h2>
             <ul className="space-y-2">
               <li>• <Link href="https://app.lookintomaxi.com" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
                 <ScrambleText text="LookIntoMaxi" />
               </Link> <ScrambleText text="A crypto statistics website." /></li>
+              <li>• <Link href="https://app.lookintomaxi.com" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
+                <ScrambleText text="LookIntoMaxi (Original)" />
+              </Link> <ScrambleText text="The legacy version of LookIntoMaxi." /></li>
+              <li>• <Link href="https://lookintoparty.com/calculator/" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
+                <ScrambleText text="Pool vs solo-staking calculator" />
+              </Link> <ScrambleText text="" /></li>
+              <li>• <Link href="https://lookintomaxi.com/limit/" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
+                <ScrambleText text="Pooled stake limit order calculator" />
+              </Link> <ScrambleText text="" /></li>
+              <li>• <Link href="#" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
+                <ScrambleText text="Hex staking front-end" />
+              </Link> <ScrambleText text="Coming soon..." /></li>
+
             </ul>
           </div>
         </div>
