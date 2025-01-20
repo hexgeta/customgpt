@@ -72,7 +72,7 @@ export default function Home() {
 
           {/* Projects */}
           <div className="mt-8">
-            <h2 className="mb-4"><ScrambleText text="My projects:" /></h2>
+            <h2 className="mb-4"><ScrambleText text="My projects" /></h2>
             <ul className="space-y-2">
               <li>• <Link href="https://app.lookintomaxi.com" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
                 <ScrambleText text="LookIntoMaxi" />
