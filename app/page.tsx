@@ -45,19 +45,28 @@ export default function Home() {
                 <NumberFlow 
                   value={hours}
                   format={{ minimumIntegerDigits: 2 }}
-                  style={{ '--number-flow-char-height': '1.2em' } as React.CSSProperties}
+                  style={{ 
+                    '--number-flow-char-height': '1.2em',
+                    '--number-flow-direction': 1 // 1 for up, -1 for down
+                  } as React.CSSProperties}
                 />
                 :
                 <NumberFlow 
                   value={minutes}
                   format={{ minimumIntegerDigits: 2 }}
-                  style={{ '--number-flow-char-height': '1.2em' } as React.CSSProperties}
+                  style={{ 
+                    '--number-flow-char-height': '1.2em',
+                    '--number-flow-direction': 1
+                  } as React.CSSProperties}
                 />
                 :
                 <NumberFlow 
                   value={seconds}
                   format={{ minimumIntegerDigits: 2 }}
-                  style={{ '--number-flow-char-height': '1.2em' } as React.CSSProperties}
+                  style={{ 
+                    '--number-flow-char-height': '1.2em',
+                    '--number-flow-direction': -1
+                  } as React.CSSProperties}
                 />
               </span>
             </p>
@@ -67,8 +76,8 @@ export default function Home() {
         {/* Main Content */}
         <div className="space-y-8 text-white">
           <p><ScrambleText text="Hi, I'm Hexgeta." /></p>
-          <p><ScrambleText text="I'm a, physisist, statistician, and front-end crypto engineer." /></p>
-          <p><ScrambleText text="I have 5 years experience building websites, dapps, and financial visualisations." /></p>
+          <p><ScrambleText text="I'm a physicist, statistician, and front-end crypto engineer." /></p>
+          <p><ScrambleText text="I have 5 years of experience building websites, dapps, and financial visualizations." /></p>
           <p><ScrambleText text="Feel free to DM me on X for enquiries." /></p>
 
           {/* Projects */}
@@ -83,14 +92,13 @@ export default function Home() {
               </Link> <ScrambleText text="The legacy version of LookIntoMaxi." /></li>
               <li>• <Link href="https://lookintoparty.com/calculator/" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
                 <ScrambleText text="Pool vs solo-staking calculator" />
-              </Link> <ScrambleText text="" /></li>
+              </Link></li>
               <li>• <Link href="https://lookintomaxi.com/limit/" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
                 <ScrambleText text="Pooled stake limit order calculator" />
-              </Link> <ScrambleText text="" /></li>
+              </Link></li>
               <li>• <Link href="#" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
-                <ScrambleText text="Hex staking front-end" />
+                <ScrambleText text="HEX staking front-end" />
               </Link> <ScrambleText text="Coming soon..." /></li>
-
             </ul>
           </div>
         </div>
