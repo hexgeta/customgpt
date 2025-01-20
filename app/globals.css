@@ -6,7 +6,6 @@
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 0, 0;
   --background-end-rgb: 0, 0, 0;
-  --number-flow-duration: 0.4s;
 }
 
 body {
@@ -57,19 +56,5 @@ body {
   /* Add more keyframes as needed */
   100% {
     text-shadow: 0.4389924193300864px 0 1px rgba(0,30,255,0.5), -0.4389924193300864px 0 1px rgba(255,0,80,0.3), 0 0 3px;
-  }
-}
-
-.number-flow-down {
-  --number-flow-transform: translateY(-100%);
-  animation: numberFlowDown var(--number-flow-duration) ease-out;
-}
-
-@keyframes numberFlowDown {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: var(--number-flow-transform);
   }
 } 

@@ -33,13 +33,13 @@ export default function Home() {
         <Link href="https://github.com/hexgeta" target="_blank" className="hover:text-[#ff69b4] transition-colors">[Github]</Link>
       </nav>
 
-      <div className="max-w-4xl w-full flex-grow flex flex-col gap-8 p-14">
+      <div className="max-w-4xl w-full flex-grow flex flex-col gap-8 p-4 md:p-14">
         {/* Logo and Header */}
         <div className="flex justify-between items-start">
           <h1 className="text-white text-4xl"><ScrambleText text="Full-stack crypto dev" /></h1>
           <div className="text-left">
-            <p className="text-white">Glad you're here!</p>
-            <p className="text-[#666] text-sm tracking-wider flex justify-end items-center gap-1 whitespace-nowrap">
+            <p className="text-white hidden md:block">Glad you're here!</p>
+            <p className="text-[#666] text-sm tracking-wider flex justify-end items-center gap-1 whitespace-nowrap hidden md:flex">
               <span>{currentDate}</span>
               <span className="flex">
                 <NumberFlow 
@@ -47,7 +47,7 @@ export default function Home() {
                   format={{ minimumIntegerDigits: 2 }}
                   style={{ 
                     '--number-flow-char-height': '1.2em',
-                    '--number-flow-direction': 1 // 1 for up, -1 for down
+                    '--number-flow-direction': 1
                   } as React.CSSProperties}
                 />
                 :
@@ -84,21 +84,55 @@ export default function Home() {
           <div className="mt-8">
             <h2 className="mb-4"><ScrambleText text="My projects:" /></h2>
             <ul className="space-y-2">
-              <li>• <Link href="https://app.lookintomaxi.com" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
-                <ScrambleText text="LookIntoMaxi" />
-              </Link> <ScrambleText text="A crypto statistics website." /></li>
-              <li>• <Link href="https://app.lookintomaxi.com" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
-                <ScrambleText text="LookIntoMaxi (Original)" />
-              </Link> <ScrambleText text="The legacy version of LookIntoMaxi." /></li>
-              <li>• <Link href="https://lookintoparty.com/calculator/" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
-                <ScrambleText text="Pool vs solo-staking calculator" />
-              </Link></li>
-              <li>• <Link href="https://lookintomaxi.com/limit/" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
-                <ScrambleText text="Pooled stake limit order calculator" />
-              </Link></li>
-              <li>• <Link href="#" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
-                <ScrambleText text="HEX staking front-end" />
-              </Link> <ScrambleText text="Coming soon..." /></li>
+              <li className="flex items-start gap-2">
+                <span>•</span>
+                <div>
+                  <Link href="https://app.lookintomaxi.com" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
+                    <ScrambleText text="LookIntoMaxi" />
+                  </Link>
+                  <span className="ml-2">
+                    <ScrambleText text="A crypto statistics website." />
+                  </span>
+                </div>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>•</span>
+                <div>
+                  <Link href="https://app.lookintomaxi.com" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
+                    <ScrambleText text="LookIntoMaxi (Original)" />
+                  </Link>
+                  <span className="ml-2">
+                    <ScrambleText text="The legacy version of LookIntoMaxi." />
+                  </span>
+                </div>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>•</span>
+                <div>
+                  <Link href="https://lookintoparty.com/calculator/" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
+                    <ScrambleText text="Pool vs solo-staking calculator" />
+                  </Link>
+                </div>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>•</span>
+                <div>
+                  <Link href="https://lookintomaxi.com/limit/" target="_blank" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
+                    <ScrambleText text="Pooled stake limit order calculator" />
+                  </Link>
+                </div>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>•</span>
+                <div>
+                  <Link href="#" className="text-[#ffd700] hover:text-[#ff69b4] transition-colors">
+                    <ScrambleText text="HEX staking front-end" />
+                  </Link>
+                  <span className="ml-2">
+                    <ScrambleText text="Coming soon..." />
+                  </span>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
