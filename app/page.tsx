@@ -36,7 +36,7 @@ export default function Home() {
       <div className="max-w-4xl w-full flex-grow flex flex-col gap-8 p-4 md:p-14">
         {/* Logo and Header */}
         <div className="flex justify-between items-start">
-          <h1 className="text-white text-4xl"><ScrambleText text="Full-stack crypto dev" /></h1>
+          <h1 className="text-white text-4xl"><ScrambleText text="Full-stack crypto" /></h1>
           <div className="text-left">
             <p className="text-white hidden md:block">Glad you're here!</p>
             <p className="text-[#666] text-sm tracking-wider flex justify-end items-center gap-1 whitespace-nowrap hidden md:flex">
@@ -55,7 +55,7 @@ export default function Home() {
                   value={minutes}
                   format={{ minimumIntegerDigits: 2 }}
                   style={{ 
-                    '--number-flow-char-height': '1.1em',
+                    '--number-flow-char-height': '1.2em',
                     '--number-flow-direction': 1
                   } as React.CSSProperties}
                 />
