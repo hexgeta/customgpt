@@ -55,7 +55,7 @@ export default function Home() {
                   value={minutes}
                   format={{ minimumIntegerDigits: 2 }}
                   style={{ 
-                    '--number-flow-char-height': '1.2em',
+                    '--number-flow-char-height': '1.1em',
                     '--number-flow-direction': 1
                   } as React.CSSProperties}
                 />
