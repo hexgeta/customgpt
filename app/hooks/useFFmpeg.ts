@@ -24,25 +24,10 @@ export const useFFmpeg = () => {
       try {
         console.log('Starting FFmpeg loading...');
         
-        // Create blob URLs first
-        console.log('Creating blob URLs...');
-        const coreURL = await toBlobURL(
-          new URL('/ffmpeg-core.js', window.location.href).href,
-          'text/javascript'
-        );
-        console.log('Core URL created');
-        
-        const wasmURL = await toBlobURL(
-          new URL('/ffmpeg-core.wasm', window.location.href).href,
-          'application/wasm'
-        );
-        console.log('WASM URL created');
-
-        // Load FFmpeg
-        console.log('Loading FFmpeg with blob URLs...');
+        // Load FFmpeg directly with base URL
         await ffmpeg.load({
-          coreURL,
-          wasmURL,
+          coreURL: "https://unpkg.com/@ffmpeg/core@0.12.6/dist/ffmpeg-core.js",
+          wasmURL: "https://unpkg.com/@ffmpeg/core@0.12.6/dist/ffmpeg-core.wasm"
         });
         
         setLoaded(true);
