@@ -29,7 +29,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' 'inline-speculation-rules' blob:; worker-src 'self' blob:; child-src 'self' blob:; script-src-elem 'self' 'unsafe-inline';"
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' 'inline-speculation-rules' blob: 'unsafe-inline'; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; script-src-elem 'self' 'unsafe-inline' blob:;"
           }
         ],
       },
@@ -43,6 +43,10 @@ const nextConfig = {
           {
             key: 'Cross-Origin-Resource-Policy',
             value: 'cross-origin',
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
           }
         ],
       },
@@ -56,6 +60,10 @@ const nextConfig = {
           {
             key: 'Cross-Origin-Resource-Policy',
             value: 'cross-origin',
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
           }
         ],
       }

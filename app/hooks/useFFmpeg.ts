@@ -24,10 +24,25 @@ export const useFFmpeg = () => {
       try {
         console.log('Starting FFmpeg loading...');
         
-        // Load FFmpeg with direct URLs first
+        // Create blob URLs first
+        console.log('Creating blob URLs...');
+        const coreURL = await toBlobURL(
+          new URL('/ffmpeg-core.js', window.location.href).href,
+          'text/javascript'
+        );
+        console.log('Core URL created');
+        
+        const wasmURL = await toBlobURL(
+          new URL('/ffmpeg-core.wasm', window.location.href).href,
+          'application/wasm'
+        );
+        console.log('WASM URL created');
+
+        // Load FFmpeg
+        console.log('Loading FFmpeg with blob URLs...');
         await ffmpeg.load({
-          coreURL: '/ffmpeg-core.js',
-          wasmURL: '/ffmpeg-core.wasm'
+          coreURL,
+          wasmURL,
         });
         
         setLoaded(true);
@@ -39,23 +54,7 @@ export const useFFmpeg = () => {
           stack: error?.stack,
           name: error?.name
         });
-        
-        // If direct loading fails, try with blob URLs
-        try {
-          console.log('Trying blob URL loading...');
-          const coreURL = await toBlobURL('/ffmpeg-core.js', 'text/javascript');
-          const wasmURL = await toBlobURL('/ffmpeg-core.wasm', 'application/wasm');
-          
-          await ffmpeg.load({
-            coreURL,
-            wasmURL,
-          });
-          setLoaded(true);
-          console.log('FFmpeg loaded successfully with blob URLs');
-        } catch (blobError: any) {
-          console.error('Error loading FFmpeg with blob URLs:', blobError);
-          throw new Error(`Failed to load FFmpeg: ${blobError?.message || 'Unknown error'}`);
-        }
+        throw new Error(`Failed to load FFmpeg: ${error?.message || 'Unknown error'}`);
       }
     }
   };
