@@ -1,70 +1,55 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { motion, useAnimationControls } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
-const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+'
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+'
 
 interface ScrambleTextProps {
   text: string
   className?: string
 }
 
-export default function ScrambleText({ text, className = '' }: ScrambleTextProps) {
-  const [displayText, setDisplayText] = useState('')
-  const [isScrambling, setIsScrambling] = useState(false)
-  const [scrambleTimeout, setScrambleTimeout] = useState<NodeJS.Timeout | null>(null)
+export default function ScrambleText({ text: initialText, className = '' }: ScrambleTextProps) {
+  const [text, setText] = useState(initialText)
+  const controls = useAnimationControls()
 
-  const scrambleText = useCallback(() => {
-    let iterations = 0
-    const maxIterations = 10
-    const interval = setInterval(() => {
-      setDisplayText(
-        text
-          .split('')
-          .map((char, index) => {
-            if (char === ' ') return ' '
-            if (iterations > index) return text[index]
-            return characters[Math.floor(Math.random() * characters.length)]
-          })
-          .join('')
-      )
-
-      iterations += 1
-      if (iterations >= maxIterations) {
-        clearInterval(interval)
-        setDisplayText(text)
-        setIsScrambling(false)
-      }
-    }, 50)
-
-    return interval
-  }, [text])
-
-  // Initial load effect
   useEffect(() => {
-    const interval = scrambleText()
+    const interval = setInterval(() => {
+      scrambleText()
+    }, 2000)
+
     return () => clearInterval(interval)
   }, [])
 
-  // Hover effect
-  const handleMouseEnter = () => {
-    if (scrambleTimeout) clearTimeout(scrambleTimeout)
-    setIsScrambling(true)
-    const interval = scrambleText()
-    const timeout = setTimeout(() => {
-      clearInterval(interval)
-      setDisplayText(text)
-      setIsScrambling(false)
-    }, 2000)
-    setScrambleTimeout(timeout)
+  const scrambleText = async () => {
+    // First, scramble the text
+    for (let i = 0; i < 3; i++) {
+      await controls.start({
+        opacity: 1,
+        transition: { duration: 0.1 }
+      })
+      
+      setText(prevText => 
+        prevText
+          .split('')
+          .map((char, index) => 
+            Math.random() > 0.5 ? characters[Math.floor(Math.random() * characters.length)] : char
+          )
+          .join('')
+      )
+    }
+
+    // Then set it back to original
+    setText(initialText)
   }
 
   return (
-    <span 
-      className={`inline-block ${className}`}
-      onMouseEnter={handleMouseEnter}
+    <motion.div
+      animate={controls}
+      className={`text-white font-mono text-sm whitespace-nowrap ${className}`}
     >
-      {displayText || text}
-    </span>
+      {text}
+    </motion.div>
   )
 } 
