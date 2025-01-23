@@ -26,6 +26,15 @@ const nextConfig = {
           {
             key: 'Cross-Origin-Embedder-Policy',
             value: 'require-corp',
+          }
+        ],
+      },
+      {
+        source: '/ffmpeg-core.js',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'text/javascript',
           },
           {
             key: 'Cross-Origin-Resource-Policy',
@@ -33,6 +42,19 @@ const nextConfig = {
           }
         ],
       },
+      {
+        source: '/ffmpeg-core.wasm',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/wasm',
+          },
+          {
+            key: 'Cross-Origin-Resource-Policy',
+            value: 'cross-origin',
+          }
+        ],
+      }
     ]
   },
 }

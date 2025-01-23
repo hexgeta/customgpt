@@ -22,15 +22,27 @@ export const useFFmpeg = () => {
   const loadFFmpeg = async () => {
     if (!ffmpeg.loaded) {
       try {
+        console.log('Starting FFmpeg loading...');
+        const coreURL = await toBlobURL('/ffmpeg-core.js', 'text/javascript');
+        console.log('Core JS URL created:', !!coreURL);
+        
+        const wasmURL = await toBlobURL('/ffmpeg-core.wasm', 'application/wasm');
+        console.log('WASM URL created:', !!wasmURL);
+
         await ffmpeg.load({
-          coreURL: await toBlobURL('/ffmpeg-core.js', 'text/javascript'),
-          wasmURL: await toBlobURL('/ffmpeg-core.wasm', 'application/wasm'),
+          coreURL,
+          wasmURL,
         });
         setLoaded(true);
         console.log('FFmpeg loaded successfully');
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error loading FFmpeg:', error);
-        throw new Error('Failed to load FFmpeg');
+        console.error('Error details:', {
+          message: error?.message || 'Unknown error',
+          stack: error?.stack,
+          name: error?.name
+        });
+        throw new Error(`Failed to load FFmpeg: ${error?.message || 'Unknown error'}`);
       }
     }
   };
