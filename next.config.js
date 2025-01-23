@@ -29,7 +29,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; script-src-elem 'self' 'unsafe-inline' blob:;"
+            value: "default-src 'self' blob: data: https://unpkg.com; connect-src 'self' blob: https://unpkg.com; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' 'inline-speculation-rules' blob: 'unsafe-inline' https://unpkg.com; worker-src 'self' blob: https://unpkg.com; child-src 'self' blob: https://unpkg.com; img-src 'self' blob: data: https://unpkg.com; media-src 'self' blob: data: https://unpkg.com; script-src-elem 'self' 'unsafe-inline' blob: https://unpkg.com;"
           }
         ],
       },

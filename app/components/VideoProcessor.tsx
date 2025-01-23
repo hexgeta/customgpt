@@ -8,17 +8,50 @@ const VideoProcessor = () => {
   const [frames, setFrames] = useState<string[]>([]);
   const [metadata, setMetadata] = useState<{ duration: number; fps: number } | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const { loaded, processing, getVideoMetadata, extractFrames, compositeImage } = useFFmpeg();
+  const { loaded, processing, getVideoMetadata, extractFrames, compositeImage, setCompositeImage } = useFFmpeg();
 
   const handleFile = async (file: File) => {
-    if (!file.type.startsWith('video/')) {
-      alert('Please upload a video file');
-      return;
+    try {
+      console.log('Handling file:', {
+        type: file.type,
+        size: file.size,
+        name: file.name
+      });
+
+      // Check file size (100MB limit)
+      if (file.size > 100 * 1024 * 1024) {
+        alert('File is too large. Please upload a video smaller than 100MB.');
+        return;
+      }
+
+      // Accept any video file, even if MIME type is not set correctly
+      const validExtensions = ['.mp4', '.webm', '.mov', '.avi', '.mkv'];
+      const hasValidExtension = validExtensions.some(ext => 
+        file.name.toLowerCase().endsWith(ext)
+      );
+
+      if (!file.type.startsWith('video/') && !hasValidExtension) {
+        alert('Please upload a valid video file (mp4, webm, mov, avi, mkv)');
+        return;
+      }
+
+      setVideo(file);
+      setFrames([]);
+      setCompositeImage(null);
+
+      console.log('Getting video metadata...');
+      const metadata = await getVideoMetadata(file);
+      console.log('Video metadata:', metadata);
+      setMetadata(metadata);
+      
+    } catch (error: any) {
+      console.error('Error handling file:', error);
+      alert(error?.message || 'Error handling file. Please try again.');
+      setVideo(null);
+      setMetadata(null);
+      setFrames([]);
+      setCompositeImage(null);
     }
-    setVideo(file);
-    setFrames([]);
-    const metadata = await getVideoMetadata(file);
-    setMetadata(metadata);
   };
 
   const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
@@ -49,11 +82,17 @@ const VideoProcessor = () => {
     if (!loaded) return alert("FFmpeg is not loaded yet. Please wait.");
 
     try {
+      setFrames([]); // Clear previous frames
+      setCompositeImage(null); // Clear previous composite
+      console.log('Starting video processing...');
       const extractedFrames = await extractFrames(video, metadata);
+      console.log('Video processing complete');
       setFrames(extractedFrames);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error processing video:', error);
-      alert('Error processing video. Please check console for details.');
+      alert(error?.message || 'Error processing video. Please check console for details.');
+      setFrames([]);
+      setCompositeImage(null);
     }
   };
 
@@ -78,7 +117,7 @@ const VideoProcessor = () => {
       >
         <input
           type="file"
-          accept="video/*"
+          accept=".mp4,.webm,.mov,.avi,.mkv,video/*"
           onChange={handleFileChange}
           className="hidden"
           id="video-upload"
@@ -88,11 +127,16 @@ const VideoProcessor = () => {
           className="cursor-pointer text-center p-4"
         >
           <p className="text-[#00ffff] text-lg mb-1">DROP VIDEO HERE</p>
-          <p className="text-[#00ffff]/60 text-sm">[ jpg / mp4 / gif ]</p>
+          <p className="text-[#00ffff]/60 text-sm">[ mp4 / webm / mov / avi / mkv ]</p>
           {metadata && (
             <div className="mt-2 text-[#ff69b4] text-sm">
               <p>Duration: {metadata.duration.toFixed(2)} seconds</p>
               <p>FPS: {metadata.fps}</p>
+              {metadata.duration === 10 && (
+                <p className="text-yellow-400 text-xs mt-1">
+                  ⚠️ Using estimated duration
+                </p>
+              )}
             </div>
           )}
         </label>
@@ -123,20 +167,22 @@ const VideoProcessor = () => {
                   className="relative group cursor-pointer"
                   onClick={() => handleDownload(frame, `frame-${index + 1}.png`)}
                 >
-                  <img
-                    src={frame}
-                    alt={`Frame ${index + 1}`}
-                    className="w-full rounded-md border border-[#00ffff]/20"
-                  />
-                  <div className="absolute top-2 left-2 bg-black/50 text-white px-2 py-1 rounded-md text-xs">
-                    {index + 1}
+                  <div className="aspect-video w-full relative">
+                    <img
+                      src={frame}
+                      alt={`Frame ${index + 1}`}
+                      className="w-full h-full object-cover rounded-md border border-[#00ffff]/20"
+                    />
+                    <div className="absolute top-2 left-2 bg-black/50 text-white px-2 py-1 rounded-md text-xs">
+                      {index + 1}
+                    </div>
+                    <button
+                      className="absolute top-2 right-2 bg-[#ff69b4] text-white w-6 h-6 rounded-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-sm"
+                      title="Download frame"
+                    >
+                      ↓
+                    </button>
                   </div>
-                  <button
-                    className="absolute top-2 right-2 bg-[#ff69b4] text-white w-6 h-6 rounded-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-sm"
-                    title="Download frame"
-                  >
-                    ↓
-                  </button>
                 </div>
               ))}
             </div>
@@ -149,20 +195,22 @@ const VideoProcessor = () => {
                 className="relative group cursor-pointer" 
                 onClick={() => handleDownload(compositeImage, 'composite-timeline.png')}
               >
-                <img
-                  src={compositeImage}
-                  alt="All frames combined"
-                  className="w-full rounded-md border border-[#00ffff]/20"
-                />
-                <button
-                  className="absolute top-2 right-2 bg-[#ff69b4] text-white w-6 h-6 rounded-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-sm"
-                  title="Download timeline"
-                >
-                  ↓
-                </button>
+                <div className="relative">
+                  <img
+                    src={compositeImage}
+                    alt="All frames combined"
+                    className="w-full rounded-md border border-[#00ffff]/20"
+                  />
+                  <button
+                    className="absolute top-2 right-2 bg-[#ff69b4] text-white w-6 h-6 rounded-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-sm"
+                    title="Download timeline"
+                  >
+                    ↓
+                  </button>
+                </div>
               </div>
               <p className="text-[#00ffff]/60 text-sm text-center">
-                Prompt: Recreate this UI animation as a demo component for me in react ignore the cursor and focus on recreating the UI functionality only. Use Shadcn, framer motion or any other libraries or code you think you need. But simple is best.
+                Click on any frame to download it
               </p>
             </div>
           )}
