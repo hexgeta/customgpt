@@ -1,8 +1,17 @@
 'use client'
 
-import VideoProcessor from './components/VideoProcessor'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import ScrambleText from './components/ScrambleText'
+
+const VideoProcessor = dynamic(() => import('./components/VideoProcessor'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-[400px] h-[225px] border-2 border-dashed border-[#00ffff] rounded-lg flex items-center justify-center">
+      <p className="text-[#00ffff]">Loading...</p>
+    </div>
+  )
+})
 
 export default function VideoPage() {
   return (
@@ -12,7 +21,7 @@ export default function VideoPage() {
 
       <div className="min-h-screen flex flex-col items-center mt-8 p-4 md:px-14">
         <h1 className="text-white text-4xl mb-4">
-          <ScrambleText text="Video to Image Frames for AI" />
+          <ScrambleText text="Video Frame Extractor" />
         </h1>
         <Link 
           href="https://twitter.com/hexgeta" 
