@@ -212,6 +212,9 @@ const VideoProcessor = () => {
               <p className="text-[#00ffff]/60 text-sm text-center">
                 Click on any frame to download it
               </p>
+              <p className="text-[#00ffff]/60 text-sm text-center mt-4">
+                Prompt: Recreate this UI animation as a demo component for me in react ignore the cursor and focus on recreating the UI functionality only. Use Shadcn, framer motion or any other libraries or code you think you need. But simple is best.
+              </p>
             </div>
           )}
         </div>
