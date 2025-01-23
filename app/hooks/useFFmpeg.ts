@@ -23,13 +23,11 @@ export const useFFmpeg = () => {
     if (!ffmpeg.loaded) {
       try {
         console.log('Starting FFmpeg loading...');
-        
-        // Load FFmpeg directly with base URL
+        const baseURL = window.location.origin;
         await ffmpeg.load({
-          coreURL: "https://unpkg.com/@ffmpeg/core@0.12.6/dist/ffmpeg-core.js",
-          wasmURL: "https://unpkg.com/@ffmpeg/core@0.12.6/dist/ffmpeg-core.wasm"
+          coreURL: `${baseURL}/ffmpeg-core.js`,
+          wasmURL: `${baseURL}/ffmpeg-core.wasm`,
         });
-        
         setLoaded(true);
         console.log('FFmpeg loaded successfully');
       } catch (error: any) {

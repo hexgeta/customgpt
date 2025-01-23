@@ -26,10 +26,6 @@ const nextConfig = {
           {
             key: 'Cross-Origin-Embedder-Policy',
             value: 'require-corp',
-          },
-          {
-            key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' 'inline-speculation-rules' blob: 'unsafe-inline' https://unpkg.com; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob: https://unpkg.com; script-src-elem 'self' 'unsafe-inline' blob: https://unpkg.com;"
           }
         ],
       },
@@ -38,15 +34,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Type',
-            value: 'text/javascript',
-          },
-          {
-            key: 'Cross-Origin-Resource-Policy',
-            value: 'cross-origin',
-          },
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: '*'
+            value: 'application/javascript',
           }
         ],
       },
@@ -56,14 +44,6 @@ const nextConfig = {
           {
             key: 'Content-Type',
             value: 'application/wasm',
-          },
-          {
-            key: 'Cross-Origin-Resource-Policy',
-            value: 'cross-origin',
-          },
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: '*'
           }
         ],
       }
