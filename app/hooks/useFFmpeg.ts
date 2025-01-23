@@ -23,11 +23,7 @@ export const useFFmpeg = () => {
     if (!ffmpeg.loaded) {
       try {
         console.log('Starting FFmpeg loading...');
-        const baseURL = window.location.origin;
-        await ffmpeg.load({
-          coreURL: `${baseURL}/ffmpeg-core.js`,
-          wasmURL: `${baseURL}/ffmpeg-core.wasm`,
-        });
+        await ffmpeg.load();
         setLoaded(true);
         console.log('FFmpeg loaded successfully');
       } catch (error: any) {
@@ -68,7 +64,7 @@ export const useFFmpeg = () => {
       // Extract frames using fps filter
       await ffmpeg.exec([
         '-i', 'input.mp4',
-        '-vf', `fps=1/${(metadata.duration/20)}`,  // Extract 20 frames evenly spaced
+        '-vf', `fps=1/${(metadata.duration/30)}`,  // Extract 20 frames evenly spaced
         '-frame_pts', '1',
         '-vsync', '0',
         'frame-%d.png'
@@ -76,7 +72,7 @@ export const useFFmpeg = () => {
 
       // Read the extracted frames
       const extractedFrames = [];
-      for (let i = 1; i <= 20; i++) {
+      for (let i = 1; i <= 30; i++) {
         try {
           const frameData = await ffmpeg.readFile(`frame-${i}.png`);
           const frameBlob = new Blob([frameData], { type: "image/png" });

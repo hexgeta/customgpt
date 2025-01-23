@@ -26,6 +26,10 @@ const nextConfig = {
           {
             key: 'Cross-Origin-Embedder-Policy',
             value: 'require-corp',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; worker-src 'self' blob:; child-src 'self' blob:; connect-src 'self' blob:; script-src-elem 'self' 'unsafe-inline' blob:;"
           }
         ],
       },
@@ -35,6 +39,10 @@ const nextConfig = {
           {
             key: 'Content-Type',
             value: 'application/javascript',
+          },
+          {
+            key: 'Cross-Origin-Resource-Policy',
+            value: 'cross-origin',
           }
         ],
       },
@@ -44,6 +52,10 @@ const nextConfig = {
           {
             key: 'Content-Type',
             value: 'application/wasm',
+          },
+          {
+            key: 'Cross-Origin-Resource-Policy',
+            value: 'cross-origin',
           }
         ],
       }
