@@ -5,7 +5,6 @@ import localFont from 'next/font/local'
 const departureMono = localFont({
   src: './fonts/DepartureMono-Regular.otf',
   variable: '--font-departure',
-  preload: true,
   display: 'swap',
 })
 
@@ -25,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={departureMono.variable}>
-      <body className={`${departureMono.className} bg-[#0a0a0f] antialiased`}>
+      <body className={`${departureMono.className}`}>
         {children}
       </body>
     </html>

@@ -106,9 +106,9 @@ const VideoProcessor = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-4">
+    <div className="flex flex-col items-center">
       <div 
-        className={`w-[400px] h-[225px] border-2 border-dashed rounded-lg flex flex-col items-center justify-center mb-8 transition-colors ${
+        className={`w-full max-w-[400px] h-[225px] border-2 border-dashed rounded-lg flex flex-col items-center justify-center mb-8 transition-colors ${
           isDragging ? 'border-[#ff69b4] bg-[#ff69b4]/10' : 'border-[#00ffff]'
         }`}
         onDrop={handleDrop}

@@ -47,7 +47,7 @@ export default function ScrambleText({ text: initialText, className = '' }: Scra
   return (
     <motion.div
       animate={controls}
-      className={`text-white font-mono text-sm whitespace-nowrap ${className}`}
+      className={`text-white font-mono whitespace-nowrap ${className}`}
     >
       {text}
     </motion.div>

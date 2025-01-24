@@ -3,74 +3,67 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 
-export default function OnboardingFlow() {
-  const [step, setStep] = useState(1)
+export default function TabsDemo() {
+  const [activeTab, setActiveTab] = useState(0)
+  const [hoveredTab, setHoveredTab] = useState<number | null>(null)
+  
+  const tabs = [
+    'Overview',
+    'Integrations',
+    'Activity',
+    'Domains',
+    'Usage',
+    'Monitoring'
+  ]
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      {/* Phone frame */}
-      <div className="w-[320px] h-[640px] bg-white rounded-[40px] relative overflow-hidden shadow-2xl p-4">
-        {/* Status bar */}
-        <div className="flex justify-between text-sm text-gray-600 mb-8">
-          <span>00:00</span>
-          <span>0:00</span>
-        </div>
-
-        <AnimatePresence mode="wait">
-          {step === 1 ? (
-            <motion.div
-              key="welcome"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute inset-x-4 top-20"
-            >
-              <div className="bg-white rounded-xl p-4 shadow-lg">
-                <div className="w-8 h-8 bg-black rounded-xl mb-3" />
-                <h2 className="text-lg font-semibold mb-2">Welcome to Miles</h2>
-                <p className="text-sm text-gray-600 mb-4">
-                  Miles is designed to help you track your running data in the simplest possible way.
-                </p>
-                <button
-                  onClick={() => setStep(2)}
-                  className="w-full bg-black text-white rounded-lg py-2.5 font-medium"
+    <div className="min-h-screen bg-white">
+      <div className="w-full max-w-2xl mx-auto p-8">
+        <nav className="relative">
+          <ul className="flex gap-6 border-b border-gray-200">
+            {tabs.map((tab, index) => (
+              <li key={tab} className="relative">
+                <AnimatePresence>
+                  {hoveredTab === index && (
+                    <motion.div
+                      layoutId="hoverBackground"
+                      className="absolute inset-0 -mx-3 -my-2 rounded-full bg-gray-50"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15 }}
+                    />
+                  )}
+                </AnimatePresence>
+                <motion.button
+                  onClick={() => setActiveTab(index)}
+                  onHoverStart={() => setHoveredTab(index)}
+                  onHoverEnd={() => setHoveredTab(null)}
+                  className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${
+                    activeTab === index 
+                      ? 'text-black' 
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  Get started
-                </button>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="health-sync"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute inset-x-4 top-20"
-            >
-              <div className="bg-white rounded-xl p-4 shadow-lg">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 bg-black rounded-xl" />
-                  <div className="w-4 h-4 text-red-500">❤️</div>
-                </div>
-                <h2 className="text-lg font-semibold mb-2">Apple Health Sync</h2>
-                <p className="text-sm text-gray-600 mb-4">
-                  You can connect with Apple Health to sync your running data with Miles.
-                </p>
-                <div className="flex items-center gap-2 mb-3 text-sm text-gray-600">
-                  <div className="w-5 h-5 bg-gray-200 rounded-full" />
-                  <span>Runs added from Miles will send to Apple Health</span>
-                </div>
-                <div className="flex items-center gap-2 mb-4 text-sm text-gray-600">
-                  <div className="w-5 h-5 bg-gray-200 rounded-full" />
-                  <span>Runs from Apple Watch and other apps will appear in Miles</span>
-                </div>
-                <button className="w-full bg-black text-white rounded-lg py-2.5 font-medium">
-                  Continue
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  {tab}
+                </motion.button>
+                {activeTab === index && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute bottom-[-1px] left-0 right-0 h-[2px] bg-black"
+                    initial={false}
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 35
+                    }}
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </div>
   )
