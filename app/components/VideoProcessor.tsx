@@ -142,7 +142,7 @@ const VideoProcessor = () => {
         </label>
       </div>
 
-      <div className="w-[400px] flex justify-center gap-4 mb-8">
+      <div className="w-full flex justify-center gap-4 mb-8">
         <button 
           onClick={processVideo}
           disabled={!video || processing || !loaded}
@@ -152,12 +152,12 @@ const VideoProcessor = () => {
               : 'border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10'
           } transition-colors`}
         >
-          {!loaded ? "Loading FFmpeg..." : processing ? "Processing..." : "Extract Frames"}
+          {!loaded ? "Loading..." : processing ? "Processing..." : "Extract Frames"}
         </button>
       </div>
 
       {frames.length > 0 && (
-        <div className="w-[400px] space-y-8">
+        <div className="w-full space-y-8">
           <div className="space-y-4">
             <h2 className="text-[#00ffff] text-xl text-center">Individual Frames</h2>
             <div className="grid grid-cols-3 gap-2">
