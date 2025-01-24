@@ -5,6 +5,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@codaworks/react-glow/**/*.{js,ts,jsx,tsx}' 
   ],
   theme: {
   	extend: {
@@ -89,5 +90,8 @@ module.exports = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require('@codaworks/react-glow/tailwind')
+  ],
 } 

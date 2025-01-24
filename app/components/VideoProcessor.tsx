@@ -213,11 +213,19 @@ const VideoProcessor = () => {
                 Click on any frame to download it
               </p>
               <p className="text-[#00ffff]/60 text-sm text-center mt-4">
-                Prompt: Recreate this UI animation as a demo component for me in react ignore the cursor and focus on recreating the UI functionality only. Use Shadcn, framer motion or any other simpler method to acheive the animation. 
+                Prompt: Recreate this UI interaction/animation in React, focusing only on the UI functionality (ignore cursor effects).
 
-The image I have attached are frames for reference of a video of the animation. 
+Ignore that you see multiple images. They are just the steps in teh animation and shouldnt be recreated literally. 
 
-For simplicity, keep everthing in a single page I can load.
+Please analyze these animation frames carefully for the following details:
+1. Initial state and final state
+2. Any transitional effects (scaling, opacity, shine, etc.)
+3. Frame by frame changes - particularly looking at:
+   - Movement of any elements
+   - Changes in lighting or reflections
+   - Timing of different effects
+4. UI structure details (window chrome, borders, etc.)
+Use Framer Motion, Shadcn, or any other simple method to achieve the animation. For simplicity, make this in a single page component.
               </p>
             </div>
           )}

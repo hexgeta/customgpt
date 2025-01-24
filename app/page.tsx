@@ -28,7 +28,7 @@ export default function VideoPage() {
           target="_blank" 
           className="text-gray-400 hover:text-[#ff69b4] transition-colors mb-2"
         >
-          [made by Hexget]
+          [made by Hexgeta]
         </Link>
         <VideoProcessor />
       </div>
