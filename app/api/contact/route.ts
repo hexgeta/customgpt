@@ -41,10 +41,11 @@ export async function POST(request: Request) {
     
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Legal Support <help@aima-legal.hexgeta.com>',
+      from: 'Subpoena AIMA <contact@aima-legal.hexgeta.com>',
       to: [email],
       subject: content.subject,
-      html: content.html(name)
+      html: content.html(name),
+      replyTo: 'contact@aima-legal.hexgeta.com'
     })
 
     if (error) {
