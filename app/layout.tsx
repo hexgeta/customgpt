@@ -3,10 +3,10 @@ import './globals.css'
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata = {
-  title: 'Legal Assistance for AIMA Complaints',
-  description: 'Professional support for filing complaints against AIMA and assistance with Portuguese visa appointments.',
+  title: 'Assistência Jurídica para Reclamações AIMA',
+  description: 'Apoio profissional para apresentação de reclamações contra a AIMA e assistência com agendamentos de vistos portugueses.',
   icons: {
-    icon: '/favicon.jpg',
+    icon: '/bg1.jpg',
   },
 }
 
