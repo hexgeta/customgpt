@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -7,16 +6,19 @@ export async function POST(request: Request) {
   try {
     const { name, email } = await request.json()
 
-    await resend.emails.send({
+    const data = await resend.emails.send({
       from: 'Legal Assistance <onboarding@resend.dev>',
-      to: 'michael@twospouts.com',
-      subject: 'New Legal Assistance Request',
-      text: `New contact form submission:\n\nName: ${name}\nEmail: ${email}`,
+      to: ['your-email@example.com'],
+      subject: 'New Legal Assistance Contact Form Submission',
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+      `
     })
-    
-    return NextResponse.json({ message: 'Success' })
+
+    return Response.json({ success: true })
   } catch (error) {
-    console.error('Error:', error)
-    return NextResponse.json({ error: 'Error sending email' }, { status: 500 })
+    return Response.json({ error: 'Failed to send email' }, { status: 500 })
   }
 } 
