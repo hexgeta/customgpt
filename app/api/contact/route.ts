@@ -1,7 +1,13 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Check if API key exists
+const resendApiKey = process.env.RESEND_API_KEY
+if (!resendApiKey) {
+  console.warn('Missing RESEND_API_KEY environment variable')
+}
+
+const resend = new Resend(resendApiKey)
 
 const emailContent = {
   pt: {
@@ -28,13 +34,21 @@ const emailContent = {
 
 export async function POST(request: Request) {
   try {
+    // Check if API key exists before proceeding
+    if (!resendApiKey) {
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      )
+    }
+
     const { name, email, language = 'pt' } = await request.json()
     
     const content = emailContent[language as keyof typeof emailContent]
     
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'AIMA Legal <onboarding@resend.dev>',
+      from: 'Legal Support<help@aima-legal.hexgeta.com>',
       to: [email],
       subject: content.subject,
       html: content.html(name)
