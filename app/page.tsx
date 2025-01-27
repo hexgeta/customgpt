@@ -38,7 +38,7 @@ export default function LegalLandingPage() {
   }
 
   return (
-    <main className="min-h-screen relative bg-[#000913] overflow-hidden">
+    <main className="min-h-screen relative bg-[#000913] overflow-hidden flex  items-center">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         {/* Base Grid Layer */}
