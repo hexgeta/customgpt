@@ -96,6 +96,7 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    require('@codaworks/react-glow/tailwind')
+    require('@codaworks/react-glow/tailwind'),
+    require('@tailwindcss/forms'),
   ],
 } 

@@ -1,33 +1,83 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import ScrambleText from './components/ScrambleText'
+import { useState } from 'react'
 
-const VideoProcessor = dynamic(() => import('./components/VideoProcessor'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full max-w-[400px] h-[225px] border-2 border-dashed border-[#00ffff] rounded-lg flex items-center justify-center">
-      <p className="text-[#00ffff] font-bold">Loading...</p>
-    </div>
-  )
-})
+export default function LegalLandingPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: ''
+  })
 
-export default function VideoPage() {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      
+      if (response.ok) {
+        alert('Thank you for your submission. We will contact you shortly.')
+        setFormData({ name: '', email: '' })
+      }
+    } catch (error) {
+      alert('There was an error submitting your form. Please try again.')
+    }
+  }
+
   return (
-    <main className="flex flex-col items-center p-2 sm:p-4">
-      <div className="w-full flex flex-col items-center mt-8 sm:mt-12">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl text-white mb-2 sm:mb-4 font-bold text-center">
-          <ScrambleText text="Video Frame Extractor" />
-        </h1>
-        <Link 
-          href="https://twitter.com/hexgeta" 
-          target="_blank" 
-          className="text-sm sm:text-base text-gray-400 hover:text-[#ff69b4] transition-colors mb-8 sm:mb-10 font-normal"
-        >
-          [made by Hexgeta]
-        </Link>
-        <VideoProcessor />
+    <main className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center">
+          <h1 className="text-4xl font-serif tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl">
+            Legal Assistance for AIMA Complaints
+          </h1>
+          <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+            Professional support for filing complaints against AIMA and assistance with Portuguese visa appointments.
+          </p>
+        </div>
+
+        {/* Contact Form */}
+        <div className="mt-10 max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="grid gap-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                value={formData.name}
+                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                value={formData.email}
+                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              Get Legal Assistance
+            </button>
+          </form>
+        </div>
       </div>
     </main>
   )

@@ -105,6 +105,12 @@ const VideoProcessor = () => {
     document.body.removeChild(a);
   };
 
+  const handleDownloadAll = () => {
+    frames.forEach((frame, index) => {
+      handleDownload(frame, `frame-${index + 1}.png`);
+    });
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div 
@@ -157,9 +163,15 @@ const VideoProcessor = () => {
       </div>
 
       {frames.length > 0 && (
-        <div className="w-full space-y-8">
+        <div className="w-[50%] space-y-8">
           <div className="space-y-4">
             <h2 className="text-[#00ffff] text-xl text-center">Individual Frames</h2>
+            <button
+              onClick={handleDownloadAll}
+              className="w-full px-4 py-2 border border-[#00ffff] text-[#00ffff] rounded-md hover:bg-[#00ffff]/10 transition-colors mb-4"
+            >
+              Download All
+            </button>
             <div className="grid grid-cols-3 gap-2">
               {frames.map((frame, index) => (
                 <div 
