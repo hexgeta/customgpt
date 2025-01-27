@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { toast } from "@/components/ui/use-toast"
 
 export default function LegalLandingPage() {
   const [formData, setFormData] = useState({
@@ -20,11 +21,19 @@ export default function LegalLandingPage() {
       })
       
       if (response.ok) {
-        alert('Thank you for your submission. We will contact you shortly.')
+        toast({
+          title: "Success!",
+          description: "Thank you for your submission. We will contact you shortly.",
+          className: "bg-green-500 text-white border-green-600",
+        })
         setFormData({ name: '', email: '' })
       }
     } catch (error) {
-      alert('There was an error submitting your form. Please try again.')
+      toast({
+        title: "Error",
+        description: "There was an error submitting your form. Please try again.",
+        variant: "destructive",
+      })
     }
   }
 

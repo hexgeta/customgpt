@@ -1,20 +1,10 @@
-import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
-import localFont from 'next/font/local'
+import { Toaster } from "@/components/ui/toaster"
 
-const departureMono = localFont({
-  src: './fonts/DepartureMono-Regular.otf',
-  variable: '--font-departure',
-  display: 'swap',
-})
-
-export const metadata: Metadata = {
-  title: 'Hexgeta',
-  description: 'Welcome to the digital frontier',
-  icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
-  },
+export const metadata = {
+  title: 'Legal Assistance for AIMA Complaints',
+  description: 'Professional support for filing complaints against AIMA and assistance with Portuguese visa appointments.',
 }
 
 export default function RootLayout({
@@ -23,9 +13,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={departureMono.variable}>
-      <body className={`${departureMono.className}`}>
+    <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="font-['Space_Mono']">
         {children}
+        <Toaster />
       </body>
     </html>
   )

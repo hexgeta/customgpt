@@ -4,6 +4,7 @@ import * as React from "react"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
+import { useEffect, useState } from 'react'
 
 import { cn } from "@/lib/utils"
 
@@ -115,6 +116,46 @@ ToastDescription.displayName = ToastPrimitives.Description.displayName
 type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>
 
 type ToastActionElement = React.ReactElement<typeof ToastAction>
+
+interface ToastProps {
+  title?: string
+  description?: string
+  className?: string
+  variant?: 'default' | 'destructive'
+  duration?: number
+}
+
+export function Toast({ 
+  title, 
+  description, 
+  className = '', 
+  variant = 'default',
+  duration = 3000 
+}: ToastProps) {
+  const [isVisible, setIsVisible] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(false)
+    }, duration)
+
+    return () => clearTimeout(timer)
+  }, [duration])
+
+  if (!isVisible) return null
+
+  const baseClasses = "fixed bottom-4 right-4 p-4 rounded-lg shadow-lg transition-all transform"
+  const variantClasses = variant === 'destructive' 
+    ? "bg-red-500 text-white" 
+    : "bg-white text-gray-900 border border-gray-200"
+
+  return (
+    <div className={`${baseClasses} ${variantClasses} ${className}`}>
+      {title && <h3 className="font-medium mb-1">{title}</h3>}
+      {description && <p className="text-sm">{description}</p>}
+    </div>
+  )
+}
 
 export {
   type ToastProps,

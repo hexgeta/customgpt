@@ -11,7 +11,7 @@ module.exports = {
   	extend: {
   		fontFamily: {
   			sans: ['var(--font-departure)'],
-  			mono: ['var(--font-departure)'],
+  			mono: ['Space Mono', 'monospace'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
