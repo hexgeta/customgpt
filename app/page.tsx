@@ -39,52 +39,82 @@ export default function LegalLandingPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <main className="min-h-screen relative bg-[#000913] overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        {/* Base Grid Layer */}
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-30 animate-grid" />
+        
+        {/* Glowing Orb */}
+        <div className="absolute top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,_rgba(0,128,255,0.15)_0%,_transparent_50%)]" />
+        
+        {/* Digital Particles */}
+        <div className="absolute inset-0">
+          {[...Array(300)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-[2px] h-[2px] bg-blue-400/50 rounded-full animate-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 1}s`,
+                animationDuration: `${3 + Math.random() * 5}s`
+              }}
+            />
+          ))}
+        </div>
+        {/* Scanlines */}
+        <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(0,0,0,0.1)_0%,transparent_10%,transparent_50%,rgba(0,0,0,0.1)_51%)] bg-[length:100%_4px]" />
+      </div>
+
+      {/* Content */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center">
-          <h1 className="text-4xl font-mono tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl">
-            Legal Assistance for AIMA Complaints
+          <h1 className="text-4xl font-mono tracking-tight font-bold text-white sm:text-5xl md:text-6xl">
+            Can't Get An Appointment at AIMA?
           </h1>
-          <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl font-mono">
-            Professional support for filing complaints against AIMA and assistance with Portuguese visa appointments.
+          <p className="max-w-md mx-auto text-base text-blue-200 sm:text-lg mt-4 md:mt-4 md:text-xl md:max-w-3xl font-mono">
+            You're not alone. 500k people may be ahead of you in the queue and the number increases every day.
+          </p>
+          <p className="mt-3 max-w-md mx-auto text-base text-blue-200 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl font-mono">
+            Exercise your EU right to a visa, and get an appointment fast (less than 1 month) by filing an official legal complaint against AIMA for €500.
           </p>
         </div>
 
         {/* Contact Form */}
         <div className="mt-10 max-w-md mx-auto">
-          <form onSubmit={handleSubmit} className="grid gap-6">
+          <form onSubmit={handleSubmit} className="grid gap-6 bg-black/40 p-6 rounded-lg backdrop-blur-sm border border-blue-500/20">
             <div>
-              <label htmlFor="name" className="block text-sm font-mono font-medium text-gray-700">
+              <label htmlFor="name" className="block text-sm font-mono font-medium text-blue-200">
                 Full Name
               </label>
               <input
                 type="text"
                 id="name"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-mono"
+                className="mt-1 block w-full rounded-md bg-black/30 border-blue-500/30 text-blue-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-mono placeholder-blue-300/30"
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-mono font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-mono font-medium text-blue-200">
                 Email Address
               </label>
               <input
                 type="email"
                 id="email"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-mono"
+                className="mt-1 block w-full rounded-md bg-black/30 border-blue-500/30 text-blue-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-mono placeholder-blue-300/30"
                 value={formData.email}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
               />
             </div>
             <button
               type="submit"
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-mono font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex justify-center py-3 px-4 border border-blue-500/30 rounded-md shadow-sm text-sm font-mono font-medium text-blue-100 bg-blue-500/20 hover:bg-blue-500/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:scale-[1.02] backdrop-blur-sm"
             >
-              Get Legal Assistance
+              Get a Instant Quote Now
             </button>
           </form>
         </div>

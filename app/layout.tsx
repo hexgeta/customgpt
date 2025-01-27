@@ -5,6 +5,9 @@ import { Toaster } from "@/components/ui/toaster"
 export const metadata = {
   title: 'Legal Assistance for AIMA Complaints',
   description: 'Professional support for filing complaints against AIMA and assistance with Portuguese visa appointments.',
+  icons: {
+    icon: '/favicon.jpg',
+  },
 }
 
 export default function RootLayout({
