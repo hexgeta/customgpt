@@ -9,7 +9,7 @@ const emailContent = {
       <p>Recebemos seu pedido de assistência com os serviços de agendamento da AIMA.</p>
       <p>Um de nossos especialistas jurídicos entrará em contato em breve para discutir como podemos ajudá-lo a garantir seu agendamento.</p>
       <p>Atenciosamente,</p>
-      <p>Carlos Almeida</p>
+      <p>Miguel Almeida</p>
     `
   },
   en: {
@@ -19,7 +19,7 @@ const emailContent = {
       <p>We have received your request for assistance with AIMA appointment services.</p>
       <p>One of our legal experts will contact you shortly to discuss how we can help you secure your appointment.</p>
       <p>Best regards,</p>
-      <p>Carlos Almeida</p>
+      <p>Miguel Almeida</p>
     `
   }
 }
@@ -39,8 +39,8 @@ export async function POST(request: Request) {
     const { name, email, language = 'pt' } = await request.json()
     const content = emailContent[language as keyof typeof emailContent]
     
-    // Send email using Resend
-    const { data, error } = await resend.emails.send({
+    // Send email to the user
+    const { data: userData, error: userError } = await resend.emails.send({
       from: 'Subpoena AIMA <contact@aima-legal.hexgeta.com>',
       to: [email],
       subject: content.subject,
@@ -48,8 +48,22 @@ export async function POST(request: Request) {
       replyTo: 'contact@aima-legal.hexgeta.com'
     })
 
-    if (error) {
-      console.error('Resend error:', error)
+    // Send notification email to admin
+    const { data: adminData, error: adminError } = await resend.emails.send({
+      from: 'Subpoena AIMA <contact@aima-legal.hexgeta.com>',
+      to: ['michael+aima-notification@twospouts.com'],
+      subject: `New Form Submission: ${name}`,
+      html: `
+        <h1>New Form Submission</h1>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Language:</strong> ${language}</p>
+      `,
+      replyTo: 'contact@aima-legal.hexgeta.com'
+    })
+
+    if (userError || adminError) {
+      console.error('Email error:', { userError, adminError })
       return NextResponse.json(
         { error: 'Failed to send email' },
         { status: 500 }
