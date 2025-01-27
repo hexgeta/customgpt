@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { toast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function LegalLandingPage() {
+  const { toast } = useToast()
   const [formData, setFormData] = useState({
     name: '',
     email: ''
