@@ -87,32 +87,38 @@ export default function LegalLandingPageV2() {
   return (
     <main className="min-h-screen relative overflow-hidden flex items-center">
       {/* Language Toggle */}
-      <div className="fixed top-4 right-4 sm:right-10 z-50 flex items-center gap-2">
+      <div className="fixed top-4 right-4 sm:right-10 z-50 flex items-center gap-4">
         <button
           onClick={() => setLanguage('pt')}
-          className={`w-11 h-11 rounded-full overflow-hidden border-2 transition-all touch-manipulation ${language === 'pt' ? 'border-blue-500 scale-100' : 'border-transparent opacity-50 hover:opacity-75'}`}
+          className={`w-14 h-14 rounded-full overflow-hidden border-2 transition-all ${language === 'pt' ? 'border-blue-500 scale-100' : 'border-transparent opacity-50 hover:opacity-75'}`}
+          style={{ WebkitTapHighlightColor: 'transparent' }}
         >
-          <Image
-            src="/pt-flag.svg"
-            alt="Portuguese"
-            width={32}
-            height={32}
-            className="w-full h-full object-cover"
-            priority
-          />
+          <div className="w-full h-full">
+            <Image
+              src="/pt-flag.svg"
+              alt="Portuguese"
+              width={32}
+              height={32}
+              className="w-full h-full object-cover"
+              priority
+            />
+          </div>
         </button>
         <button
           onClick={() => setLanguage('en')}
-          className={`w-11 h-11 rounded-full overflow-hidden border-2 transition-all touch-manipulation ${language === 'en' ? 'border-blue-500 scale-100' : 'border-transparent opacity-50 hover:opacity-75'}`}
+          className={`w-14 h-14 rounded-full overflow-hidden border-2 transition-all ${language === 'en' ? 'border-blue-500 scale-100' : 'border-transparent opacity-50 hover:opacity-75'}`}
+          style={{ WebkitTapHighlightColor: 'transparent' }}
         >
-          <Image
-            src="/us-flag.svg"
-            alt="English"
-            width={32}
-            height={32}
-            className="w-full h-full object-cover"
-            priority
-          />
+          <div className="w-full h-full">
+            <Image
+              src="/us-flag.svg"
+              alt="English"
+              width={40}
+              height={40}
+              className="w-full h-full object-cover"
+              priority
+            />
+          </div>
         </button>
       </div>
 
