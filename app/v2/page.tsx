@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useToast } from "@/components/ui/use-toast"
 import Image from 'next/image'
-import { Loader2, Check, Star, StarHalf } from "lucide-react"
+import { Loader2, Check, Star, StarHalf, Phone } from "lucide-react"
 import Cookies from 'js-cookie'
 
 export default function LegalLandingPageV2() {
@@ -36,7 +36,8 @@ export default function LegalLandingPageV2() {
       rating: "Avaliação dos Clientes",
       offer: "Oferta Especial",
       expires: "Termina em",
-      sale: "Promoção de Ano Novo"
+      sale: "Promoção de Ano Novo",
+      phone: "Ligue agora: +351 920 229 287"
     },
     en: {
       title: "Struggling To Get An Appointment At AIMA?",
@@ -53,7 +54,8 @@ export default function LegalLandingPageV2() {
       rating: "Customer Rating",
       offer: "Special Offer",
       expires: "Ends in",
-      sale: "New Year Sale"
+      sale: "New Year Sale",
+      phone: "Call now: +351 920 229 287"
     }
   }
 
@@ -162,7 +164,7 @@ export default function LegalLandingPageV2() {
         </div>
       </div>
 
-      <main className="min-h-screen relative overflow-hidden flex items-center pt-2">
+      <main className="min-h-screen relative overflow-hidden flex items-center pt-12 sm:pt-4">
         {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0">
           <div 
@@ -232,6 +234,8 @@ export default function LegalLandingPageV2() {
 
           {/* Contact Form */}
           <div className="mt-10 max-w-md mx-auto">
+
+
             <form onSubmit={handleSubmit} className="grid gap-6 bg-white/80 p-6 rounded-lg backdrop-blur-sm border border-gray-200 shadow-xl">
               <div>
                 <label htmlFor="name" className="block text-sm font-mono font-medium text-gray-700">
@@ -284,7 +288,18 @@ export default function LegalLandingPageV2() {
                   <span className="ml-2 text-sm font-mono text-black">4.8/5</span>
                 </div>
               </div>
+              
             </form>
+                        {/* Phone Number */}
+                        <div className="text-center mb-6 mt-6 font-bold">
+              <a 
+                href="tel:+351920229287" 
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors font-mono text-lg"
+              >
+                <Phone className="w-5 h-5" />
+                {currentContent.phone}
+              </a>
+            </div>
           </div>
         </div>
       </main>
