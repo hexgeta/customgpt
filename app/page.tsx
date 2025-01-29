@@ -145,7 +145,7 @@ export default function LegalLandingPageV2() {
 
   return (
     <>
-      {/* Top Banner */}
+      {/* Top Banner
       <div className="fixed top-0 left-0 right-0 bg-gradient-to-r from-gray-100 to-gray-50 text-center py-1.5 sm:py-2 z-50 border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-2 sm:px-4">
           <div className="flex items-center justify-center flex-wrap gap-x-1 sm:gap-x-2 gap-y-1 text-[13px] sm:text-sm font-mono">
@@ -164,7 +164,7 @@ export default function LegalLandingPageV2() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <main className="min-h-screen relative overflow-hidden flex items-center pt-12 sm:pt-4">
         {/* Background Image with Gradient Overlay */}
