@@ -10,8 +10,8 @@ module.exports = {
   theme: {
   	extend: {
   		fontFamily: {
-  			sans: ['var(--font-departure)'],
-  			mono: ['Space Mono', 'monospace'],
+  			sans: ['var(--font-space-mono)', 'Space Mono', 'monospace'],
+  			mono: ['var(--font-space-mono)', 'Space Mono', 'monospace'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

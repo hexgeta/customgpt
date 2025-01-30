@@ -1,10 +1,28 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ReactElement } from 'react'
 import { useToast } from "@/components/ui/use-toast"
 import Image from 'next/image'
-import { Loader2, Check, Star, StarHalf, MessageCircle } from "lucide-react"
+import { Loader2, Check, Star, StarHalf, MessageCircle, CalendarIcon, X } from "lucide-react"
 import Cookies from 'js-cookie'
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { format } from "date-fns"
 
 type ContentType = {
   title: string;
@@ -24,9 +42,16 @@ type ContentType = {
   disclaimer: string;
   whyUs: string;
   reasons: string[];
+  visaType: string;
+  contactAttempts: string;
+  newApplication: string;
+  currentExpiry: string;
+  visaTypes: { value: string; label: string; }[];
+  yes: string;
+  no: string;
 }
 
-export default function LegalLandingPageV2() {
+export default function LegalLandingPageV2(): ReactElement {
   const { toast } = useToast()
   const [language, setLanguage] = useState<'pt' | 'en'>('pt')
   const [timeLeft, setTimeLeft] = useState({
@@ -37,7 +62,11 @@ export default function LegalLandingPageV2() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    visaType: '',
+    contactAttempts: '',
+    isNewApplication: true,
+    currentExpiry: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -73,7 +102,21 @@ export default function LegalLandingPageV2() {
         "Apoio Jurídico Especializado – Especializados em processos administrativos judiciais",
         "Total Transparência – Comunicação clara e sem taxas ocultas",
         "Processo Sem Complicações – Tratamos de toda a documentação legal"
-      ]
+      ],
+      visaType: "Tipo de Visto",
+      contactAttempts: "Número de tentativas de contacto com a AIMA",
+      newApplication: "É uma nova aplicação de visto?",
+      currentExpiry: "Data de expiração do visto atual",
+      visaTypes: [
+        { value: "D1", label: "D1 (Visto de Trabalho)" },
+        { value: "D2", label: "D2 (Visto para Empreendedores)" },
+        { value: "D3", label: "D3 (Visto para Atividades Altamente Qualificadas)" },
+        { value: "D6", label: "D6 (Visto para Reagrupamento Familiar)" },
+        { value: "D7", label: "D7 (Visto para Rendimento Passivo)" },
+        { value: "D8", label: "D8 (Visto para Trabalho Remoto)" }
+      ],
+      yes: "Sim",
+      no: "Não"
     },
     en: {
       title: "Unable to get an AIMA appointment?",
@@ -100,13 +143,27 @@ export default function LegalLandingPageV2() {
         "Court Review – Your case is reviewed by an assigned judge and a decision is made",
         "Appointment Scheduling – If approved, AIMA will provide an appointment date immediately"
       ],
-      disclaimer: "While we cannot guarantee the court's decision, we ensure that your petition is properly prepared, submitted, and you stand in a strong position to get an appointment.",
+      disclaimer: "While we cannot guarantee the court's decision, we will ensure that your petition is properly prepared, submitted, and you stand in a strong position to get an appointment.",
       whyUs: "Why Work With Us?",
       reasons: [
         "Expert Legal Support – Specialized in administrative court filings",
         "Full Transparency – Clear communication and no hidden fees",
         "Hassle-Free Process – We handle all legal documentation"
-      ]
+      ],
+      visaType: "Visa Type",
+      contactAttempts: "Number of attempts to contact AIMA",
+      newApplication: "Is this a new visa application?",
+      currentExpiry: "Current visa expiry date",
+      visaTypes: [
+        { value: "D1", label: "D1 (Work Visa)" },
+        { value: "D2", label: "D2 (Entrepreneur Visa)" },
+        { value: "D3", label: "D3 (Highly Qualified Activities Visa)" },
+        { value: "D6", label: "D6 (Family Reunification Visa)" },
+        { value: "D7", label: "D7 (Passive Income Visa)" },
+        { value: "D8", label: "D8 (Remote Work Visa)" }
+      ],
+      yes: "Yes",
+      no: "No"
     }
   }
 
@@ -157,6 +214,20 @@ export default function LegalLandingPageV2() {
     e.preventDefault()
     if (isSubmitting) return
 
+    // Check if any required fields are missing
+    if (!formData.name || !formData.visaType || !formData.contactAttempts || 
+        (!formData.email && !formData.phone) || 
+        (!formData.isNewApplication && !formData.currentExpiry)) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: language === 'pt'
+          ? "Por favor preencha todos os campos obrigatórios"
+          : "Please complete all required fields",
+      })
+      return
+    }
+
     setIsSubmitting(true)
     try {
       const response = await fetch('/api/contact', {
@@ -172,20 +243,28 @@ export default function LegalLandingPageV2() {
       
       if (response.ok) {
         toast({
-          title: language === 'pt' ? "Sucesso" : "Success",
+          title: "Success",
           description: language === 'pt' 
             ? "Obrigado pelo seu interesse. Entraremos em contato em breve."
             : "Thank you for your submission. We will contact you shortly.",
         })
-        setFormData({ name: '', email: '', phone: '' })
+        setFormData({ name: '', email: '', phone: '', visaType: '', contactAttempts: '', isNewApplication: true, currentExpiry: '' })
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: language === 'pt'
+            ? "Houve um erro ao enviar o formulário. Por favor, tente novamente."
+            : "There was an error submitting your form. Please try again.",
+        })
       }
     } catch (error) {
       toast({
-        title: language === 'pt' ? "Erro" : "Error",
+        variant: "destructive",
+        title: "Error",
         description: language === 'pt'
           ? "Houve um erro ao enviar o formulário. Por favor, tente novamente."
           : "There was an error submitting your form. Please try again.",
-        variant: "destructive",
       })
     } finally {
       setIsSubmitting(false)
@@ -237,10 +316,10 @@ export default function LegalLandingPageV2() {
           </div>
 
           <div className="text-center">
-            <h1 className="text-4xl font-mono tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl leading-[1.2]">
+            <h1 className="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl leading-[1.2]">
               {currentContent.title}
             </h1>
-            <p className="max-w-md mx-auto text-base text-gray-600 sm:text-lg mt-6 md:mt-6 md:text-xl md:max-w-3xl font-mono">
+            <p className="max-w-md mx-auto text-base text-gray-600 sm:text-lg mt-6 md:mt-6 md:text-xl md:max-w-3xl">
               {currentContent.subtitle}
             </p>
 
@@ -248,7 +327,7 @@ export default function LegalLandingPageV2() {
             <div className="mt-10">
               <a
                 href="#how-it-works"
-                className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200 hover:scale-[1.02] font-mono"
+                className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200 hover:scale-[1.02]"
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
@@ -266,12 +345,12 @@ export default function LegalLandingPageV2() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* How It Works Section */}
           <div id="how-it-works" className="max-w-3xl mx-auto text-center scroll-mt-24">
-            <h2 className="text-3xl font-mono font-bold text-gray-900 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">
               {currentContent.howItWorks}
             </h2>
             <div className="space-y-6">
               {currentContent.steps.map((step, index) => (
-                <div key={index} className="flex items-start text-left space-x-4 font-mono">
+                <div key={index} className="flex items-start text-left space-x-4">
                   <span className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">
                     {index + 1}
                   </span>
@@ -280,18 +359,15 @@ export default function LegalLandingPageV2() {
               ))}
             </div>
             
-            <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-              <p className="text-gray-600 font-mono">
+            <div className="mt-8 p-4 bg-blue-100 rounded-lg">
+              <p className="text-gray-600">
                 📌 {currentContent.disclaimer}
               </p>
             </div>
           </div>
 
           {/* Benefits Section */}
-          <div className="mt-16">
-            <h2 className="text-3xl font-mono font-bold text-gray-900 mb-12 text-center">
-              {language === 'pt' ? 'Benefícios' : 'Benefits'}
-            </h2>
+          <div className="mt-32">
             <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
               {/* Image */}
               <div className="md:col-span-2 relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
@@ -304,11 +380,14 @@ export default function LegalLandingPageV2() {
                 />
               </div>
 
-              {/* Benefits Content */}
+              {/* Text Section*/}
               <div className="md:col-span-3 px-4 md:px-6">
-                <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-gray-900 mb-8 md:pl-12">
+                  {language === 'pt' ? 'Benefícios' : 'Benefits'}
+                </h2>
+                <div className="space-y-6 mt-8 md:mt-0 md:pl-12">
                   {currentContent.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start space-x-4 font-mono">
+                    <div key={index} className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
                         <div className="w-8 h-8 rounded-full bg-blue-100/50 flex items-center justify-center">
                           <Check className="w-5 h-5 text-blue-500" />
@@ -323,17 +402,28 @@ export default function LegalLandingPageV2() {
           </div>
 
           {/* Why Work With Us Section */}
-          <div className="mt-16 relative overflow-hidden py-8">
+          <div className="mt-32">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-mono font-bold text-gray-900 mb-12 text-center">
-                {currentContent.whyUs}
-              </h2>
               <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
+                {/* Image */}
+                <div className="md:col-span-2 relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden order-1 md:order-2">
+                  <Image
+                    src="/bg2.jpg"
+                    alt="Legal Support"
+                    fill
+                    className="object-cover object-top rounded-2xl"
+                    priority
+                  />
+                </div>
+
                 {/* Text Content */}
-                <div className="md:col-span-3 px-4 md:px-6">
-                  <div className="space-y-8">
+                <div className="md:col-span-3 px-4 md:px-6 order-2 md:order-1">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-8 md:pl-12">
+                    {currentContent.whyUs}
+                  </h2>
+                  <div className="space-y-6 md:pl-12">
                     {currentContent.reasons.map((reason, index) => (
-                      <div key={index} className="flex items-start space-x-4 font-mono">
+                      <div key={index} className="flex items-start space-x-4">
                         <div className="flex-shrink-0">
                           <div className="w-8 h-8 rounded-full bg-blue-100/50 flex items-center justify-center">
                             <Check className="w-5 h-5 text-blue-500" />
@@ -344,116 +434,181 @@ export default function LegalLandingPageV2() {
                     ))}
                   </div>
                 </div>
-
-                {/* Image */}
-                <div className="md:col-span-2 relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
-                  <Image
-                    src="/bg2.jpg"
-                    alt="Legal Support"
-                    fill
-                    className="object-cover object-top rounded-2xl"
-                    priority
-                  />
-                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Requirements Section */}
-      <div className="w-full bg-blue-50/80">
-        <div className="max-w-6xl mx-auto py-16">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-mono font-bold text-gray-900 mb-8">
-              {language === 'pt' ? 'Requisitos' : 'Requirements'}
-            </h2>
-            <div className="space-y-4">
-              {(language === 'pt' ? [
-                'Visto expirado',
-                'Comprovativo de tentativa de contacto com a AIMA'
-              ] : [
-                'Expired visa',
-                'Evidence of contacting AIMA'
-              ]).map((requirement, index) => (
-                <div key={index} className="flex items-start space-x-4 font-mono justify-center">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-blue-100/50 flex items-center justify-center">
-                      <Check className="w-5 h-5 text-blue-500" />
-                    </div>
-                  </div>
-                  <p className="text-gray-600 text-lg leading-relaxed text-left">{requirement}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Contact Form Section */}
-      <div className="w-full bg-blue-50/80">
+      <div className="w-full bg-[#fafafa]">
         <div className="max-w-6xl mx-auto py-16">
           <div id="form" className="max-w-md mx-auto scroll-mt-24">
-            <h2 className="text-3xl font-mono font-bold text-gray-900 text-center mb-6">
+            <h2 className="text-3xl text-gray-900 text-center mb-6">
               {language === 'pt' ? 'Pronto para ação legal?' : 'Ready to take legal action?'}
             </h2>
+            
+            {/* Requirements */}
             <div className="mx-4">
               <form onSubmit={handleSubmit} className="grid gap-6 bg-white p-8 rounded-lg backdrop-blur-sm border border-gray-200 shadow-xl">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-mono font-medium text-gray-700">
-                    {currentContent.fullName}
-                  </label>
-                  <input
+                {/* Requirements */}
+                <div className="mb-4">
+                  <div className="py-6 bg-red-100 rounded-lg border-2 border-red-200">
+                    <p className="text-gray-600 text-center mb-2 underline font-bold">
+                      Requirements
+                    </p>
+                    <div className="text-gray-600 space-y-2 px-10 py-2">
+                      {(language === 'pt' ? [
+                        'Visto expirado',
+                        'Comprovativo de tentativa de contacto com a AIMA'
+                      ] : [
+                        'Visa/permit currently expired',
+                        'Evidence of multiple attempts to contact AIMA'
+                      ]).map((requirement, index) => (
+                        <p key={index}>• {requirement}</p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="newApplication">{currentContent.newApplication}</Label>
+                  <div suppressHydrationWarning>
+                    <RadioGroup
+                      value={formData.isNewApplication ? "yes" : "no"}
+                      onValueChange={(value) => setFormData(prev => ({ 
+                        ...prev, 
+                        isNewApplication: value === "yes",
+                        currentExpiry: value === "yes" ? "" : prev.currentExpiry 
+                      }))}
+                      className="flex gap-8"
+                      disabled={isSubmitting}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="yes" id="yes" />
+                        <Label htmlFor="yes" className="font-normal cursor-pointer select-none">{currentContent.yes}</Label>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="no" id="no" />
+                        <Label htmlFor="no" className="font-normal cursor-pointer select-none">{currentContent.no}</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                </div>
+
+                {!formData.isNewApplication && (
+                  <div className="grid gap-2">
+                    <Label htmlFor="currentExpiry">{currentContent.currentExpiry}</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="w-full justify-start text-left font-normal bg-white"
+                          disabled={isSubmitting}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {formData.currentExpiry ? format(new Date(formData.currentExpiry), "PPP") : language === 'pt' ? 'Selecione uma data' : 'Pick a date'}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={formData.currentExpiry ? new Date(formData.currentExpiry) : undefined}
+                          onSelect={(date) => setFormData(prev => ({ ...prev, currentExpiry: date ? date.toISOString().split('T')[0] : '' }))}
+                          disabled={isSubmitting}
+                          defaultMonth={formData.currentExpiry ? new Date(formData.currentExpiry) : new Date()}
+                          fromDate={new Date()}
+                          fixedWeeks
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                )}
+
+                <div className="grid gap-2">
+                  <Label htmlFor="visaType">
+                    {currentContent.visaType}
+                  </Label>
+                  <Select
+                    value={formData.visaType}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, visaType: value }))}
+                    disabled={isSubmitting}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder={language === 'pt' ? 'Selecione o tipo de visto' : 'Select visa type'} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {currentContent.visaTypes.map((type) => (
+                        <SelectItem key={type.value} value={type.value}>
+                          {type.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="contactAttempts">
+                    {currentContent.contactAttempts}
+                  </Label>
+                  <Input
+                    type="number"
+                    id="contactAttempts"
+                    min="1"
+                    value={formData.contactAttempts}
+                    onChange={(e) => setFormData(prev => ({ ...prev, contactAttempts: e.target.value }))}
+                    disabled={isSubmitting}
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="name">{currentContent.fullName}</Label>
+                  <Input
                     type="text"
                     id="name"
-                    required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-mono"
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                     disabled={isSubmitting}
                   />
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-mono font-medium text-gray-700">
-                    {currentContent.email}
-                  </label>
-                  <input
+
+                <div className="grid gap-2">
+                  <Label htmlFor="email">{currentContent.email}</Label>
+                  <Input
                     type="email"
                     id="email"
-                    required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-mono"
                     value={formData.email}
                     onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                     disabled={isSubmitting}
+                    placeholder="email@example.com"
                   />
                 </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-mono font-medium text-gray-700">
-                    {currentContent.phone}
-                  </label>
-                  <input
+
+                <div className="grid gap-2">
+                  <Label htmlFor="phone">{currentContent.phone}</Label>
+                  <Input
                     type="tel"
                     id="phone"
-                    required
                     pattern="[0-9+\s-]+"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-mono"
                     value={formData.phone}
                     onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                     placeholder="+351 "
                     disabled={isSubmitting}
                   />
                 </div>
-                <button
+
+                <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-mono font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed`}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                 >
                   {isSubmitting ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
                   ) : (
                     currentContent.button
                   )}
-                </button>
+                </Button>
               </form>
             </div>
           </div>
@@ -461,7 +616,7 @@ export default function LegalLandingPageV2() {
       </div>
 
       {/* Sticky WhatsApp Widget */}
-      <a
+      {/* <a
         href={`https://wa.me/351920229287?text=${encodeURIComponent(currentContent.whatsappMsg)}`}
         target="_blank"
         rel="noopener noreferrer"
@@ -478,7 +633,7 @@ export default function LegalLandingPageV2() {
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
           </svg>
         </div>
-      </a>
+      </a> */}
     </>
   )
 } 

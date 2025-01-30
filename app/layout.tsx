@@ -1,13 +1,16 @@
-import { Inter } from 'next/font/google'
+import { Space_Mono } from 'next/font/google'
 import './globals.css'
 import { Toaster } from "@/components/ui/toaster"
 
+const spaceMono = Space_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-space-mono',
+})
+
 export const metadata = {
-  title: 'Assistência Jurídica para Reclamações AIMA',
-  description: 'Apoio profissional para apresentação de reclamações contra a AIMA e assistência com agendamentos de vistos portugueses.',
-  icons: {
-    icon: '/bg1.jpg',
-  },
+  title: 'AIMA Legal Support',
+  description: 'Get legal support for your AIMA appointment',
 }
 
 export default function RootLayout({
@@ -16,17 +19,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="font-['Space_Mono']">
+    <html lang="en" className={`${spaceMono.variable}`}>
+      <body className="min-h-screen bg-background font-mono antialiased">
         {children}
         <Toaster />
       </body>
     </html>
   )
-} 
+}
