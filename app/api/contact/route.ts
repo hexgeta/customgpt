@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     }
 
     const resend = new Resend(resendApiKey)
-    const { name, email, language = 'pt' } = await request.json()
+    const { name, email, phone, language = 'pt' } = await request.json()
     const content = emailContent[language as keyof typeof emailContent]
     
     // Send email to the user
@@ -57,6 +57,7 @@ export async function POST(request: Request) {
         <h1>New Form Submission</h1>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Language:</strong> ${language}</p>
       `,
       replyTo: 'contact@aima-legal.hexgeta.com'
