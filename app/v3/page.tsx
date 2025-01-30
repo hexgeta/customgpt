@@ -127,7 +127,7 @@ export default function LegalLandingPage() {
               {isSubmitting ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
-                "Start Your Application"
+                "Start Your Applicati"
               )}
             </button>
           </form>
