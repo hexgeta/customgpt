@@ -73,7 +73,7 @@ export default function LegalLandingPageV2(): ReactElement {
   const content: Record<'pt' | 'en', ContentType> = {
     pt: {
       title: "Não consegue marcar uma consulta na AIMA?",
-      subtitle: "Podemos ajudar a apresentar uma petição legal nos tribunais portugueses para garantir a sua consulta de imigração",
+      subtitle: "Podemos ajudar a apresentar uma intimação nos tribunais portugueses para peticionar pelo seu agendamento junto da AIMA",
       benefits: [
         "Utilize o forte precedente legal em Portugal para garantir o seu direito a uma consulta",
         "Imposição de prazos e penalidades financeiras à AIMA para incentivar uma resposta rápida",

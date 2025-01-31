@@ -339,7 +339,7 @@ export default function LegalLandingPageV2(): ReactElement {
       </section>
 
       {/* Main Content Section */}
-      <section className="bg-white py-32">
+      <section className="bg-white py-28">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* How It Works Section */}
           <div id="how-it-works" className="max-w-3xl mx-auto text-center scroll-mt-24">
