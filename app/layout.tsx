@@ -12,6 +12,7 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: 'Apoio Jurídico Imigração',
   description: 'Assistência jurídica especializada para garantir sua consulta na AIMA. Apoio profissional com processos administrativos nos tribunais portugueses.',
+  metadataBase: new URL('https://www.apoiojuridico-imigracao.com'),
   icons: {
     icon: '/favicon.jpg',
   },
@@ -20,14 +21,12 @@ export const metadata: Metadata = {
     description: 'Assistência jurídica especializada para garantir sua consulta na AIMA. Apoio profissional com processos administrativos nos tribunais portugueses.',
     url: 'https://www.apoiojuridico-imigracao.com',
     siteName: 'Apoio Jurídico Imigração',
-    images: [
-      {
-        url: '/social-preview.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Apoio Jurídico Imigração Preview',
-      },
-    ],
+    images: [{
+      url: '/social-image.png',
+      width: 1200,
+      height: 630,
+      alt: 'Apoio Jurídico Imigração Preview'
+    }],
     locale: 'pt_PT',
     type: 'website',
   },
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Apoio Jurídico Imigração',
     description: 'Assistência jurídica especializada para garantir sua consulta na AIMA. Apoio profissional com processos administrativos nos tribunais portugueses.',
-    images: ['/social-preview.jpg'],
+    images: ['/social-image.png'],
   },
 }
 
