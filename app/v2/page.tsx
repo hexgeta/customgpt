@@ -75,10 +75,9 @@ export default function LegalLandingPageV2(): ReactElement {
       title: "Não consegue marcar uma consulta na AIMA?",
       subtitle: "Podemos ajudar a apresentar uma petição legal nos tribunais portugueses para garantir a sua consulta de imigração",
       benefits: [
-        "Ação legal através dos tribunais portugueses para proteger o seu direito a uma consulta de imigração",
+        "Utilize o forte precedente legal em Portugal para garantir o seu direito a uma consulta",
         "Imposição de prazos e penalidades financeiras à AIMA para incentivar uma resposta rápida",
-        "Processo eficiente com prazo estimado de 2-3 meses",
-        "Serviço jurídico profissional com total transparência"
+        "Processo eficiente com prazo estimado de 2-3 meses"
       ],
       fullName: "Nome Completo",
       email: "Endereço de Email",
@@ -96,7 +95,7 @@ export default function LegalLandingPageV2(): ReactElement {
         "Revisão do Tribunal – O seu caso é analisado por um juiz designado e é tomada uma decisão",
         "Marcação da Consulta – Se aprovado, a AIMA fornecerá uma data de consulta imediatamente"
       ],
-      disclaimer: "Embora não possamos garantir a decisão do tribunal, garantimos que a sua petição é devidamente preparada, submetida e que estará numa posição forte para obter uma consulta.",
+      disclaimer: "Embora não possamos garantir a decisão do tribunal, garantimos que a sua petição será devidamente preparada, submetida e que estará numa posição forte para obter uma consulta.",
       whyUs: "Porquê Trabalhar Connosco?",
       reasons: [
         "Apoio Jurídico Especializado – Especializados em processos administrativos judiciais",
@@ -122,10 +121,9 @@ export default function LegalLandingPageV2(): ReactElement {
       title: "Unable to get an AIMA appointment?",
       subtitle: "We can help file a legal petition with the Portuguese courts to help secure your immigration appointment",
       benefits: [
-        "Legal action through Portuguese courts to protect your right to an immigration appointment",
+        "Use the strong legal president in Portugal to enforce your right to an appointment",
         "Impose time constraints & financial penalties on AIMA to encourage a speedy response",
-        "Efficient process with 2-3 month estimated timeline",
-        "Professional legal service with full transparency"
+        "Efficient process with 2-3 month estimated timeline"
       ],
       fullName: "Full Name",
       email: "Email Address",
@@ -220,7 +218,7 @@ export default function LegalLandingPageV2(): ReactElement {
         (!formData.isNewApplication && !formData.currentExpiry)) {
       toast({
         variant: "destructive",
-        title: "Error",
+        title: language === 'pt' ? "Erro" : "Error",
         description: language === 'pt'
           ? "Por favor preencha todos os campos obrigatórios"
           : "Please complete all required fields",
@@ -243,16 +241,16 @@ export default function LegalLandingPageV2(): ReactElement {
       
       if (response.ok) {
         toast({
-          title: "Success",
+          title: language === 'pt' ? "Sucesso" : "Success",
           description: language === 'pt' 
-            ? "Obrigado pelo seu interesse. Entraremos em contato em breve."
+            ? "Obrigado pelo seu interesse. Entraremos em contacto em breve."
             : "Thank you for your submission. We will contact you shortly.",
         })
         setFormData({ name: '', email: '', phone: '', visaType: '', contactAttempts: '', isNewApplication: true, currentExpiry: '' })
       } else {
         toast({
           variant: "destructive",
-          title: "Error",
+          title: language === 'pt' ? "Erro" : "Error",
           description: language === 'pt'
             ? "Houve um erro ao enviar o formulário. Por favor, tente novamente."
             : "There was an error submitting your form. Please try again.",
@@ -261,7 +259,7 @@ export default function LegalLandingPageV2(): ReactElement {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Error",
+        title: language === 'pt' ? "Erro" : "Error",
         description: language === 'pt'
           ? "Houve um erro ao enviar o formulário. Por favor, tente novamente."
           : "There was an error submitting your form. Please try again.",
@@ -341,7 +339,7 @@ export default function LegalLandingPageV2(): ReactElement {
       </section>
 
       {/* Main Content Section */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-32">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* How It Works Section */}
           <div id="how-it-works" className="max-w-3xl mx-auto text-center scroll-mt-24">
@@ -367,14 +365,15 @@ export default function LegalLandingPageV2(): ReactElement {
           </div>
 
           {/* Benefits Section */}
-          <div className="mt-32">
+          <div className="mt-40">
             <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
-              {/* Image */}
+              {/* Benefits Section Image */}
               <div className="md:col-span-2 relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
                 <Image
                   src="/bg1.jpg"
                   alt="Legal Support"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover object-top rounded-2xl"
                   priority
                 />
@@ -383,7 +382,7 @@ export default function LegalLandingPageV2(): ReactElement {
               {/* Text Section*/}
               <div className="md:col-span-3 px-4 md:px-6">
                 <h2 className="text-3xl font-bold text-gray-900 mb-8 md:pl-12">
-                  {language === 'pt' ? 'Benefícios' : 'Benefits'}
+                  {language === 'pt' ? 'Benefícios' : 'Benefits for you'}
                 </h2>
                 <div className="space-y-6 mt-8 md:mt-0 md:pl-12">
                   {currentContent.benefits.map((benefit, index) => (
@@ -402,15 +401,16 @@ export default function LegalLandingPageV2(): ReactElement {
           </div>
 
           {/* Why Work With Us Section */}
-          <div className="mt-32">
+          <div className="mt-32 -scroll-mb-32">
             <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
-                {/* Image */}
+                {/* Why Work With Us Image */}
                 <div className="md:col-span-2 relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden order-1 md:order-2">
                   <Image
                     src="/bg2.jpg"
                     alt="Legal Support"
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover object-top rounded-2xl"
                     priority
                   />
@@ -441,7 +441,7 @@ export default function LegalLandingPageV2(): ReactElement {
       </section>
 
       {/* Contact Form Section */}
-      <div className="w-full bg-[#fafafa]">
+      <div className="w-full bg-[#fafafa] py-8">
         <div className="max-w-6xl mx-auto py-16">
           <div id="form" className="max-w-md mx-auto scroll-mt-24">
             <h2 className="text-3xl text-gray-900 text-center mb-6">
@@ -455,12 +455,12 @@ export default function LegalLandingPageV2(): ReactElement {
                 <div className="mb-4">
                   <div className="py-6 bg-red-100 rounded-lg border-2 border-red-200">
                     <p className="text-gray-600 text-center mb-2 underline font-bold">
-                      Requirements
+                      {language === 'pt' ? 'Requisitos' : 'Requirements'}
                     </p>
                     <div className="text-gray-600 space-y-2 px-10 py-2">
                       {(language === 'pt' ? [
-                        'Visto expirado',
-                        'Comprovativo de tentativa de contacto com a AIMA'
+                        'Visto/autorização atualmente expirado',
+                        'Comprovativo de múltiplas tentativas de contacto com a AIMA'
                       ] : [
                         'Visa/permit currently expired',
                         'Evidence of multiple attempts to contact AIMA'
@@ -517,9 +517,11 @@ export default function LegalLandingPageV2(): ReactElement {
                           onSelect={(date) => setFormData(prev => ({ ...prev, currentExpiry: date ? date.toISOString().split('T')[0] : '' }))}
                           disabled={isSubmitting}
                           defaultMonth={formData.currentExpiry ? new Date(formData.currentExpiry) : new Date()}
-                          fromDate={new Date()}
-                          fixedWeeks
                           initialFocus
+                          classNames={{
+                            day_selected: "bg-blue-600 text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white",
+                            day_today: "bg-gray-100 text-gray-900"
+                          }}
                         />
                       </PopoverContent>
                     </Popover>

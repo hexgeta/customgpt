@@ -1,6 +1,7 @@
 import { Space_Mono } from 'next/font/google'
 import './globals.css'
 import { Toaster } from "@/components/ui/toaster"
+import { defaultMetadata } from './shared-metadata'
 
 const spaceMono = Space_Mono({
   subsets: ['latin'],
@@ -8,10 +9,7 @@ const spaceMono = Space_Mono({
   variable: '--font-space-mono',
 })
 
-export const metadata = {
-  title: 'AIMA Legal Support',
-  description: 'Get legal support for your AIMA appointment',
-}
+export const metadata = defaultMetadata
 
 export default function RootLayout({
   children,
