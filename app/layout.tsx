@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: 'Apoio Jurídico Imigração',
     images: [
       {
-        url: '/social-image.png',
+        url: '/social-preview.jpg',
         width: 1200,
         height: 630,
         alt: 'Apoio Jurídico Imigração Preview',
