@@ -513,7 +513,7 @@ export default function LegalLandingPageV2(): ReactElement {
                     onValueChange={(value) => setFormData(prev => ({ ...prev, visaType: value }))}
                     disabled={isSubmitting}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-white">
                       <SelectValue placeholder={language === 'pt' ? 'Selecione o tipo de visto' : 'Select visa type'} />
                     </SelectTrigger>
                     <SelectContent>
@@ -532,25 +532,30 @@ export default function LegalLandingPageV2(): ReactElement {
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-full justify-start text-left font-normal bg-white"
+                        className={`w-full justify-start text-left font-normal bg-white ${!formData.currentExpiry ? 'text-muted-foreground' : ''}`}
                         disabled={isSubmitting}
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {formData.currentExpiry ? format(new Date(formData.currentExpiry), "PPP") : language === 'pt' ? 'Selecione uma data' : 'Pick a date'}
+                        {formData.currentExpiry ? format(new Date(formData.currentExpiry + 'T00:00:00'), "PPP") : language === 'pt' ? 'Selecione uma data' : 'Pick a date'}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         mode="single"
-                        selected={formData.currentExpiry ? new Date(formData.currentExpiry) : undefined}
-                        onSelect={(date) => setFormData(prev => ({ ...prev, currentExpiry: date ? date.toISOString().split('T')[0] : '' }))}
-                        disabled={isSubmitting}
-                        defaultMonth={formData.currentExpiry ? new Date(formData.currentExpiry) : new Date()}
-                        initialFocus
-                        classNames={{
-                          day_selected: "bg-blue-600 text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white",
-                          day_today: "bg-gray-100 text-gray-900"
+                        selected={formData.currentExpiry ? new Date(formData.currentExpiry + 'T00:00:00') : undefined}
+                        onSelect={(date) => {
+                          if (date) {
+                            const year = date.getFullYear()
+                            const month = String(date.getMonth() + 1).padStart(2, '0')
+                            const day = String(date.getDate()).padStart(2, '0')
+                            setFormData(prev => ({ ...prev, currentExpiry: `${year}-${month}-${day}` }))
+                          } else {
+                            setFormData(prev => ({ ...prev, currentExpiry: '' }))
+                          }
                         }}
+                        disabled={(date) => date < new Date("1900-01-01")}
+                        initialFocus
+                        className="rounded-md border"
                       />
                     </PopoverContent>
                   </Popover>
