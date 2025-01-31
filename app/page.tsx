@@ -73,7 +73,7 @@ export default function LegalLandingPageV2(): ReactElement {
   const content: Record<'pt' | 'en', ContentType> = {
     pt: {
       title: "Não consegue marcar uma consulta na AIMA?",
-      subtitle: "Podemos ajudar a apresentar uma petição legal nos tribunais portugueses para garantir a sua consulta de imigração",
+      subtitle: "Podemos ajudar a apresentar uma intimação nos tribunais portugueses para peticionar pelo seu agendamento junto da AIMA",
       benefits: [
         "Utilize o forte precedente legal em Portugal para garantir o seu direito a uma consulta",
         "Imposição de prazos e penalidades financeiras à AIMA para incentivar uma resposta rápida",
@@ -339,7 +339,7 @@ export default function LegalLandingPageV2(): ReactElement {
       </section>
 
       {/* Main Content Section */}
-      <section className="bg-white py-28">
+      <section className="bg-white py-32">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* How It Works Section */}
           <div id="how-it-works" className="max-w-3xl mx-auto text-center scroll-mt-24">
