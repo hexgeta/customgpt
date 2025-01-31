@@ -9,7 +9,24 @@ const spaceMono = Space_Mono({
   variable: '--font-space-mono',
 })
 
-export const metadata = defaultMetadata
+export const metadata = {
+  ...defaultMetadata,
+  openGraph: {
+    ...defaultMetadata.openGraph,
+    images: [
+      {
+        url: '/social-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Apoio Jurídico AIMA',
+      },
+    ],
+  },
+  twitter: {
+    ...defaultMetadata.twitter,
+    images: ['/social-image.png'],
+  },
+}
 
 export default function RootLayout({
   children,

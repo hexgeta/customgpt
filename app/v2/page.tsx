@@ -3,7 +3,7 @@
 import { useState, useEffect, ReactElement } from 'react'
 import { useToast } from "@/components/ui/use-toast"
 import Image from 'next/image'
-import { Loader2, Check, Star, StarHalf, MessageCircle, CalendarIcon, X } from "lucide-react"
+import { Loader2, Check, Star, StarHalf, MessageCircle, CalendarIcon, X, ChevronDown } from "lucide-react"
 import Cookies from 'js-cookie'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -44,11 +44,8 @@ type ContentType = {
   reasons: string[];
   visaType: string;
   contactAttempts: string;
-  newApplication: string;
   currentExpiry: string;
   visaTypes: { value: string; label: string; }[];
-  yes: string;
-  no: string;
 }
 
 export default function LegalLandingPageV2(): ReactElement {
@@ -65,7 +62,6 @@ export default function LegalLandingPageV2(): ReactElement {
     phone: '',
     visaType: '',
     contactAttempts: '',
-    isNewApplication: true,
     currentExpiry: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -75,7 +71,7 @@ export default function LegalLandingPageV2(): ReactElement {
       title: "Não consegue marcar uma consulta na AIMA?",
       subtitle: "Podemos ajudar a apresentar uma intimação nos tribunais portugueses para peticionar pelo seu agendamento junto da AIMA",
       benefits: [
-        "Utilize o forte precedente legal em Portugal para garantir o seu direito a uma consulta",
+        "Utilize o precedente legal em Portugal para peticionar pelo seu direito a uma consulta",
         "Imposição de prazos e penalidades financeiras à AIMA para incentivar uma resposta rápida",
         "Processo eficiente com prazo estimado de 2-3 meses"
       ],
@@ -95,7 +91,7 @@ export default function LegalLandingPageV2(): ReactElement {
         "Revisão do Tribunal – O seu caso é analisado por um juiz designado e é tomada uma decisão",
         "Marcação da Consulta – Se aprovado, a AIMA fornecerá uma data de consulta imediatamente"
       ],
-      disclaimer: "Embora não possamos garantir a decisão do tribunal, garantimos que a sua petição será devidamente preparada, submetida e que estará numa posição forte para obter uma consulta.",
+      disclaimer: "Embora não possamos prever a decisão do tribunal, asseguramos que a sua petição será devidamente preparada e submetida para fortalecer a sua posição para obter uma consulta.",
       whyUs: "Porquê Trabalhar Connosco?",
       reasons: [
         "Apoio Jurídico Especializado – Especializados em processos administrativos judiciais",
@@ -104,9 +100,9 @@ export default function LegalLandingPageV2(): ReactElement {
       ],
       visaType: "Tipo de Visto",
       contactAttempts: "Número de tentativas de contacto com a AIMA",
-      newApplication: "É uma nova aplicação de visto?",
-      currentExpiry: "Data de expiração do visto atual",
+      currentExpiry: "",
       visaTypes: [
+        { value: "TOURIST", label: "Visto de Turista" },
         { value: "D1", label: "D1 (Visto de Trabalho)" },
         { value: "D2", label: "D2 (Visto para Empreendedores)" },
         { value: "D3", label: "D3 (Visto para Atividades Altamente Qualificadas)" },
@@ -114,8 +110,6 @@ export default function LegalLandingPageV2(): ReactElement {
         { value: "D7", label: "D7 (Visto para Rendimento Passivo)" },
         { value: "D8", label: "D8 (Visto para Trabalho Remoto)" }
       ],
-      yes: "Sim",
-      no: "Não"
     },
     en: {
       title: "Unable to get an AIMA appointment?",
@@ -150,9 +144,9 @@ export default function LegalLandingPageV2(): ReactElement {
       ],
       visaType: "Visa Type",
       contactAttempts: "Number of attempts to contact AIMA",
-      newApplication: "Is this a new visa application?",
-      currentExpiry: "Current visa expiry date",
+      currentExpiry: "",
       visaTypes: [
+        { value: "TOURIST", label: "Tourist Visa" },
         { value: "D1", label: "D1 (Work Visa)" },
         { value: "D2", label: "D2 (Entrepreneur Visa)" },
         { value: "D3", label: "D3 (Highly Qualified Activities Visa)" },
@@ -160,8 +154,6 @@ export default function LegalLandingPageV2(): ReactElement {
         { value: "D7", label: "D7 (Passive Income Visa)" },
         { value: "D8", label: "D8 (Remote Work Visa)" }
       ],
-      yes: "Yes",
-      no: "No"
     }
   }
 
@@ -212,16 +204,58 @@ export default function LegalLandingPageV2(): ReactElement {
     e.preventDefault()
     if (isSubmitting) return
 
-    // Check if any required fields are missing
-    if (!formData.name || !formData.visaType || !formData.contactAttempts || 
-        (!formData.email && !formData.phone) || 
-        (!formData.isNewApplication && !formData.currentExpiry)) {
+    // Check each required field and show specific error message
+    if (!formData.name) {
       toast({
         variant: "destructive",
         title: language === 'pt' ? "Erro" : "Error",
         description: language === 'pt'
-          ? "Por favor preencha todos os campos obrigatórios"
-          : "Please complete all required fields",
+          ? "Por favor insira o seu nome"
+          : "Please enter your name",
+      })
+      return
+    }
+
+    if (!formData.visaType) {
+      toast({
+        variant: "destructive",
+        title: language === 'pt' ? "Erro" : "Error",
+        description: language === 'pt'
+          ? "Por favor selecione o tipo de visto"
+          : "Please select your visa type",
+      })
+      return
+    }
+
+    if (!formData.contactAttempts) {
+      toast({
+        variant: "destructive",
+        title: language === 'pt' ? "Erro" : "Error",
+        description: language === 'pt'
+          ? "Por favor indique o número de tentativas de contacto com a AIMA"
+          : "Please enter the number of times you've tried to contact AIMA",
+      })
+      return
+    }
+
+    if (!formData.currentExpiry) {
+      toast({
+        variant: "destructive",
+        title: language === 'pt' ? "Erro" : "Error",
+        description: language === 'pt'
+          ? "Por favor selecione a data de expiração do seu visto"
+          : "Please select your visa expiry date",
+      })
+      return
+    }
+
+    if (!formData.email) {
+      toast({
+        variant: "destructive",
+        title: language === 'pt' ? "Erro" : "Error",
+        description: language === 'pt'
+          ? "Por favor insira o seu endereço de email"
+          : "Please enter your email address",
       })
       return
     }
@@ -246,7 +280,7 @@ export default function LegalLandingPageV2(): ReactElement {
             ? "Obrigado pelo seu interesse. Entraremos em contacto em breve."
             : "Thank you for your submission. We will contact you shortly.",
         })
-        setFormData({ name: '', email: '', phone: '', visaType: '', contactAttempts: '', isNewApplication: true, currentExpiry: '' })
+        setFormData({ name: '', email: '', phone: '', visaType: '', contactAttempts: '', currentExpiry: '' })
       } else {
         toast({
           variant: "destructive",
@@ -272,9 +306,9 @@ export default function LegalLandingPageV2(): ReactElement {
   return (
     <>
       {/* Hero Section */}
-      <section className="min-h-screen relative overflow-hidden flex items-center pt-12 sm:pt-4 bg-[#fafafa]">
+      <section className="min-h-[80vh] relative overflow-hidden flex items-center pt-4 bg-[#fafafa]">
         {/* Hero Content */}
-        <div className="relative w-full max-w-6xl mx-auto py-8 xs:py-12 md:py-16 lg:py-16 px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full max-w-6xl mx-auto py-4 xs:py-8 md:py-16 lg:py-16 px-4 sm:px-6 lg:px-8">
           {/* Language Toggle */}
           <div className="flex justify-center mb-4">
             <div className="flex items-center gap-2 sm:gap-4">
@@ -332,6 +366,7 @@ export default function LegalLandingPageV2(): ReactElement {
                 }}
               >
                 {language === 'pt' ? 'Saber Mais' : 'Learn more'}
+                <ChevronDown className="ml-2 h-4 w-4" />
               </a>
             </div>
           </div>
@@ -339,7 +374,7 @@ export default function LegalLandingPageV2(): ReactElement {
       </section>
 
       {/* Main Content Section */}
-      <section className="bg-white py-32">
+      <section className="bg-white py-28">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* How It Works Section */}
           <div id="how-it-works" className="max-w-3xl mx-auto text-center scroll-mt-24">
@@ -365,10 +400,10 @@ export default function LegalLandingPageV2(): ReactElement {
           </div>
 
           {/* Benefits Section */}
-          <div className="mt-40">
-            <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
+          <div className="mt-20">
+            <div className="grid md:grid-cols-2 gap-8">
               {/* Benefits Section Image */}
-              <div className="md:col-span-2 relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
+              <div className="relative w-full h-[400px] md:h-[400px] rounded-2xl overflow-hidden">
                 <Image
                   src="/bg1.jpg"
                   alt="Legal Support"
@@ -380,19 +415,19 @@ export default function LegalLandingPageV2(): ReactElement {
               </div>
 
               {/* Text Section*/}
-              <div className="md:col-span-3 px-4 md:px-6">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8 md:pl-12">
+              <div className="flex flex-col justify-top py-8 px-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-8">
                   {language === 'pt' ? 'Benefícios' : 'Benefits for you'}
                 </h2>
-                <div className="space-y-6 mt-8 md:mt-0 md:pl-12">
+                <div className="space-y-3">
                   {currentContent.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start space-x-4">
+                    <div key={index} className="flex items-start space-x-3">
                       <div className="flex-shrink-0">
-                        <div className="w-8 h-8 rounded-full bg-blue-100/50 flex items-center justify-center">
-                          <Check className="w-5 h-5 text-blue-500" />
+                        <div className="w-6 h-6 rounded-full bg-blue-100/50 flex items-center justify-center">
+                          <Check className="w-4 h-4 text-blue-500" />
                         </div>
                       </div>
-                      <p className="text-gray-600 text-lg leading-relaxed">{benefit}</p>
+                      <p className="text-gray-600 text-base leading-relaxed">{benefit}</p>
                     </div>
                   ))}
                 </div>
@@ -401,39 +436,37 @@ export default function LegalLandingPageV2(): ReactElement {
           </div>
 
           {/* Why Work With Us Section */}
-          <div className="mt-32 -scroll-mb-32">
-            <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
-                {/* Why Work With Us Image */}
-                <div className="md:col-span-2 relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden order-1 md:order-2">
-                  <Image
-                    src="/bg2.jpg"
-                    alt="Legal Support"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover object-top rounded-2xl"
-                    priority
-                  />
-                </div>
-
-                {/* Text Content */}
-                <div className="md:col-span-3 px-4 md:px-6 order-2 md:order-1">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-8 md:pl-12">
-                    {currentContent.whyUs}
-                  </h2>
-                  <div className="space-y-6 md:pl-12">
-                    {currentContent.reasons.map((reason, index) => (
-                      <div key={index} className="flex items-start space-x-4">
-                        <div className="flex-shrink-0">
-                          <div className="w-8 h-8 rounded-full bg-blue-100/50 flex items-center justify-center">
-                            <Check className="w-5 h-5 text-blue-500" />
-                          </div>
+          <div className="mt-20">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Text Content */}
+              <div className="order-2 md:order-1 flex flex-col justify-top py-8 px-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                  {currentContent.whyUs}
+                </h2>
+                <div className="space-y-3">
+                  {currentContent.reasons.map((reason, index) => (
+                    <div key={index} className="flex items-start space-x-3">
+                      <div className="flex-shrink-0">
+                        <div className="w-6 h-6 rounded-full bg-blue-100/50 flex items-center justify-center">
+                          <Check className="w-4 h-4 text-blue-500" />
                         </div>
-                        <p className="text-gray-600 text-lg leading-relaxed">{reason}</p>
                       </div>
-                    ))}
-                  </div>
+                      <p className="text-gray-600 text-base leading-relaxed">{reason}</p>
+                    </div>
+                  ))}
                 </div>
+              </div>
+
+              {/* Why Work With Us Image */}
+              <div className="order-1 md:order-2 relative w-full h-[400px] md:h-[400px] rounded-2xl overflow-hidden">
+                <Image
+                  src="/bg2.jpg"
+                  alt="Legal Support"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-top rounded-2xl"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -472,63 +505,6 @@ export default function LegalLandingPageV2(): ReactElement {
                 </div>
 
                 <div className="grid gap-2">
-                  <Label htmlFor="newApplication">{currentContent.newApplication}</Label>
-                  <div suppressHydrationWarning>
-                    <RadioGroup
-                      value={formData.isNewApplication ? "yes" : "no"}
-                      onValueChange={(value) => setFormData(prev => ({ 
-                        ...prev, 
-                        isNewApplication: value === "yes",
-                        currentExpiry: value === "yes" ? "" : prev.currentExpiry 
-                      }))}
-                      className="flex gap-8"
-                      disabled={isSubmitting}
-                    >
-                      <div className="flex items-center space-x-3">
-                        <RadioGroupItem value="yes" id="yes" />
-                        <Label htmlFor="yes" className="font-normal cursor-pointer select-none">{currentContent.yes}</Label>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <RadioGroupItem value="no" id="no" />
-                        <Label htmlFor="no" className="font-normal cursor-pointer select-none">{currentContent.no}</Label>
-                      </div>
-                    </RadioGroup>
-                  </div>
-                </div>
-
-                {!formData.isNewApplication && (
-                  <div className="grid gap-2">
-                    <Label htmlFor="currentExpiry">{currentContent.currentExpiry}</Label>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className="w-full justify-start text-left font-normal bg-white"
-                          disabled={isSubmitting}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {formData.currentExpiry ? format(new Date(formData.currentExpiry), "PPP") : language === 'pt' ? 'Selecione uma data' : 'Pick a date'}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={formData.currentExpiry ? new Date(formData.currentExpiry) : undefined}
-                          onSelect={(date) => setFormData(prev => ({ ...prev, currentExpiry: date ? date.toISOString().split('T')[0] : '' }))}
-                          disabled={isSubmitting}
-                          defaultMonth={formData.currentExpiry ? new Date(formData.currentExpiry) : new Date()}
-                          initialFocus
-                          classNames={{
-                            day_selected: "bg-blue-600 text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white",
-                            day_today: "bg-gray-100 text-gray-900"
-                          }}
-                        />
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-                )}
-
-                <div className="grid gap-2">
                   <Label htmlFor="visaType">
                     {currentContent.visaType}
                   </Label>
@@ -548,6 +524,36 @@ export default function LegalLandingPageV2(): ReactElement {
                       ))}
                     </SelectContent>
                   </Select>
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="currentExpiry">{currentContent.currentExpiry}</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start text-left font-normal bg-white"
+                        disabled={isSubmitting}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {formData.currentExpiry ? format(new Date(formData.currentExpiry), "PPP") : language === 'pt' ? 'Selecione uma data' : 'Pick a date'}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={formData.currentExpiry ? new Date(formData.currentExpiry) : undefined}
+                        onSelect={(date) => setFormData(prev => ({ ...prev, currentExpiry: date ? date.toISOString().split('T')[0] : '' }))}
+                        disabled={isSubmitting}
+                        defaultMonth={formData.currentExpiry ? new Date(formData.currentExpiry) : new Date()}
+                        initialFocus
+                        classNames={{
+                          day_selected: "bg-blue-600 text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white",
+                          day_today: "bg-gray-100 text-gray-900"
+                        }}
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </div>
 
                 <div className="grid gap-2">

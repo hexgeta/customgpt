@@ -34,9 +34,9 @@ export async function POST(request: Request) {
         { status: 500 }
       )
     }
-
+    
     const resend = new Resend(resendApiKey)
-    const { name, email, phone, language = 'pt', visaType, isNewApplication, currentExpiry, contactAttempts } = await request.json()
+    const { name, email, phone, language = 'pt', visaType, currentExpiry, contactAttempts } = await request.json()
     const content = emailContent[language as keyof typeof emailContent]
     
     // Send email to the user
@@ -45,20 +45,18 @@ export async function POST(request: Request) {
       to: [email],
       subject: content.subject(name, email),
       html: content.html(name),
-      replyTo: 'mk.mscsp@gmail.com'
+      replyTo: 'miguel.pires@msplawyer.io'
     })
 
     // Send notification email to admin
     const { data: adminData, error: adminError } = await resend.emails.send({
       from: 'NEW LEAD<contact@apoiojuridico-imigracao.com>',
       to: ['michael+aima-notification@twospouts.com'],
-      cc: ['mk.mscsp@gmail.com'],
+      cc: ['miguel.pires@msplawyer.io'],
       subject: `New Lead (Apoiojurídico Imigração) | ${name} | ${email}`,
       html: `
-        <h1>New Lead (Apoiojurídico Imigração)</h1>
-        <p><strong>Is New Application:</strong> ${isNewApplication ? 'Yes' : 'No'}</p>
         <p><strong>Visa Type:</strong> ${visaType}</p>
-                ${!isNewApplication ? `<p><strong>Current Visa Expiry:</strong> ${currentExpiry}</p>` : ''}
+        <p><strong>Current Visa Expiry:</strong> ${currentExpiry}</p>
         <p><strong>Number of AIMA Contact Attempts:</strong> ${contactAttempts}</p>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email || 'Not provided'}</p>
@@ -74,7 +72,7 @@ export async function POST(request: Request) {
         { status: 500 }
       )
     }
-
+    
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Error:', error)

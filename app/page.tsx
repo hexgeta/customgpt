@@ -75,7 +75,7 @@ export default function LegalLandingPageV2(): ReactElement {
       title: "Não consegue marcar uma consulta na AIMA?",
       subtitle: "Podemos ajudar a apresentar uma intimação nos tribunais portugueses para peticionar pelo seu agendamento junto da AIMA",
       benefits: [
-        "Utilize o forte precedente legal em Portugal para garantir o seu direito a uma consulta",
+        "Utilize o precedente legal em Portugal para peticionar pelo seu direito a uma consulta",
         "Imposição de prazos e penalidades financeiras à AIMA para incentivar uma resposta rápida",
         "Processo eficiente com prazo estimado de 2-3 meses"
       ],
@@ -95,7 +95,7 @@ export default function LegalLandingPageV2(): ReactElement {
         "Revisão do Tribunal – O seu caso é analisado por um juiz designado e é tomada uma decisão",
         "Marcação da Consulta – Se aprovado, a AIMA fornecerá uma data de consulta imediatamente"
       ],
-      disclaimer: "Embora não possamos garantir a decisão do tribunal, garantimos que a sua petição será devidamente preparada, submetida e que estará numa posição forte para obter uma consulta.",
+      disclaimer: "Embora não possamos prever a decisão do tribunal, asseguramos que a sua petição será devidamente preparada e submetida para fortalecer a sua posição para obter uma consulta.",
       whyUs: "Porquê Trabalhar Connosco?",
       reasons: [
         "Apoio Jurídico Especializado – Especializados em processos administrativos judiciais",
