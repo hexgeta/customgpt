@@ -23,6 +23,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { format } from "date-fns"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 
 type ContentType = {
   title: string;
@@ -374,33 +375,111 @@ export default function LegalLandingPageV2(): ReactElement {
       </section>
 
       {/* Main Content Section */}
-      <section className="bg-white py-28">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* How It Works Section */}
-          <div id="how-it-works" className="max-w-3xl mx-auto text-center scroll-mt-24">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">
-              {currentContent.howItWorks}
-            </h2>
-            <div className="space-y-6">
-              {currentContent.steps.map((step, index) => (
-                <div key={index} className="flex items-start text-left space-x-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">
-                    {index + 1}
-                  </span>
-                  <p className="text-gray-600 text-lg">{step}</p>
-                </div>
-              ))}
-            </div>
-            
-            <div className="mt-8 p-4 bg-blue-100 rounded-lg">
-              <p className="text-gray-600">
-                📌 {currentContent.disclaimer}
-              </p>
+      <section>
+        {/* How It Works Section */}
+        <div className="bg-white pt-16">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="how-it-works" className="max-w-3xl mx-auto text-center scroll-mt-24">
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                {currentContent.howItWorks}
+              </h2>
+              <div className="space-y-6">
+                {currentContent.steps.map((step, index) => (
+                  <div key={index} className="flex items-start text-left space-x-4">
+                    <span className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">
+                      {index + 1}
+                    </span>
+                    <p className="text-gray-600 text-lg">{step}</p>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-8 p-4 bg-blue-100 rounded-lg">
+                <p className="text-gray-600">
+                  📌 {currentContent.disclaimer}
+                </p>
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Benefits Section */}
-          <div className="mt-20">
+        {/* Lawyer Bio Section */}
+        <div className="bg-white py-16">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+              <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                <div className="grid md:grid-cols-2 gap-0 min-h-[200px]">
+                  {/* Image */}
+                  <div className="relative">
+                    <Image
+                      src="/Miguel.jpg"
+                      alt="Miguel Pires - Immigration Lawyer"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover w-full h-full"
+                      priority
+                    />
+                  </div>
+
+                  {/* Bio Content */}
+                  <div className="p-8 flex flex-col justify-center">
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                      Miguel Pires
+                    </h2>
+                    <p className="text-blue-600 font-medium mb-4">
+                      {language === 'pt' ? 'Advogado Especialista em Imigração' : 'Portuguese Litigation Lawyer'}
+                    </p>
+                    <div className="space-y-4 text-gray-600">
+                      <p>
+                        {language === 'pt' 
+                          ? 'Com uma década de experiência em direito da imigração, Miguel Pires ajudou centenas de clientes a navegar com sucesso pelo sistema de imigração português.'
+                          : 'With a decade of experience in Portuguese tax & immigration law, Miguel Pires has helped hundreds of clients successfully navigate the Portuguese legal system and receive the outcomes they desire.'}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 space-y-4">
+                      <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-1">
+                          <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                          <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                          <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                          <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                          <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        </div>
+                        <span className="text-xs text-gray-500">
+                          {language === 'pt' ? 'Avaliação dos Clientes' : 'Client Rating'}
+                        </span>
+                      </div>
+                      
+                      <div className="flex items-center space-x-4">
+                        <a 
+                          href="https://msplawyer.io" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
+                        >
+                          🌐 Website
+                        </a>
+                        <a 
+                          href="https://www.upwork.com/freelancers/~0152fa2808750c7f47" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
+                        >
+                          ⭐ Upwork Profile
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Benefits Section */}
+        <div className="bg-[#fafafa] py-16">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Benefits Section Image */}
               <div className="relative w-full h-[400px] md:h-[400px] rounded-2xl overflow-hidden">
@@ -434,9 +513,11 @@ export default function LegalLandingPageV2(): ReactElement {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Why Work With Us Section */}
-          <div className="mt-20">
+        {/* Why Work With Us Section */}
+        <div className="bg-[#fafafa] py-16">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Text Content */}
               <div className="order-2 md:order-1 flex flex-col justify-top py-8 px-8">
@@ -468,6 +549,96 @@ export default function LegalLandingPageV2(): ReactElement {
                   priority
                 />
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="bg-white py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
+                {language === 'pt' ? 'Perguntas Frequentes' : 'Frequently Asked Questions'}
+              </h2>
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="text-left">
+                    {language === 'pt' 
+                      ? 'Quanto tempo demora o processo legal?' 
+                      : 'How long does the legal process take?'}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {language === 'pt'
+                      ? 'O processo geralmente leva entre 2 a 3 meses. Isso inclui a preparação da documentação, submissão ao tribunal e obtenção da decisão judicial.'
+                      : 'The process typically takes between 2 to 3 months. This includes preparing documentation, court submission, and obtaining the court decision.'}
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-2">
+                  <AccordionTrigger className="text-left">
+                    {language === 'pt'
+                      ? 'Quais são as chances de sucesso?'
+                      : 'What are the chances of success?'}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {language === 'pt'
+                      ? 'Com base em casos anteriores, temos um histórico forte de sucesso. No entanto, cada caso é único e depende de vários fatores, incluindo a documentação adequada e o histórico de tentativas de contato com a AIMA. Não podemos garantir que os tribunais concederão um agendamento.'
+                      : 'Based on previous cases, we have a strong track record of success. However, each case is unique and depends on various factors, including proper documentation and a history of AIMA contact attempts. We cannot guarantee that the courts will grant you an appointment.'}
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-3">
+                  <AccordionTrigger className="text-left">
+                    {language === 'pt'
+                      ? 'Preciso comparecer ao tribunal pessoalmente?'
+                      : 'Do I need to appear in court personally?'}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {language === 'pt'
+                      ? 'Não, nós cuidamos de todo o processo legal em seu nome. Você não precisa comparecer ao tribunal pessoalmente. O processo é puramente administrativo, sendo realizado online e via correio.'
+                      : 'No, we handle the entire legal process on your behalf. You do not need to appear in court personally. The filing is purely administrative, so it is completed online and via post.'}
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-4">
+                  <AccordionTrigger className="text-left">
+                    {language === 'pt'
+                      ? 'Sou elegível para este processo?'
+                      : 'Am I eligible for this?'}
+                  </AccordionTrigger>
+                  <AccordionContent className="whitespace-pre-wrap">
+                    {language === 'pt'
+                      ? 'Existem dois requisitos cruciais para este processo funcionar:\n\n• Você precisa ter um visto ou autorização de residência atualmente expirado\n\n• Você precisa ter provas suficientes de tentativas de contato com a AIMA (e-mails, registros de chamadas)'
+                      : 'There are two crucial requirements for this process to work:\n\n• You will need to have a visa or residence permit that is currently expired\n\n• You will need to have sufficient proof of attempts to contact AIMA (emails, call logs)'}
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-5">
+                  <AccordionTrigger className="text-left">
+                    {language === 'pt'
+                      ? 'Que documentos são necessários?'
+                      : 'What documents are required?'}
+                  </AccordionTrigger>
+                  <AccordionContent className="whitespace-pre-wrap">
+                    {language === 'pt'
+                      ? 'Precisaremos de:\n\n• Uma cópia do seu visto ou autorização de residência expirado\n\n• Provas suficientes de tentativas de contato com a AIMA (e-mails, registros de chamadas)\n\n• Documentos de identificação básicos (Passaporte, NIF, etc.)'
+                      : 'We will need:\n\n• A copy of your current expired visa or residence permit\n\n• Sufficient proof of attempts to contact AIMA (emails, call logs)\n\n• Basic identification documents (Passport, NIF, etc.)'}
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-6">
+                  <AccordionTrigger className="text-left">
+                    {language === 'pt'
+                      ? 'Qual é o custo deste serviço?'
+                      : 'How much is this service?'}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {language === 'pt'
+                      ? 'Os detalhes sobre preços são fornecidos mediante solicitação de cotação.'
+                      : 'Details on pricing are provided upon quote request.'}
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
           </div>
         </div>
@@ -647,6 +818,22 @@ export default function LegalLandingPageV2(): ReactElement {
           </svg>
         </div>
       </a> */}
+
+      {/* Footer */}
+      <footer className="bg-gray-100 py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-gray-600 mb-4">
+              Apoiojurídico-Imigração 2025
+            </p>
+            <p className="text-xs text-gray-500 max-w-4xl mx-auto">
+              {language === 'pt' 
+                ? 'Aviso Legal: Não existe relação advogado-cliente ou aconselhamento jurídico. Este website destina-se a fornecer informações gerais sobre a nossa empresa e os nossos serviços. Embora este website possa fornecer informações sobre questões jurídicas, a sua utilização, incluindo, mas não se limitando a, recepção, uso ou envio de quaisquer informações, materiais e comunicações fornecidas ou feitas por, em, para ou através deste website, não constitui prestação de serviços jurídicos de qualquer tipo.'
+                : 'Disclaimer: No attorney-client relationship or legal advice. This website is intended to provide general information about our firm and our services. Although this website may provide information regarding legal issues, your use of this website, including, but not limited to, your receipt, use, or sending of any information, materials, and communications provided or made by, in, to or through this website, does not constitute providing of legal services of any kind.'}
+            </p>
+          </div>
+        </div>
+      </footer>
     </>
   )
 } 
