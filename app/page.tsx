@@ -69,35 +69,35 @@ export default function LegalLandingPageV2(): ReactElement {
 
   const content: Record<'pt' | 'en', ContentType> = {
     pt: {
-      title: "Não consegue marcar uma consulta na AIMA?",
-      subtitle: "Podemos ajudar a apresentar uma intimação nos tribunais portugueses para peticionar pelo seu agendamento junto da AIMA",
+      title: "Não consegue agendar uma consulta na AIMA?",
+      subtitle: "Podemos ajudar a protocolar um requerimento junto aos tribunais portugueses para solicitar o seu agendamento na AIMA.",
       benefits: [
-        "Utilize o precedente legal em Portugal para peticionar pelo seu direito a uma consulta",
-        "Imposição de prazos e penalidades financeiras à AIMA para incentivar uma resposta rápida",
-        "Processo eficiente com prazo estimado de 2-3 meses"
+        "Aproveite o precedente jurídico em Portugal para reivindicar o seu direito a uma consulta.",
+        "Estipulação de prazos e penalidades financeiras à AIMA com o intuito de estimular uma resposta célere.",
+        "Processo eficaz com prazo estimado entre 2 e 3 meses."
       ],
       fullName: "Nome Completo",
-      email: "Endereço de Email",
+      email: "Endereço de e-mail",
       phone: "Número de Telefone",
-      button: "Obter cotação rápida",
+      button: "Obter uma cotação rápida",
       rating: "Avaliação dos Clientes",
       offer: "Oferta Especial",
-      expires: "Termina em",
+      expires: "Expira em",
       sale: "Promoção de Ano Novo",
-      whatsappMsg: "Olá! Gostaria de saber mais sobre o serviço de marcação na AIMA.",
+      whatsappMsg: "Olá! Gostaria de obter mais informações acerca do serviço de agendamento na AIMA.",
       howItWorks: "Como Funciona",
       steps: [
-        "Consulta Inicial – Analisamos o seu caso e explicamos o processo legal",
-        "Apresentação ao Tribunal – Preparamos e submetemos a sua petição legal",
-        "Revisão do Tribunal – O seu caso é analisado por um juiz designado e é tomada uma decisão",
-        "Marcação da Consulta – Se aprovado, a AIMA fornecerá uma data de consulta imediatamente"
+        "Consulta Inicial – Analisamos o seu caso e explicamos o processo jurídico.",
+        "Submissão da Petição – Preparámos e protocolamos a sua petição junto ao tribunal.",
+        "Revisão Judicial – O seu caso é analisado por um juiz designado, que proferirá uma decisão.",
+        "Agendamento da Consulta – Se aprovado, a AIMA indicará imediatamente a data da consulta."
       ],
-      disclaimer: "Embora não possamos prever a decisão do tribunal, asseguramos que a sua petição será devidamente preparada e submetida para fortalecer a sua posição para obter uma consulta.",
-      whyUs: "Porquê Trabalhar Connosco?",
+      disclaimer: "Embora não possamos prever a decisão do tribunal, garantimos que a sua petição será preparada e protocolada de forma adequada, reforçando a sua posição para assegurar a consulta.",
+      whyUs: "Porque trabalhar connosco?",
       reasons: [
-        "Apoio Jurídico Especializado – Especializados em processos administrativos judiciais",
-        "Total Transparência – Comunicação clara e sem taxas ocultas",
-        "Processo Sem Complicações – Tratamos de toda a documentação legal"
+        "Apoio Jurídico Especializado – Especialistas em processos administrativos judiciais.",
+        "Total Transparência – Comunicação clara e sem taxas ocultas.",
+        "Processo Sem Complicações – Tratamos de toda a documentação jurídica."
       ],
       visaType: "Tipo de Visto",
       contactAttempts: "Número de tentativas de contacto com a AIMA",
@@ -305,8 +305,7 @@ export default function LegalLandingPageV2(): ReactElement {
   }
 
   return (
-    <>
-      {/* Hero Section */}
+    <main>
       <section className="min-h-[80vh] relative overflow-hidden flex items-center pt-4 bg-[#fafafa]">
         {/* Hero Content */}
         <div className="relative w-full max-w-6xl mx-auto py-4 xs:py-8 md:py-16 lg:py-16 px-4 sm:px-6 lg:px-8">
@@ -366,7 +365,7 @@ export default function LegalLandingPageV2(): ReactElement {
                   document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                {language === 'pt' ? 'Saber Mais' : 'Learn more'}
+                {language === 'pt' ? 'Saiba Mais' : 'Learn more'}
                 <ChevronDown className="ml-2 h-4 w-4" />
               </a>
             </div>
@@ -374,9 +373,8 @@ export default function LegalLandingPageV2(): ReactElement {
         </div>
       </section>
 
-      {/* Main Content Section */}
       <section>
-        {/* How It Works Section */}
+        {/* Main Content Section */}
         <div className="bg-white pt-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="how-it-works" className="max-w-3xl mx-auto text-center scroll-mt-24">
@@ -478,7 +476,7 @@ export default function LegalLandingPageV2(): ReactElement {
         </div>
 
         {/* Benefits Section */}
-        <div className="bg-[#fafafa] py-16">
+        <div className="mt-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Benefits Section Image */}
@@ -494,7 +492,7 @@ export default function LegalLandingPageV2(): ReactElement {
               </div>
 
               {/* Text Section*/}
-              <div className="flex flex-col justify-top py-8 px-8">
+              <div className="flex flex-col justify-top py-8">
                 <h2 className="text-3xl font-bold text-gray-900 mb-8">
                   {language === 'pt' ? 'Benefícios' : 'Benefits for you'}
                 </h2>
@@ -516,11 +514,11 @@ export default function LegalLandingPageV2(): ReactElement {
         </div>
 
         {/* Why Work With Us Section */}
-        <div className="bg-[#fafafa] py-16">
+        <div className="mt-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Text Content */}
-              <div className="order-2 md:order-1 flex flex-col justify-top py-8 px-8">
+              <div className="order-2 md:order-1 flex flex-col justify-top py-8">
                 <h2 className="text-3xl font-bold text-gray-900 mb-8">
                   {currentContent.whyUs}
                 </h2>
@@ -552,9 +550,141 @@ export default function LegalLandingPageV2(): ReactElement {
             </div>
           </div>
         </div>
+      </section>
 
+      {/* Testimonials Section */}
+      <section className="bg-white py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+            {language === 'pt' ? 'O Que Dizem Nossos Clientes' : 'What Our Clients Say'}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Luis Testimonial */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center space-x-1 mb-4">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                </div>
+                <div className="flex-grow">
+                  <div className="text-[#1d2432] text-lg font-medium italic mb-6">
+                    {language === 'pt' ?
+                      "Profissional de excelência! Toda a informação que nos prestou foi de elevado valor. Voltarei a contar com os serviços do Miguel." :
+                      "Great professional! all the information he provided us was valuable. Will work with Miguel again!"}
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <p className="text-blue-500 font-semibold text-lg">LUIS</p>
+                  <p className="text-gray-500 text-sm">Jan 15, 2024</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Ivo Testimonial */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center space-x-1 mb-4">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                </div>
+                <div className="flex-grow">
+                  <div className="text-[#1d2432] text-lg font-medium italic mb-6">
+                    {language === 'pt' ?
+                      "As informações e sugestões, prestadas de forma profissional, foram excecionais. Certamente recorrerei novamente aos seus serviços assim que se fizer necessário." :
+                      "Amazing info and suggestion professionally, definitely rehiring again anytime soon when needed."}
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <p className="text-blue-500 font-semibold text-lg">IVO</p>
+                  <p className="text-gray-500 text-sm">Dec 28, 2023</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Shai Testimonial */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center space-x-1 mb-4">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                </div>
+                <div className="flex-grow">
+                  <div className="text-[#1d2432] text-lg font-medium italic mb-6">
+                    {language === 'pt' ?
+                      "Sem dúvida, o Miguel possui um conhecimento aprofundado da legislação fiscal portuguesa. Voltarei a recorrer aos seus serviços após uma consulta de elevada qualidade." :
+                      "There's no doubt that Miguel is highly knowledgeable of the Portuguese tax laws. Will hire him again after a great consultation."}
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <p className="text-blue-500 font-semibold text-lg">SHAI</p>
+                  <p className="text-gray-500 text-sm">Dec 12, 2023</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Richard Testimonial */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center space-x-1 mb-4">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                </div>
+                <div className="flex-grow">
+                  <div className="text-[#1d2432] text-lg font-medium italic mb-6">
+                    {language === 'pt' ?
+                      "O Miguel poupou-nos centenas de horas e uma quantia considerável de dinheiro. Agradeço imensamente." :
+                      "Miguel saved us hundreds of hours and an immense amount of money. Thank you."}
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <p className="text-blue-500 font-semibold text-lg">RICHARD</p>
+                  <p className="text-gray-500 text-sm">Nov 30, 2023</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Gennaro Testimonial */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center space-x-1 mb-4">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                </div>
+                <div className="flex-grow">
+                  <div className="text-[#1d2432] text-lg font-medium italic mb-6">
+                    {language === 'pt' ?
+                      "Não identifiquei qualquer falha na atuação do Miguel. Foi impressionantemente pontual, extremamente informativo e demonstrou um empenho notável para ajudar. Recomendo-o vivamente a todos os potenciais clientes. Muito obrigado!" :
+                      "I didn't find any flaws in Miguel's performance. He was impressively punctual, highly informative, and got the impression that he went out of his way to help out. I'd highly recommend him to any prospective clients. Many thanks!"}
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <p className="text-blue-500 font-semibold text-lg">GENNARO</p>
+                  <p className="text-gray-500 text-sm">Nov 15, 2023</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
         {/* FAQ Section */}
-        <div className="bg-white py-24">
+        <div className="bg-white py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
@@ -569,7 +699,7 @@ export default function LegalLandingPageV2(): ReactElement {
                   </AccordionTrigger>
                   <AccordionContent>
                     {language === 'pt'
-                      ? 'O processo geralmente leva entre 2 a 3 meses. Isso inclui a preparação da documentação, submissão ao tribunal e obtenção da decisão judicial.'
+                      ? 'O processo geralmente demora entre 2 e 3 meses, incluindo a preparação da documentação, a submissão ao tribunal e a obtenção da decisão judicial.'
                       : 'The process typically takes between 2 to 3 months. This includes preparing documentation, court submission, and obtaining the court decision.'}
                   </AccordionContent>
                 </AccordionItem>
@@ -595,7 +725,7 @@ export default function LegalLandingPageV2(): ReactElement {
                   </AccordionTrigger>
                   <AccordionContent>
                     {language === 'pt'
-                      ? 'Não, nós cuidamos de todo o processo legal em seu nome. Você não precisa comparecer ao tribunal pessoalmente. O processo é puramente administrativo, sendo realizado online e via correio.'
+                      ? 'Não, tratamos de todo o processo jurídico em seu nome. Não é necessário comparecer pessoalmente ao tribunal, uma vez que o procedimento é exclusivamente administrativo, realizado online e por correio.'
                       : 'No, we handle the entire legal process on your behalf. You do not need to appear in court personally. The filing is purely administrative, so it is completed online and via post.'}
                   </AccordionContent>
                 </AccordionItem>
@@ -608,7 +738,7 @@ export default function LegalLandingPageV2(): ReactElement {
                   </AccordionTrigger>
                   <AccordionContent className="whitespace-pre-wrap">
                     {language === 'pt'
-                      ? 'Existem dois requisitos cruciais para este processo funcionar:\n\n• Você precisa ter um visto ou autorização de residência atualmente expirado\n\n• Você precisa ter provas suficientes de tentativas de contato com a AIMA (e-mails, registros de chamadas)'
+                      ? 'Existem dois requisitos essenciais para o processamento deste pedido:\n\n• Possuir um visto ou autorização de residência que se encontre atualmente expirado;\n\n• Dispor de provas suficientes das várias tentativas de contacto com a AIMA (e-mails, registos de chamadas).'
                       : 'There are two crucial requirements for this process to work:\n\n• You will need to have a visa or residence permit that is currently expired\n\n• You will need to have sufficient proof of attempts to contact AIMA (emails, call logs)'}
                   </AccordionContent>
                 </AccordionItem>
@@ -621,7 +751,7 @@ export default function LegalLandingPageV2(): ReactElement {
                   </AccordionTrigger>
                   <AccordionContent className="whitespace-pre-wrap">
                     {language === 'pt'
-                      ? 'Precisaremos de:\n\n• Uma cópia do seu visto ou autorização de residência expirado\n\n• Provas suficientes de tentativas de contato com a AIMA (e-mails, registros de chamadas)\n\n• Documentos de identificação básicos (Passaporte, NIF, etc.)'
+                      ? 'Exigiremos:\n\n• Uma cópia do seu visto ou autorização de residência que se encontre expirado;\n\n• Provas suficientes das tentativas de contacto com a AIMA (e-mails, registos de chamadas);\n\n• Documentos de identificação básicos (passaporte, NIF, etc.).'
                       : 'We will need:\n\n• A copy of your current expired visa or residence permit\n\n• Sufficient proof of attempts to contact AIMA (emails, call logs)\n\n• Basic identification documents (Passport, NIF, etc.)'}
                   </AccordionContent>
                 </AccordionItem>
@@ -634,7 +764,7 @@ export default function LegalLandingPageV2(): ReactElement {
                   </AccordionTrigger>
                   <AccordionContent>
                     {language === 'pt'
-                      ? 'Os detalhes sobre preços são fornecidos mediante solicitação de cotação.'
+                      ? 'Os detalhes relativos aos preços serão facultados mediante pedido de cotação.'
                       : 'Details on pricing are provided upon quote request.'}
                   </AccordionContent>
                 </AccordionItem>
@@ -645,11 +775,11 @@ export default function LegalLandingPageV2(): ReactElement {
       </section>
 
       {/* Contact Form Section */}
-      <div className="w-full bg-[#fafafa] py-8">
+      <section className="w-full bg-[#fafafa] py-8">
         <div className="max-w-6xl mx-auto py-16">
           <div id="form" className="max-w-md mx-auto scroll-mt-24">
             <h2 className="text-3xl text-gray-900 text-center mb-6">
-              {language === 'pt' ? 'Pronto para ação legal?' : 'Ready to take legal action?'}
+              {language === 'pt' ? 'Pronto para iniciar um processo jurídico?' : 'Ready to take legal action?'}
             </h2>
             
             {/* Requirements */}
@@ -797,27 +927,7 @@ export default function LegalLandingPageV2(): ReactElement {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Sticky WhatsApp Widget */}
-      {/* <a
-        href={`https://wa.me/351920229287?text=${encodeURIComponent(currentContent.whatsappMsg)}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50"
-        aria-label="Chat on WhatsApp"
-      >
-        <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-[#25D366] hover:bg-[#20BA56] text-white rounded-full shadow-lg transition-all duration-200 hover:scale-110">
-          <svg
-            className="w-8 h-8 sm:w-10 sm:h-10"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-          </svg>
-        </div>
-      </a> */}
+      </section>
 
       {/* Footer */}
       <footer className="bg-gray-100 py-8">
@@ -834,6 +944,6 @@ export default function LegalLandingPageV2(): ReactElement {
           </div>
         </div>
       </footer>
-    </>
+    </main>
   )
 } 
