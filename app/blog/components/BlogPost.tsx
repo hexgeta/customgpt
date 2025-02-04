@@ -34,6 +34,7 @@ export default function BlogPost({
             <Link 
               href="/" 
               className="flex items-center justify-between hover:opacity-90 transition-opacity"
+              prefetch={false}
             >
             <div className="flex items-center gap-3">
               <div className="bg-white/20 rounded-full p-2">
@@ -72,7 +73,9 @@ export default function BlogPost({
                 src="/Miguel.jpg"
                 alt={author}
                 fill
+                sizes="56px"
                 className="object-cover"
+                priority
               />
             </div>
             <div>
@@ -84,19 +87,21 @@ export default function BlogPost({
 
         {/* Featured Image */}
         {image && (
-          <div className="relative w-full h-[500px] mb-16 rounded-xl overflow-hidden">
+          <div className="relative aspect-[16/9] w-full mb-16 rounded-xl overflow-hidden">
             <Image
               src={image.src}
               alt={image.alt}
               fill
+              sizes="(min-width: 1280px) 1200px, (min-width: 780px) 800px, 100vw"
               className="object-cover"
-              priority
+              loading="eager"
+              quality={90}
             />
           </div>
         )}
 
         {/* Content */}
-        <div className="mt-32 space-y-4 mb-2 [&>h2]:mt-16 [&>h3]:mt-12">
+        <div className="mt-8 [&>h2]:mt-4 [&>h3]:mt-8">
             {content}
         </div>
       </article>
