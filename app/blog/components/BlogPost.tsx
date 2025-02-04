@@ -76,7 +76,7 @@ export default function BlogPost({
       <div className="sticky top-5 z-50 bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg rounded-lg">
         <div className="max-w-6xl mx-auto px-4 py-3">
           <Link 
-            href="/legal-subpoena" 
+            href="/" 
             className="flex items-center justify-between hover:opacity-90 transition-opacity"
             prefetch={false}
             aria-label="Learn more about filing a legal subpoena against AIMA"
