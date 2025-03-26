@@ -26,7 +26,7 @@ import { format } from "date-fns"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { DM_Sans } from 'next/font/google'
 import { AnimatePresence, motion } from 'framer-motion'
-import { trackFormConversion } from './utils/analytics'
+import { trackFormConversion } from '../utils/analytics'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -461,71 +461,71 @@ export default function LegalLandingPageV2(): ReactElement {
       </AnimatePresence>
 
       <div className="pt-20">
-        <section className="min-h-[80vh] relative overflow-hidden flex items-center pt-4 bg-[#fafafa]">
-          <div className="relative w-full max-w-6xl mx-auto py-4 xs:py-8 md:py-16 lg:py-16 px-4 sm:px-6 lg:px-8">
-            {/* Language Toggle */}
-            <div className="flex justify-center mb-4">
-              <div className="flex items-center gap-2 sm:gap-4">
-                <button
-                  onClick={() => setLanguage('pt')}
-                  className={`w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 transition-all ${language === 'pt' ? 'border-blue-500 scale-100' : 'border-transparent opacity-50 hover:opacity-75'}`}
-                  style={{ WebkitTapHighlightColor: 'transparent' }}
-                >
-                  <div className="w-full h-full">
-                    <Image
-                      src="/pt-flag.svg"
-                      alt="Portuguese"
-                      width={32}
-                      height={32}
-                      className="w-full h-full object-cover"
-                      priority
-                    />
-                  </div>
-                </button>
-                <button
-                  onClick={() => setLanguage('en')}
-                  className={`w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 transition-all ${language === 'en' ? 'border-blue-500 scale-100' : 'border-transparent opacity-50 hover:opacity-75'}`}
-                  style={{ WebkitTapHighlightColor: 'transparent' }}
-                >
-                  <div className="w-full h-full">
-                    <Image
-                      src="/us-flag.svg"
-                      alt="English"
-                      width={32}
-                      height={32}
-                      className="w-full h-full object-cover"
-                      priority
-                    />
-                  </div>
-                </button>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <h1 className="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl leading-[1.2]">
-                {currentContent.title}
-              </h1>
-              <p className="max-w-md mx-auto text-base text-gray-600 sm:text-lg mt-6 md:mt-6 md:text-xl md:max-w-3xl">
-                {currentContent.subtitle}
-              </p>
-
-              {/* CTA Button */}
-              <div className="mt-10">
-                <a
-                  href="#how-it-works"
-                  className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  {language === 'pt' ? 'Saiba Mais' : 'Learn more'}
-                  <ChevronDown className="ml-2 h-4 w-4" />
-                </a>
-              </div>
+      <section className="min-h-[80vh] relative overflow-hidden flex items-center pt-4 bg-[#fafafa]">
+        <div className="relative w-full max-w-6xl mx-auto py-4 xs:py-8 md:py-16 lg:py-16 px-4 sm:px-6 lg:px-8">
+          {/* Language Toggle */}
+          <div className="flex justify-center mb-4">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <button
+                onClick={() => setLanguage('pt')}
+                className={`w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 transition-all ${language === 'pt' ? 'border-blue-500 scale-100' : 'border-transparent opacity-50 hover:opacity-75'}`}
+                style={{ WebkitTapHighlightColor: 'transparent' }}
+              >
+                <div className="w-full h-full">
+                  <Image
+                    src="/pt-flag.svg"
+                    alt="Portuguese"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
+                </div>
+              </button>
+              <button
+                onClick={() => setLanguage('en')}
+                className={`w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 transition-all ${language === 'en' ? 'border-blue-500 scale-100' : 'border-transparent opacity-50 hover:opacity-75'}`}
+                style={{ WebkitTapHighlightColor: 'transparent' }}
+              >
+                <div className="w-full h-full">
+                  <Image
+                    src="/us-flag.svg"
+                    alt="English"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
+                </div>
+              </button>
             </div>
           </div>
-        </section>
+
+          <div className="text-center">
+            <h1 className="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl leading-[1.2]">
+              {currentContent.title}
+            </h1>
+            <p className="max-w-md mx-auto text-base text-gray-600 sm:text-lg mt-6 md:mt-6 md:text-xl md:max-w-3xl">
+              {currentContent.subtitle}
+            </p>
+
+            {/* CTA Button */}
+            <div className="mt-10">
+              <a
+                href="#how-it-works"
+                  className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                {language === 'pt' ? 'Saiba Mais' : 'Learn more'}
+                <ChevronDown className="ml-2 h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
         <section className="bg-white pt-16" id="how-it-works">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -695,139 +695,139 @@ export default function LegalLandingPageV2(): ReactElement {
                   className="object-cover object-top rounded-2xl"
                   priority
                 />
-              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="bg-white py-24">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-              {language === 'pt' ? 'O Que Dizem Nossos Clientes' : 'What Our Clients Say'}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Luis Testimonial */}
-              <div className="bg-gray-50 p-8 rounded-2xl">
-                <div className="flex flex-col h-full">
-                  <div className="flex items-center space-x-1 mb-4">
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-[#1d2432] text-lg font-medium italic mb-6">
-                      {language === 'pt' ?
-                        "Profissional de excelência! Toda a informação que nos prestou foi de elevado valor. Voltarei a contar com os serviços do Miguel." :
-                        "Great professional! all the information he provided us was valuable. Will work with Miguel again!"}
-                    </div>
-                  </div>
-                  <div className="mt-4 flex justify-between items-center">
-                    <p className="text-blue-500 font-semibold text-lg">LUIS</p>
-                    <p className="text-gray-500 text-sm">Jan 15, 2024</p>
+      <section className="bg-white py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+            {language === 'pt' ? 'O Que Dizem Nossos Clientes' : 'What Our Clients Say'}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Luis Testimonial */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center space-x-1 mb-4">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                </div>
+                <div className="flex-grow">
+                  <div className="text-[#1d2432] text-lg font-medium italic mb-6">
+                    {language === 'pt' ?
+                      "Profissional de excelência! Toda a informação que nos prestou foi de elevado valor. Voltarei a contar com os serviços do Miguel." :
+                      "Great professional! all the information he provided us was valuable. Will work with Miguel again!"}
                   </div>
                 </div>
-              </div>
-
-              {/* Ivo Testimonial */}
-              <div className="bg-gray-50 p-8 rounded-2xl">
-                <div className="flex flex-col h-full">
-                  <div className="flex items-center space-x-1 mb-4">
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-[#1d2432] text-lg font-medium italic mb-6">
-                      {language === 'pt' ?
-                        "As informações e sugestões, prestadas de forma profissional, foram excecionais. Certamente recorrerei novamente aos seus serviços assim que se fizer necessário." :
-                        "Amazing info and suggestion professionally, definitely rehiring again anytime soon when needed."}
-                    </div>
-                  </div>
-                  <div className="mt-4 flex justify-between items-center">
-                    <p className="text-blue-500 font-semibold text-lg">IVO</p>
-                    <p className="text-gray-500 text-sm">Dec 28, 2023</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Shai Testimonial */}
-              <div className="bg-gray-50 p-8 rounded-2xl">
-                <div className="flex flex-col h-full">
-                  <div className="flex items-center space-x-1 mb-4">
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-[#1d2432] text-lg font-medium italic mb-6">
-                      {language === 'pt' ?
-                        "Sem dúvida, o Miguel possui um conhecimento aprofundado da legislação fiscal portuguesa. Voltarei a recorrer aos seus serviços após uma consulta de elevada qualidade." :
-                        "There's no doubt that Miguel is highly knowledgeable of the Portuguese tax laws. Will hire him again after a great consultation."}
-                    </div>
-                  </div>
-                  <div className="mt-4 flex justify-between items-center">
-                    <p className="text-blue-500 font-semibold text-lg">SHAI</p>
-                    <p className="text-gray-500 text-sm">Dec 12, 2023</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Richard Testimonial */}
-              <div className="bg-gray-50 p-8 rounded-2xl">
-                <div className="flex flex-col h-full">
-                  <div className="flex items-center space-x-1 mb-4">
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-[#1d2432] text-lg font-medium italic mb-6">
-                      {language === 'pt' ?
-                        "O Miguel poupou-nos centenas de horas e uma quantia considerável de dinheiro. Agradeço imensamente." :
-                        "Miguel saved us hundreds of hours and an immense amount of money. Thank you."}
-                    </div>
-                  </div>
-                  <div className="mt-4 flex justify-between items-center">
-                    <p className="text-blue-500 font-semibold text-lg">RICHARD</p>
-                    <p className="text-gray-500 text-sm">Nov 30, 2023</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Gennaro Testimonial */}
-              <div className="bg-gray-50 p-8 rounded-2xl">
-                <div className="flex flex-col h-full">
-                  <div className="flex items-center space-x-1 mb-4">
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="text-[#1d2432] text-lg font-medium italic mb-6">
-                      {language === 'pt' ?
-                        "Não identifiquei qualquer falha na atuação do Miguel. Foi impressionantemente pontual, extremamente informativo e demonstrou um empenho notável para ajudar. Recomendo-o vivamente a todos os potenciais clientes. Muito obrigado!" :
-                        "I didn't find any flaws in Miguel's performance. He was impressively punctual, highly informative, and got the impression that he went out of his way to help out. I'd highly recommend him to any prospective clients. Many thanks!"}
-                    </div>
-                  </div>
-                  <div className="mt-4 flex justify-between items-center">
-                    <p className="text-blue-500 font-semibold text-lg">GENNARO</p>
-                    <p className="text-gray-500 text-sm">Nov 15, 2023</p>
-                  </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <p className="text-blue-500 font-semibold text-lg">LUIS</p>
+                  <p className="text-gray-500 text-sm">Jan 15, 2024</p>
                 </div>
               </div>
             </div>
+
+            {/* Ivo Testimonial */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center space-x-1 mb-4">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                </div>
+                <div className="flex-grow">
+                  <div className="text-[#1d2432] text-lg font-medium italic mb-6">
+                    {language === 'pt' ?
+                      "As informações e sugestões, prestadas de forma profissional, foram excecionais. Certamente recorrerei novamente aos seus serviços assim que se fizer necessário." :
+                      "Amazing info and suggestion professionally, definitely rehiring again anytime soon when needed."}
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <p className="text-blue-500 font-semibold text-lg">IVO</p>
+                  <p className="text-gray-500 text-sm">Dec 28, 2023</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Shai Testimonial */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center space-x-1 mb-4">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                </div>
+                <div className="flex-grow">
+                  <div className="text-[#1d2432] text-lg font-medium italic mb-6">
+                    {language === 'pt' ?
+                      "Sem dúvida, o Miguel possui um conhecimento aprofundado da legislação fiscal portuguesa. Voltarei a recorrer aos seus serviços após uma consulta de elevada qualidade." :
+                      "There's no doubt that Miguel is highly knowledgeable of the Portuguese tax laws. Will hire him again after a great consultation."}
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <p className="text-blue-500 font-semibold text-lg">SHAI</p>
+                  <p className="text-gray-500 text-sm">Dec 12, 2023</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Richard Testimonial */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center space-x-1 mb-4">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                </div>
+                <div className="flex-grow">
+                  <div className="text-[#1d2432] text-lg font-medium italic mb-6">
+                    {language === 'pt' ?
+                      "O Miguel poupou-nos centenas de horas e uma quantia considerável de dinheiro. Agradeço imensamente." :
+                      "Miguel saved us hundreds of hours and an immense amount of money. Thank you."}
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <p className="text-blue-500 font-semibold text-lg">RICHARD</p>
+                  <p className="text-gray-500 text-sm">Nov 30, 2023</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Gennaro Testimonial */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center space-x-1 mb-4">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                </div>
+                <div className="flex-grow">
+                  <div className="text-[#1d2432] text-lg font-medium italic mb-6">
+                    {language === 'pt' ?
+                      "Não identifiquei qualquer falha na atuação do Miguel. Foi impressionantemente pontual, extremamente informativo e demonstrou um empenho notável para ajudar. Recomendo-o vivamente a todos os potenciais clientes. Muito obrigado!" :
+                      "I didn't find any flaws in Miguel's performance. He was impressively punctual, highly informative, and got the impression that he went out of his way to help out. I'd highly recommend him to any prospective clients. Many thanks!"}
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between items-center">
+                  <p className="text-blue-500 font-semibold text-lg">GENNARO</p>
+                  <p className="text-gray-500 text-sm">Nov 15, 2023</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
         <section className="bg-white py-16" id="faq">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -839,9 +839,9 @@ export default function LegalLandingPageV2(): ReactElement {
                 <AccordionItem value="item-1" className="border-b border-gray-200">
                   <AccordionTrigger className="text-left hover:no-underline group">
                     <span className="text-gray-900 group-hover:text-[#005bdc] transition-colors duration-200">
-                      {language === 'pt' 
-                        ? 'Quanto tempo demora o processo legal?' 
-                        : 'How long does the legal process take?'}
+                    {language === 'pt' 
+                      ? 'Quanto tempo demora o processo legal?' 
+                      : 'How long does the legal process take?'}
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-600">
@@ -854,9 +854,9 @@ export default function LegalLandingPageV2(): ReactElement {
                 <AccordionItem value="item-2" className="border-b border-gray-200">
                   <AccordionTrigger className="text-left hover:no-underline group">
                     <span className="text-gray-900 group-hover:text-[#005bdc] transition-colors duration-200">
-                      {language === 'pt'
-                        ? 'Quais são as chances de sucesso?'
-                        : 'What are the chances of success?'}
+                    {language === 'pt'
+                      ? 'Quais são as chances de sucesso?'
+                      : 'What are the chances of success?'}
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-600">
@@ -869,9 +869,9 @@ export default function LegalLandingPageV2(): ReactElement {
                 <AccordionItem value="item-3" className="border-b border-gray-200">
                   <AccordionTrigger className="text-left hover:no-underline group">
                     <span className="text-gray-900 group-hover:text-[#005bdc] transition-colors duration-200">
-                      {language === 'pt'
-                        ? 'Preciso comparecer ao tribunal pessoalmente?'
-                        : 'Do I need to appear in court personally?'}
+                    {language === 'pt'
+                      ? 'Preciso comparecer ao tribunal pessoalmente?'
+                      : 'Do I need to appear in court personally?'}
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-600">
@@ -884,9 +884,9 @@ export default function LegalLandingPageV2(): ReactElement {
                 <AccordionItem value="item-4" className="border-b border-gray-200">
                   <AccordionTrigger className="text-left hover:no-underline group">
                     <span className="text-gray-900 group-hover:text-[#005bdc] transition-colors duration-200">
-                      {language === 'pt'
-                        ? 'Sou elegível para este processo?'
-                        : 'Am I eligible for this?'}
+                    {language === 'pt'
+                      ? 'Sou elegível para este processo?'
+                      : 'Am I eligible for this?'}
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-600">
@@ -899,9 +899,9 @@ export default function LegalLandingPageV2(): ReactElement {
                 <AccordionItem value="item-5" className="border-b border-gray-200">
                   <AccordionTrigger className="text-left hover:no-underline group">
                     <span className="text-gray-900 group-hover:text-[#005bdc] transition-colors duration-200">
-                      {language === 'pt'
-                        ? 'Que documentos são necessários?'
-                        : 'What documents are required?'}
+                    {language === 'pt'
+                      ? 'Que documentos são necessários?'
+                      : 'What documents are required?'}
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-600">
@@ -914,9 +914,9 @@ export default function LegalLandingPageV2(): ReactElement {
                 <AccordionItem value="item-6" className="border-b border-gray-200">
                   <AccordionTrigger className="text-left hover:no-underline group">
                     <span className="text-gray-900 group-hover:text-[#005bdc] transition-colors duration-200">
-                      {language === 'pt'
-                        ? 'Qual é o custo deste serviço?'
-                        : 'How much is this service?'}
+                    {language === 'pt'
+                      ? 'Qual é o custo deste serviço?'
+                      : 'How much is this service?'}
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-600">
@@ -926,184 +926,184 @@ export default function LegalLandingPageV2(): ReactElement {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Contact Form Section */}
-        <section className="w-full bg-[#fafafa] py-8">
-          <div className="max-w-6xl mx-auto py-16">
-            <div id="form" className="max-w-md mx-auto scroll-mt-24">
-              <h2 className="text-3xl text-gray-900 text-center mb-6">
-                {language === 'pt' ? 'Pronto para iniciar um processo jurídico?' : 'Ready to take legal action?'}
-              </h2>
-              
-              {/* Requirements */}
-              <div className="mx-4">
+      {/* Contact Form Section */}
+      <section className="w-full bg-[#fafafa] py-8">
+        <div className="max-w-6xl mx-auto py-16">
+          <div id="form" className="max-w-md mx-auto scroll-mt-24">
+            <h2 className="text-3xl text-gray-900 text-center mb-6">
+              {language === 'pt' ? 'Pronto para iniciar um processo jurídico?' : 'Ready to take legal action?'}
+            </h2>
+            
+            {/* Requirements */}
+            <div className="mx-4">
                 <form onSubmit={handleSubmit} className="grid gap-6 bg-white p-8 rounded-2xl backdrop-blur-sm border border-gray-200 shadow-xl">
-                  {/* Requirements */}
-                  <div className="mb-4">
+                {/* Requirements */}
+                <div className="mb-4">
                     <div className="py-6 bg-red-100 rounded-2xl border-2 border-red-200">
-                      <p className="text-gray-600 text-center mb-2 underline font-bold">
-                        {language === 'pt' ? 'Requisitos' : 'Requirements'}
-                      </p>
-                      <div className="text-gray-600 space-y-2 px-10 py-2">
-                        {(language === 'pt' ? [
-                          'Visto/autorização atualmente expirado',
-                          'Comprovativo de múltiplas tentativas de contacto com a AIMA'
-                        ] : [
-                          'Visa/permit currently expired',
-                          'Evidence of multiple attempts to contact AIMA'
-                        ]).map((requirement, index) => (
-                          <p key={index}>• {requirement}</p>
-                        ))}
-                      </div>
+                    <p className="text-gray-600 text-center mb-2 underline font-bold">
+                      {language === 'pt' ? 'Requisitos' : 'Requirements'}
+                    </p>
+                    <div className="text-gray-600 space-y-2 px-10 py-2">
+                      {(language === 'pt' ? [
+                        'Visto/autorização atualmente expirado',
+                        'Comprovativo de múltiplas tentativas de contacto com a AIMA'
+                      ] : [
+                        'Visa/permit currently expired',
+                        'Evidence of multiple attempts to contact AIMA'
+                      ]).map((requirement, index) => (
+                        <p key={index}>• {requirement}</p>
+                      ))}
                     </div>
                   </div>
+                </div>
 
-                  <div className="grid gap-2">
-                    <Label htmlFor="visaType">
-                      {currentContent.visaType}
-                    </Label>
-                    <Select
-                      value={formData.visaType}
-                      onValueChange={(value) => setFormData(prev => ({ ...prev, visaType: value }))}
-                      disabled={isSubmitting}
-                    >
-                      <SelectTrigger className="bg-white rounded-full">
-                        <SelectValue placeholder={language === 'pt' ? 'Selecione o tipo de visto' : 'Select visa type'} />
-                      </SelectTrigger>
-                      <SelectContent className="rounded-xl">
-                        {currentContent.visaTypes.map((type) => (
-                          <SelectItem key={type.value} value={type.value}>
-                            {type.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="currentExpiry">{currentContent.currentExpiry}</Label>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className={`w-full justify-start text-left font-normal bg-white rounded-full ${!formData.currentExpiry ? 'text-muted-foreground' : ''}`}
-                          disabled={isSubmitting}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {formData.currentExpiry ? format(new Date(formData.currentExpiry + 'T00:00:00'), "PPP") : language === 'pt' ? 'Selecione uma data' : 'Pick a date'}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0 rounded-xl" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={formData.currentExpiry ? new Date(formData.currentExpiry + 'T00:00:00') : undefined}
-                          onSelect={(date) => {
-                            if (date) {
-                              const year = date.getFullYear()
-                              const month = String(date.getMonth() + 1).padStart(2, '0')
-                              const day = String(date.getDate()).padStart(2, '0')
-                              setFormData(prev => ({ ...prev, currentExpiry: `${year}-${month}-${day}` }))
-                            } else {
-                              setFormData(prev => ({ ...prev, currentExpiry: '' }))
-                            }
-                          }}
-                          disabled={(date) => date < new Date("1900-01-01")}
-                          initialFocus
-                          className="rounded-xl border"
-                        />
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="contactAttempts">
-                      {currentContent.contactAttempts}
-                    </Label>
-                    <Input
-                      type="number"
-                      id="contactAttempts"
-                      min="1"
-                      value={formData.contactAttempts}
-                      onChange={(e) => setFormData(prev => ({ ...prev, contactAttempts: e.target.value }))}
-                      disabled={isSubmitting}
-                      className="rounded-full"
-                    />
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="name">{currentContent.fullName}</Label>
-                    <Input
-                      type="text"
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                      disabled={isSubmitting}
-                      className="rounded-full"
-                    />
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="email">{currentContent.email}</Label>
-                    <Input
-                      type="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                      disabled={isSubmitting}
-                      placeholder="email@example.com"
-                      className="rounded-full"
-                    />
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="phone">{currentContent.phone}</Label>
-                    <Input
-                      type="tel"
-                      id="phone"
-                      pattern="[0-9+\s-]+"
-                      value={formData.phone}
-                      onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                      placeholder="+351 "
-                      disabled={isSubmitting}
-                      className="rounded-full"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
+                <div className="grid gap-2">
+                  <Label htmlFor="visaType">
+                    {currentContent.visaType}
+                  </Label>
+                  <Select
+                    value={formData.visaType}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, visaType: value }))}
                     disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300"
                   >
-                    {isSubmitting ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                    ) : (
-                      currentContent.button
-                    )}
-                  </Button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
+                      <SelectTrigger className="bg-white rounded-full">
+                      <SelectValue placeholder={language === 'pt' ? 'Selecione o tipo de visto' : 'Select visa type'} />
+                    </SelectTrigger>
+                      <SelectContent className="rounded-xl">
+                      {currentContent.visaTypes.map((type) => (
+                        <SelectItem key={type.value} value={type.value}>
+                          {type.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
-        {/* Footer */}
-        <footer className="bg-gray-100 py-8">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <p className="text-gray-600 mb-4">
-                Apoiojurídico-Imigração 2025
-              </p>
-              <p className="text-xs text-gray-500 max-w-4xl mx-auto">
-                {language === 'pt' 
-                  ? 'Aviso Legal: Não existe relação advogado-cliente ou aconselhamento jurídico. Este website destina-se a fornecer informações gerais sobre a nossa empresa e os nossos serviços. Embora este website possa fornecer informações sobre questões jurídicas, a sua utilização, incluindo, mas não se limitando a, recepção, uso ou envio de quaisquer informações, materiais e comunicações fornecidas ou feitas por, em, para ou através deste website, não constitui prestação de serviços jurídicos de qualquer tipo.'
-                  : 'Disclaimer: No attorney-client relationship or legal advice. This website is intended to provide general information about our firm and our services. Although this website may provide information regarding legal issues, your use of this website, including, but not limited to, your receipt, use, or sending of any information, materials, and communications provided or made by, in, to or through this website, does not constitute providing of legal services of any kind.'}
-              </p>
+                <div className="grid gap-2">
+                  <Label htmlFor="currentExpiry">{currentContent.currentExpiry}</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                          className={`w-full justify-start text-left font-normal bg-white rounded-full ${!formData.currentExpiry ? 'text-muted-foreground' : ''}`}
+                        disabled={isSubmitting}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {formData.currentExpiry ? format(new Date(formData.currentExpiry + 'T00:00:00'), "PPP") : language === 'pt' ? 'Selecione uma data' : 'Pick a date'}
+                      </Button>
+                    </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0 rounded-xl" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={formData.currentExpiry ? new Date(formData.currentExpiry + 'T00:00:00') : undefined}
+                        onSelect={(date) => {
+                          if (date) {
+                            const year = date.getFullYear()
+                            const month = String(date.getMonth() + 1).padStart(2, '0')
+                            const day = String(date.getDate()).padStart(2, '0')
+                            setFormData(prev => ({ ...prev, currentExpiry: `${year}-${month}-${day}` }))
+                          } else {
+                            setFormData(prev => ({ ...prev, currentExpiry: '' }))
+                          }
+                        }}
+                        disabled={(date) => date < new Date("1900-01-01")}
+                        initialFocus
+                          className="rounded-xl border"
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="contactAttempts">
+                    {currentContent.contactAttempts}
+                  </Label>
+                  <Input
+                    type="number"
+                    id="contactAttempts"
+                    min="1"
+                    value={formData.contactAttempts}
+                    onChange={(e) => setFormData(prev => ({ ...prev, contactAttempts: e.target.value }))}
+                    disabled={isSubmitting}
+                      className="rounded-full"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="name">{currentContent.fullName}</Label>
+                  <Input
+                    type="text"
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                    disabled={isSubmitting}
+                      className="rounded-full"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="email">{currentContent.email}</Label>
+                  <Input
+                    type="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                    disabled={isSubmitting}
+                    placeholder="email@example.com"
+                      className="rounded-full"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="phone">{currentContent.phone}</Label>
+                  <Input
+                    type="tel"
+                    id="phone"
+                    pattern="[0-9+\s-]+"
+                    value={formData.phone}
+                    onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                    placeholder="+351 "
+                    disabled={isSubmitting}
+                      className="rounded-full"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300"
+                >
+                  {isSubmitting ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    currentContent.button
+                  )}
+                </Button>
+              </form>
             </div>
           </div>
-        </footer>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-100 py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-gray-600 mb-4">
+              Apoiojurídico-Imigração 2025
+            </p>
+            <p className="text-xs text-gray-500 max-w-4xl mx-auto">
+              {language === 'pt' 
+                ? 'Aviso Legal: Não existe relação advogado-cliente ou aconselhamento jurídico. Este website destina-se a fornecer informações gerais sobre a nossa empresa e os nossos serviços. Embora este website possa fornecer informações sobre questões jurídicas, a sua utilização, incluindo, mas não se limitando a, recepção, uso ou envio de quaisquer informações, materiais e comunicações fornecidas ou feitas por, em, para ou através deste website, não constitui prestação de serviços jurídicos de qualquer tipo.'
+                : 'Disclaimer: No attorney-client relationship or legal advice. This website is intended to provide general information about our firm and our services. Although this website may provide information regarding legal issues, your use of this website, including, but not limited to, your receipt, use, or sending of any information, materials, and communications provided or made by, in, to or through this website, does not constitute providing of legal services of any kind.'}
+            </p>
+          </div>
+        </div>
+      </footer>
       </div>
     </main>
   )

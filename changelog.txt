@@ -1,0 +1,27 @@
+# Changelog
+
+## [2024-03-21]
+
+### Added
+- Created new NavigationBar component with responsive design
+- Added mobile menu with animations using framer-motion
+- Integrated NavigationBar into the landing page
+- Installed framer-motion package for animations
+- Added responsive mobile menu to v6 page
+- Implemented click-outside detection for mobile menu
+- Added smooth animations for menu transitions
+
+### Changed
+- Updated main layout to accommodate the navigation bar
+- Modified background styling to work better with the navigation
+- Updated header section in v6 page to be responsive
+- Added proper React imports and hooks for mobile menu functionality
+
+### Technical Details
+- NavigationBar uses React hooks (useState, useEffect, useRef) for state management
+- Implemented click-outside detection for mobile menu
+- Added smooth animations for menu transitions
+- Used Tailwind CSS for styling with the existing design system
+- Maintained consistent font usage (DM Sans) throughout the navigation
+- Mobile menu includes all navigation items and CTA button
+- Menu closes automatically when clicking outside or selecting an option 

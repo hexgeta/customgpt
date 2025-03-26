@@ -34,15 +34,15 @@ export function Toaster() {
               )}
               <div className="grid gap-1.5">
                 {title && (
-                  <ToastTitle className={`text-lg font-mono font-bold ${
-                    isDestructive ? 'text-red-800' : 'text-green-800'
+                  <ToastTitle className={`text-lg font-dm-sans font-bold ${
+                    isDestructive ? 'text-white' : 'text-foreground'
                   }`}>
                     {title}
                   </ToastTitle>
                 )}
                 {description && (
-                  <ToastDescription className={`font-mono text-sm leading-relaxed ${
-                    isDestructive ? 'text-red-700' : 'text-green-700'
+                  <ToastDescription className={`font-dm-sans text-sm leading-relaxed ${
+                    isDestructive ? 'text-white' : 'text-muted-foreground'
                   }`}>
                     {description}
                   </ToastDescription>
