@@ -47,19 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable}`}>
       <head>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-11266387977"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'AW-11266387977');
-          `}
-        </Script>
+        <script defer data-domain="apoiojuridico-imigracao.com" src="https://plausible.io/js/script.js"></script>
       </head>
       <body className="min-h-screen bg-background font-dm-sans antialiased">
         {children}
