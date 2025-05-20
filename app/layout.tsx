@@ -11,30 +11,30 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Apoio Jurídico Imigração',
-  description: 'Assistência jurídica especializada para garantir sua consulta na AIMA. Apoio profissional com processos administrativos nos tribunais portugueses.',
+  title: 'Immigration Legal Support',
+  description: 'Specialized legal assistance to secure your AIMA appointment. Professional support with administrative processes in Portuguese courts.',
   metadataBase: new URL('https://www.apoiojuridico-imigracao.com'),
   icons: {
     icon: '/favicon.jpg',
   },
   openGraph: {
-    title: 'Apoio Jurídico Imigração',
-    description: 'Assistência jurídica especializada para garantir sua consulta na AIMA. Apoio profissional com processos administrativos nos tribunais portugueses.',
+    title: 'Immigration Legal Support',
+    description: 'Specialized legal assistance to secure your AIMA appointment. Professional support with administrative processes in Portuguese courts.',
     url: 'https://www.apoiojuridico-imigracao.com',
-    siteName: 'Apoio Jurídico Imigração',
+    siteName: 'Immigration Legal Support',
     images: [{
       url: '/social-image.png',
       width: 1200,
       height: 630,
-      alt: 'Apoio Jurídico Imigração Preview'
+      alt: 'Immigration Legal Support Preview'
     }],
-    locale: 'pt_PT',
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Apoio Jurídico Imigração',
-    description: 'Assistência jurídica especializada para garantir sua consulta na AIMA. Apoio profissional com processos administrativos nos tribunais portugueses.',
+    title: 'Immigration Legal Support',
+    description: 'Specialized legal assistance to secure your AIMA appointment. Professional support with administrative processes in Portuguese courts.',
     images: ['/social-image.png'],
   },
 }

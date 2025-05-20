@@ -26,7 +26,6 @@ import { format } from "date-fns"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { DM_Sans } from 'next/font/google'
 import { AnimatePresence, motion } from 'framer-motion'
-import { trackFormConversion } from './utils/analytics'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -299,9 +298,6 @@ export default function LegalLandingPageV2(): ReactElement {
       })
       
       if (response.ok) {
-        // Track conversion
-        trackFormConversion();
-        
         toast({
           title: language === 'pt' ? "Sucesso" : "Success",
           description: language === 'pt' 
