@@ -596,24 +596,7 @@ export default function LegalLandingPageV2(): ReactElement {
                         </span>
                       </div>
                       
-                      <div className="flex items-center space-x-4">
-                        <a 
-                          href="https://msplawyer.io" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
-                        >
-                          🌐 Website
-                        </a>
-                        <a 
-                          href="https://www.upwork.com/freelancers/~0152fa2808750c7f47" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
-                        >
-                          ⭐ Upwork Profile
-                        </a>
-                      </div>
+                      {/* Website and Upwork links removed */}
                     </div>
                   </div>
                 </div>
