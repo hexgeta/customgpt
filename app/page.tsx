@@ -102,7 +102,7 @@ export default function LegalLandingPageV2(): ReactElement {
       fullName: "Nome Completo",
       email: "Endereço de e-mail",
       phone: "Número de Telefone",
-      button: "Obter uma cotação rápida",
+      button: "Contacte-nos",
       rating: "Avaliação dos Clientes",
       offer: "Oferta Especial",
       expires: "Expira em",
@@ -146,7 +146,7 @@ export default function LegalLandingPageV2(): ReactElement {
       fullName: "Full Name",
       email: "Email Address",
       phone: "Phone Number",
-      button: "Submit Application",
+      button: "Contact Us",
       rating: "Customer Rating",
       offer: "Special Offer",
       expires: "Ends in",
@@ -376,9 +376,9 @@ export default function LegalLandingPageV2(): ReactElement {
             </nav>
             <Button 
               className="px-6 py-6 bg-[#005bdc]/90 backdrop-blur-sm text-white text-lg font-medium font-dm-sans leading-none rounded-full hover:bg-[#0046a8] transition-all duration-300"
-              onClick={() => scrollToSection('form')}
+              onClick={() => scrollToSection('contact')}
             >
-              Submit Application
+              {language === 'pt' ? 'Contacte-nos' : 'Contact Us'}
             </Button>
           </div>
 
@@ -445,11 +445,11 @@ export default function LegalLandingPageV2(): ReactElement {
               <Button 
                 className="w-full mt-4 bg-[#005bdc]/90 text-white hover:bg-[#0046a8] transition-all duration-300 rounded-full"
                 onClick={() => {
-                  scrollToSection('form');
+                  scrollToSection('contact');
                   setIsMenuOpen(false);
                 }}
               >
-                Submit Application
+                {language === 'pt' ? 'Contacte-nos' : 'Contact Us'}
               </Button>
             </motion.div>
           </motion.div>
@@ -926,166 +926,24 @@ export default function LegalLandingPageV2(): ReactElement {
           </div>
         </section>
 
-        {/* Contact Form Section - temporarily disabled */}
-        {false && (
-        <section className="w-full bg-[#fafafa] py-8">
-          <div className="max-w-6xl mx-auto py-16">
-            <div id="form" className="max-w-md mx-auto scroll-mt-24">
-              <h2 className="text-3xl text-gray-900 text-center mb-6">
-                {language === 'pt' ? 'Pronto para iniciar um processo jurídico?' : 'Ready to take legal action?'}
+        {/* Contact Section */}
+        <section className="bg-white py-16" id="contact">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                {language === 'pt' ? 'Informações de Contacto' : 'Contact Information'}
               </h2>
-              
-              {/* Requirements */}
-              <div className="mx-4">
-                <form onSubmit={handleSubmit} className="grid gap-6 bg-white p-8 rounded-2xl backdrop-blur-sm border border-gray-200 shadow-xl">
-                  {/* Requirements */}
-                  <div className="mb-4">
-                    <div className="py-6 bg-red-100 rounded-2xl border-2 border-red-200">
-                      <p className="text-gray-600 text-center mb-2 underline font-bold">
-                        {language === 'pt' ? 'Requisitos' : 'Requirements'}
-                      </p>
-                      <div className="text-gray-600 space-y-2 px-10 py-2">
-                        {(language === 'pt' ? [
-                          'Visto/autorização atualmente expirado',
-                          'Comprovativo de múltiplas tentativas de contacto com a AIMA'
-                        ] : [
-                          'Visa/permit currently expired',
-                          'Evidence of multiple attempts to contact AIMA'
-                        ]).map((requirement, index) => (
-                          <p key={index}>• {requirement}</p>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="visaType">
-                      {currentContent.visaType}
-                    </Label>
-                    <Select
-                      value={formData.visaType}
-                      onValueChange={(value) => setFormData(prev => ({ ...prev, visaType: value }))}
-                      disabled={isSubmitting}
-                    >
-                      <SelectTrigger className="bg-white rounded-full">
-                        <SelectValue placeholder={language === 'pt' ? 'Selecione o tipo de visto' : 'Select visa type'} />
-                      </SelectTrigger>
-                      <SelectContent className="rounded-xl">
-                        {currentContent.visaTypes.map((type) => (
-                          <SelectItem key={type.value} value={type.value}>
-                            {type.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="currentExpiry">{currentContent.currentExpiry}</Label>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className={`w-full justify-start text-left font-normal bg-white rounded-full ${!formData.currentExpiry ? 'text-muted-foreground' : ''}`}
-                          disabled={isSubmitting}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {formData.currentExpiry ? format(new Date(formData.currentExpiry + 'T00:00:00'), "PPP") : language === 'pt' ? 'Selecione uma data' : 'Pick a date'}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0 rounded-xl" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={formData.currentExpiry ? new Date(formData.currentExpiry + 'T00:00:00') : undefined}
-                          onSelect={(date) => {
-                            if (date) {
-                              const year = date.getFullYear()
-                              const month = String(date.getMonth() + 1).padStart(2, '0')
-                              const day = String(date.getDate()).padStart(2, '0')
-                              setFormData(prev => ({ ...prev, currentExpiry: `${year}-${month}-${day}` }))
-                            } else {
-                              setFormData(prev => ({ ...prev, currentExpiry: '' }))
-                            }
-                          }}
-                          disabled={(date) => date < new Date("1900-01-01")}
-                          initialFocus
-                          className="rounded-xl border"
-                        />
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="contactAttempts">
-                      {currentContent.contactAttempts}
-                    </Label>
-                    <Input
-                      type="number"
-                      id="contactAttempts"
-                      min="1"
-                      value={formData.contactAttempts}
-                      onChange={(e) => setFormData(prev => ({ ...prev, contactAttempts: e.target.value }))}
-                      disabled={isSubmitting}
-                      className="rounded-full"
-                    />
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="name">{currentContent.fullName}</Label>
-                    <Input
-                      type="text"
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                      disabled={isSubmitting}
-                      className="rounded-full"
-                    />
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="email">{currentContent.email}</Label>
-                    <Input
-                      type="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                      disabled={isSubmitting}
-                      placeholder="email@example.com"
-                      className="rounded-full"
-                    />
-                  </div>
-
-                  <div className="grid gap-2">
-                    <Label htmlFor="phone">{currentContent.phone}</Label>
-                    <Input
-                      type="tel"
-                      id="phone"
-                      pattern="[0-9+\s-]+"
-                      value={formData.phone}
-                      onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                      placeholder="+351 "
-                      disabled={isSubmitting}
-                      className="rounded-full"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300"
-                  >
-                    {isSubmitting ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                    ) : (
-                      currentContent.button
-                    )}
-                  </Button>
-                </form>
-              </div>
+              <p className="text-gray-600 text-lg">
+                <a
+                  href="mailto:miguel.pires@msplawyer.io"
+                  className="text-blue-600 hover:text-blue-700 font-medium underline decoration-dotted"
+                >
+                  miguel.pires@msplawyer.io
+                </a>
+              </p>
             </div>
           </div>
         </section>
-        )}
 
         {/* Footer */}
         <footer className="bg-gray-100 py-8">
