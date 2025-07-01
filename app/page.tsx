@@ -926,7 +926,8 @@ export default function LegalLandingPageV2(): ReactElement {
           </div>
         </section>
 
-        {/* Contact Form Section */}
+        {/* Contact Form Section - temporarily disabled */}
+        {false && (
         <section className="w-full bg-[#fafafa] py-8">
           <div className="max-w-6xl mx-auto py-16">
             <div id="form" className="max-w-md mx-auto scroll-mt-24">
@@ -1084,6 +1085,7 @@ export default function LegalLandingPageV2(): ReactElement {
             </div>
           </div>
         </section>
+        )}
 
         {/* Footer */}
         <footer className="bg-gray-100 py-8">
