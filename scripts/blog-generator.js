@@ -735,18 +735,9 @@ export default function ${this.toPascalCase(content.slug)}() {
       // Clean old topics (optional - remove topics older than 1 year)
       this.topicTracker.cleanOldTopics(365);
       
-      // Check if we already ran today (skip check in test mode)
-      if (!process.env.NODE_ENV || process.env.NODE_ENV !== 'test') {
-        if (this.alreadyRanToday()) {
-          console.log('✋ Already generated posts today. Skipping...');
-          
-          // Show topic tracker stats
-          const stats = this.topicTracker.getStats();
-          console.log(`📊 Topic Tracker Stats: ${stats.totalTopics} topics tracked`);
-          return;
-        }
-      } else {
-        console.log('🧪 Test mode: Bypassing "already ran today" check');
+      // Test mode logging
+      if (process.env.NODE_ENV === 'test') {
+        console.log('🧪 Test mode: Single post generation');
       }
 
       // Fetch trending topics
@@ -805,19 +796,7 @@ export default function ${this.toPascalCase(content.slug)}() {
     }
   }
 
-  alreadyRanToday() {
-    if (!fs.existsSync(this.config.lastRunFile)) return false;
-    
-    try {
-      const lastRun = JSON.parse(fs.readFileSync(this.config.lastRunFile, 'utf8'));
-      const lastRunDate = new Date(lastRun.date).toDateString();
-      const today = new Date().toDateString();
-      
-      return lastRunDate === today;
-    } catch (error) {
-      return false;
-    }
-  }
+
 
   saveRunInfo(results) {
     const runInfo = {
