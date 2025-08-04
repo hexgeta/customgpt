@@ -141,30 +141,30 @@ export default function FamilyReunificationInPortugalProcess() {
       <h2 id="processing-times">Processing Times and Expectations</h2>
       <p>Understanding realistic processing timeframes helps applicants plan effectively and manage expectations throughout the family reunification process.</p>
 
-      <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-        <tr style="background-color: #f5f5f5;">
-          <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><strong>Stage</strong></th>
-          <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><strong>Expected Timeline</strong></th>
+      <table style={{width: '100%', borderCollapse: 'collapse', margin: '20px 0'}}>
+        <tr style={{backgroundColor: '#f5f5f5'}}>
+          <th style={{border: '1px solid #ddd', padding: '12px', textAlign: 'left'}}><strong>Stage</strong></th>
+          <th style={{border: '1px solid #ddd', padding: '12px', textAlign: 'left'}}><strong>Expected Timeline</strong></th>
         </tr>
         <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;">Document Preparation</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">4-8 weeks</td>
+          <td style={{border: '1px solid #ddd', padding: '12px'}}>Document Preparation</td>
+          <td style={{border: '1px solid #ddd', padding: '12px'}}>4-8 weeks</td>
         </tr>
         <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;">AIMA Appointment Booking</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">3-8 months</td>
+          <td style={{border: '1px solid #ddd', padding: '12px'}}>AIMA Appointment Booking</td>
+          <td style={{border: '1px solid #ddd', padding: '12px'}}>3-8 months</td>
         </tr>
         <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;">Application Processing</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">2-6 months</td>
+          <td style={{border: '1px solid #ddd', padding: '12px'}}>Application Processing</td>
+          <td style={{border: '1px solid #ddd', padding: '12px'}}>2-6 months</td>
         </tr>
         <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;">Decision Notification</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">1-2 weeks</td>
+          <td style={{border: '1px solid #ddd', padding: '12px'}}>Decision Notification</td>
+          <td style={{border: '1px solid #ddd', padding: '12px'}}>1-2 weeks</td>
         </tr>
         <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;">Permit Collection</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">2-4 weeks</td>
+          <td style={{border: '1px solid #ddd', padding: '12px'}}>Permit Collection</td>
+          <td style={{border: '1px solid #ddd', padding: '12px'}}>2-4 weeks</td>
         </tr>
       </table>
 
