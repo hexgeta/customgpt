@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   }
 }
 
-export default function 2024UpdateAimaAppointmentScheduling() {
+export default function UpdateAimaAppointmentScheduling2024() {
   const tableOfContents = [
     {
         "title": "Introduction",

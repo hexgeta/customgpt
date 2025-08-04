@@ -711,10 +711,17 @@ export default function ${this.toPascalCase(content.slug)}() {
   }
 
   toPascalCase(slug) {
-    return slug
+    let pascalCase = slug
       .split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join('');
+    
+    // Ensure function name starts with a letter (JavaScript requirement)
+    if (/^[0-9]/.test(pascalCase)) {
+      pascalCase = 'BlogPost' + pascalCase;
+    }
+    
+    return pascalCase;
   }
 
   // Main execution function
