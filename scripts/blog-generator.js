@@ -83,6 +83,16 @@ class AutomatedBlogGenerator {
       uncoveredTopics.push(...variations);
     }
     
+    // Store topic analysis for error reporting
+    this.lastTopicAnalysis = {
+      originalTopics: topics,
+      uniqueTopics: uniqueTopics,
+      uncoveredTopics: uncoveredTopics,
+      originalCount: topics.length,
+      uniqueCount: uniqueTopics.length,
+      uncoveredCount: uncoveredTopics.length
+    };
+    
     return uncoveredTopics.slice(0, this.config.postsPerDay);
   }
 
@@ -744,6 +754,30 @@ export default function ${this.toPascalCase(content.slug)}() {
       const topics = await this.fetchTrendingTopics();
       console.log(`📋 Found ${topics.length} topics to process`);
 
+      // Check if no topics available and send error notification
+      if (topics.length === 0) {
+        console.log('⚠️ No new topics available for processing. Sending error notification...');
+        
+        // Get detailed topic analysis from the fetch process
+        const analysis = this.lastTopicAnalysis || {};
+        const duplicateTopics = this.topicTracker.getStats();
+        
+        await this.emailNotifier.sendErrorNotification('NO_NEW_TOPICS', {
+          topicsFound: analysis.originalCount || 0,
+          topicsAfterDuplicateCheck: analysis.uncoveredCount || 0,
+          duplicateTopics: `${duplicateTopics.totalTopics} topics already covered`,
+          recentNewsTopics: analysis.originalTopics ? analysis.originalTopics.slice(0, 10).map(t => ({
+            title: t.title,
+            source: t.source || 'News API',
+            publishedAt: t.publishedAt || 'Unknown date'
+          })) : [],
+          timestamp: new Date().toISOString()
+        });
+        
+        console.log('📧 Error notification sent. Exiting gracefully.');
+        return;
+      }
+
       // Generate content for each topic
       const results = [];
       for (let i = 0; i < topics.length; i++) {
@@ -792,6 +826,19 @@ export default function ${this.toPascalCase(content.slug)}() {
 
     } catch (error) {
       console.error('❌ Error in blog generation:', error);
+      
+      // Send error notification
+      try {
+        await this.emailNotifier.sendErrorNotification('API_ERROR', {
+          error: error.message,
+          stack: error.stack,
+          timestamp: new Date().toISOString()
+        });
+        console.log('📧 Error notification sent.');
+      } catch (emailError) {
+        console.error('⚠️ Failed to send error notification:', emailError.message);
+      }
+      
       process.exit(1);
     }
   }

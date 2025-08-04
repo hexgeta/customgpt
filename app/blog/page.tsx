@@ -67,7 +67,7 @@ function BlogCard({ post }: { post: BlogPost }) {
 export default async function BlogIndex() {
   const blogPosts = await getAllBlogPosts()
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Sticky Sales Banner */}
       <div className="sticky top-5 z-50 bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg rounded-lg mx-4 sm:mx-6">
         <div className="max-w-7xl mx-auto px-4 py-3">

@@ -185,6 +185,118 @@ Generated: ${new Date().toLocaleString()}`;
       return await this.sendBlogCompletionNotification(fallbackPosts);
     }
   }
+
+  async sendErrorNotification(errorType, details) {
+    if (!this.resend || !process.env.RESEND_API_KEY) {
+      console.log('⚠️ Resend API key not found. Skipping error email notification.');
+      return;
+    }
+
+    try {
+      console.log(`📧 Sending error notification: ${errorType}`);
+
+      let emailText = '';
+      let subject = '';
+
+      switch (errorType) {
+        case 'NO_NEW_TOPICS':
+          subject = 'Blog Automation Alert - No New Topics Available';
+          
+          let recentTopicsList = '';
+          if (details.recentNewsTopics && details.recentNewsTopics.length > 0) {
+            recentTopicsList = `
+RECENT TOPICS DISCOVERED FROM NEWS API:
+${details.recentNewsTopics.map((topic, index) => 
+  `${index + 1}. "${topic.title}"
+   Source: ${topic.source}
+   Published: ${topic.publishedAt}`
+).join('\n\n')}
+
+${details.recentNewsTopics.length >= 10 ? '(Showing first 10 topics)' : `(Total: ${details.recentNewsTopics.length} topics found)`}
+`;
+          } else {
+            recentTopicsList = `
+RECENT TOPICS: No topics found from News API
+`;
+          }
+
+          emailText = `Blog Automation Status Report
+
+⚠️ ISSUE: No new blog posts could be generated
+
+REASON: All discovered topics were marked as duplicates
+
+DETAILS:
+- Topics found from News API: ${details.topicsFound || 0}
+- After duplicate filtering: ${details.topicsAfterDuplicateCheck || 0}
+- Previously covered topics: ${details.duplicateTopics || 'Unknown'}
+${recentTopicsList}
+IMPACT: No new content was published in this cycle.
+
+ANALYSIS:
+${details.topicsFound === 0 ? 
+  '• News API returned no results - possibly no recent immigration news' :
+  '• Topics were found but all have been covered before'
+}
+
+NEXT STEPS:
+1. This is normal - the system prevents duplicate content
+2. New unique topics will be processed in future runs
+3. If topics look fresh but are being marked as duplicates, the similarity threshold may be too strict
+4. You can manually clear old topics if needed
+
+System continues to monitor for new immigration topics every 10 minutes.
+
+---
+Automated Blog Generation System
+${new Date().toISOString()}`;
+          break;
+
+        case 'API_ERROR':
+          subject = 'Blog Automation Error - API Failure';
+          emailText = `Blog Automation Error Report
+
+❌ ERROR: API failure during blog generation
+
+DETAILS: ${details.error || 'Unknown error'}
+
+IMPACT: No new content was published in this cycle.
+
+NEXT STEPS: The system will retry in the next scheduled run.
+
+---
+Automated Blog Generation System
+${new Date().toISOString()}`;
+          break;
+
+        default:
+          subject = 'Blog Automation Error';
+          emailText = `Blog Automation Error Report
+
+❌ ERROR: ${errorType}
+
+DETAILS: ${JSON.stringify(details, null, 2)}
+
+---
+Automated Blog Generation System
+${new Date().toISOString()}`;
+      }
+
+      const result = await this.resend.emails.send({
+        from: this.fromEmail,
+        to: this.toEmail,
+        subject: subject,
+        text: emailText,
+      });
+
+      console.log('✅ Error notification sent successfully:', result.id);
+      return result;
+
+    } catch (error) {
+      console.error('❌ Failed to send error notification:', error);
+      throw error;
+    }
+  }
 }
 
 module.exports = EmailNotifier;
