@@ -4,7 +4,7 @@ const path = require('path');
 class TopicTracker {
   constructor() {
     this.trackerFile = path.join(__dirname, 'generated-topics.json');
-    this.similarityThreshold = 0.7; // 70% similarity threshold
+    this.similarityThreshold = 0.85; // 85% similarity threshold (less aggressive)
   }
 
   // Load existing topics from file
