@@ -154,7 +154,7 @@ export default function DocumentChecklist() {
       date="2024-02-04"
       author="Miguel Pires"
       content={content}
-      category="Immigration"
+      category="Document Checklist"
       estimatedReadTime={12}
       image={{
         src: "/bg4.jpg",

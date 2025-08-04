@@ -138,7 +138,7 @@ export default function EmergencyAppointments() {
       date="2024-01-22"
       author="Miguel Pires"
       content={content}
-      category="Immigration"
+      category="AIMA Update"
       estimatedReadTime={12}
       image={{
         src: "/bg1.jpg",

@@ -1,0 +1,28 @@
+# Blog Generation Environment Variables
+
+# OpenAI API Key (required for content generation)
+# Get from: https://platform.openai.com/api-keys
+OPENAI_API_KEY=your_openai_api_key_here
+
+# News API Key (required for trending topics)
+# Get from: https://newsapi.org/register
+NEWS_API_KEY=your_news_api_key_here
+
+# Email Notifications (Optional)
+# Get Resend API key from: https://resend.com
+RESEND_API_KEY=your_resend_api_key_here
+FROM_EMAIL=blog@yourdomain.com
+NOTIFICATION_EMAIL=your@email.com
+
+# Optional: Customize generation settings
+POSTS_PER_DAY=10
+GENERATION_TIME=09:00
+TIMEZONE=Europe/Lisbon
+
+# Vercel Cron Security (Production)
+CRON_SECRET=your_secure_random_string_here
+
+# Optional: Content customization
+BLOG_CATEGORY=Immigration
+MIN_WORD_COUNT=1500
+MAX_WORD_COUNT=2500

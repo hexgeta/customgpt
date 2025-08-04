@@ -25,7 +25,7 @@ export default function AimaAppointmentGuide() {
       description="A comprehensive guide to understanding and navigating the AIMA appointment system in Portugal, including waiting times, booking strategies, and legal solutions for faster processing."
       date="2024-02-20"
       author="Miguel Silva"
-      category="Immigration"
+      category="Process Guide"
       estimatedReadTime={12}
       tableOfContents={tableOfContents}
       content={

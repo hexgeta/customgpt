@@ -199,7 +199,7 @@ export default function BlogPost({
             <div>
               <h3 className="font-bold text-lg sm:text-xl mb-2 sm:mb-3 text-center sm:text-left">{author}</h3>
               <p className="text-gray-700 text-sm sm:text-base mb-4 leading-relaxed">
-                Miguel is a certified immigration expert with over 10 years of experience helping people navigate Portuguese immigration processes. He specializes in complex AIMA cases and has helped hundreds of clients successfully obtain their visas and permits through both standard processes and legal interventions.
+                Miguel Pires is a certified immigration expert with over 10 years of experience helping people navigate Portuguese immigration processes. He specializes in complex AIMA cases and has helped hundreds of clients successfully obtain their visas and permits through both standard processes and legal interventions.
               </p>
               <div className="flex justify-center sm:justify-start gap-4">
                 <Link 
