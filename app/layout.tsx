@@ -3,6 +3,7 @@ import { DM_Sans } from 'next/font/google'
 import './globals.css'
 import { Toaster } from "@/components/ui/toaster"
 import Script from 'next/script'
+import FooterWrapper from './FooterWrapper'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -51,9 +52,8 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-background font-dm-sans antialiased">
         {children}
+        <FooterWrapper />
         <Toaster />
-        
-
       </body>
     </html>
   )

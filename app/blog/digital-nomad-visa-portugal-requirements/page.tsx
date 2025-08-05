@@ -3,10 +3,10 @@ import BlogPost from '../components/BlogPost'
 
 export const metadata: Metadata = {
   title: "Digital Nomad Visa Portugal Requirements",
-  description: "Complete guide to Portugal's Digital Nomad Visa",
+  description: "Complete guide to Portugal's Digital Nomad Visa requirements, application process, and eligibility criteria for remote workers seeking residency",
   openGraph: {
     title: "Digital Nomad Visa Portugal Requirements",
-    description: "Complete guide to Portugal's Digital Nomad Visa",
+    description: "Complete guide to Portugal's Digital Nomad Visa requirements, application process, and eligibility criteria for remote workers seeking residency",
   }
 }
 
@@ -57,8 +57,8 @@ export default function DigitalNomadVisaPortugalRequirements() {
   return (
     <BlogPost
       title="Digital Nomad Visa Portugal Requirements"
-      description="Complete guide to Portugal's Digital Nomad Visa"
-      date="2025-08-04"
+      description="Complete guide to Portugal's Digital Nomad Visa requirements, application process, and eligibility criteria for remote workers seeking residency"
+      date="2025-08-05"
       author="Miguel Pires"
       category="Digital Nomad"
       estimatedReadTime={12}

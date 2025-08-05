@@ -167,7 +167,7 @@ class AutomatedBlogGenerator {
       },
       {
         title: "Digital Nomad Visa Portugal Requirements",
-        description: "Complete guide to Portugal's Digital Nomad Visa",
+        description: "Complete guide to Portugal's Digital Nomad Visa requirements, application process, and eligibility criteria for remote workers",
         keyword: "digital nomad",
         category: "Visa Guide",
         type: "evergreen",
@@ -183,7 +183,7 @@ class AutomatedBlogGenerator {
       },
       {
         title: "Portugal Work Permit Application Guide",
-        description: "How to apply for work permits in Portugal",
+        description: "Comprehensive guide to applying for work permits in Portugal, including requirements, processing times, and step-by-step procedures",
         keyword: "work permit",
         category: "Work Visa",
         type: "evergreen",
@@ -194,12 +194,61 @@ class AutomatedBlogGenerator {
 
   removeDuplicateTopics(topics) {
     const seen = new Set();
+    const keywords = new Set();
+    
     return topics.filter(topic => {
-      const key = topic.title.toLowerCase().slice(0, 50);
-      if (seen.has(key)) return false;
-      seen.add(key);
+      // Check exact title matches (first 50 chars)
+      const titleKey = topic.title.toLowerCase().slice(0, 50);
+      if (seen.has(titleKey)) {
+        console.log(`🔄 Exact title duplicate removed: ${topic.title}`);
+        return false;
+      }
+      
+      // Check keyword similarity for semantic duplicates
+      if (topic.keyword) {
+        const keywordKey = topic.keyword.toLowerCase().trim();
+        
+        // Check for exact keyword matches
+        if (keywords.has(keywordKey)) {
+          console.log(`🔄 Keyword duplicate removed: ${topic.title} (keyword: ${topic.keyword})`);
+          return false;
+        }
+        
+        // Check for semantic similarity in keywords
+        for (const existingKeyword of keywords) {
+          if (this.areKeywordsSimilar(keywordKey, existingKeyword)) {
+            console.log(`🔄 Similar keyword duplicate removed: ${topic.title} (${keywordKey} ≈ ${existingKeyword})`);
+            return false;
+          }
+        }
+        
+        keywords.add(keywordKey);
+      }
+      
+      seen.add(titleKey);
       return true;
     });
+  }
+
+  // Check if two keywords are semantically similar
+  areKeywordsSimilar(keyword1, keyword2) {
+    // Exact match
+    if (keyword1 === keyword2) return true;
+    
+    // Check if one keyword contains the other (for variations like "golden visa" vs "portugal golden visa")
+    if (keyword1.includes(keyword2) || keyword2.includes(keyword1)) {
+      return true;
+    }
+    
+    // Check for common word overlap
+    const words1 = new Set(keyword1.split(/\s+/));
+    const words2 = new Set(keyword2.split(/\s+/));
+    const intersection = new Set([...words1].filter(x => words2.has(x)));
+    const union = new Set([...words1, ...words2]);
+    
+    // If 70% or more words overlap, consider similar
+    const similarity = intersection.size / union.size;
+    return similarity >= 0.7;
   }
 
   // Generate topic variations when we need more content
@@ -233,10 +282,13 @@ class AutomatedBlogGenerator {
       const angle = angles[i % angles.length];
       const topic = topics[i % topics.length];
       
+      // Extract a proper keyword for the variation
+      const properKeyword = this.extractKeywordFromContent(angle + topic, '');
+      
       variations.push({
         title: angle + topic,
         description: `Professional guidance on ${topic.toLowerCase()}`,
-        keyword: topic.toLowerCase().replace(/\s+/g, ' '),
+        keyword: properKeyword,
         type: "variation"
       });
     }
@@ -249,11 +301,9 @@ class AutomatedBlogGenerator {
     console.log('🔄 Initializing topic tracker with existing posts...');
     
     const stats = this.topicTracker.getStats();
-    if (stats.totalTopics > 0) {
-      console.log(`✅ Topic tracker already initialized with ${stats.totalTopics} topics`);
-      return;
-    }
+    console.log(`📊 Current tracker stats: ${stats.totalTopics} topics`);
     
+    // Force re-scan if we have very few topics compared to actual blog posts
     const blogDir = this.config.blogPath;
     if (!fs.existsSync(blogDir)) {
       console.log('📁 Blog directory not found, creating...');
@@ -262,6 +312,24 @@ class AutomatedBlogGenerator {
     }
     
     const entries = fs.readdirSync(blogDir, { withFileTypes: true });
+    const actualPostCount = entries.filter(entry => 
+      entry.isDirectory() && 
+      entry.name !== 'components' && 
+      fs.existsSync(path.join(blogDir, entry.name, 'page.tsx'))
+    ).length;
+    
+    console.log(`📁 Found ${actualPostCount} actual blog posts in directory`);
+    
+    // If tracker has significantly fewer topics than actual posts, re-scan
+    if (stats.totalTopics < actualPostCount * 0.8) {
+      console.log('🔄 Re-scanning all posts due to tracker/directory mismatch...');
+      // Clear existing tracker to rebuild from scratch
+      this.topicTracker.saveTopics({ topics: [], lastUpdated: new Date().toISOString() });
+    } else if (stats.totalTopics > 0) {
+      console.log(`✅ Topic tracker already initialized with ${stats.totalTopics} topics`);
+      return;
+    }
+    
     let addedCount = 0;
     
     for (const entry of entries) {
@@ -303,10 +371,20 @@ class AutomatedBlogGenerator {
       }
     }
     
+    // Check for common topic patterns and extract main keyword
+    if (titleLower.includes('golden visa')) return 'golden visa';
+    if (titleLower.includes('digital nomad')) return 'digital nomad';
+    if (titleLower.includes('work permit')) return 'work permit';
+    if (titleLower.includes('family reunification')) return 'family reunification';
+    if (titleLower.includes('aima')) return 'AIMA appointments';
+    if (titleLower.includes('visa')) return 'visa';
+    if (titleLower.includes('permit')) return 'permit';
+    if (titleLower.includes('residence')) return 'residence permit';
+    
     // Fallback: use first significant words from title
     const words = title.split(' ').filter(word => 
       word.length > 3 && 
-      !['the', 'and', 'for', 'with', 'your'].includes(word.toLowerCase())
+      !['the', 'and', 'for', 'with', 'your', 'guide', 'complete', 'comprehensive'].includes(word.toLowerCase())
     );
     
     return words.slice(0, 2).join(' ').toLowerCase();

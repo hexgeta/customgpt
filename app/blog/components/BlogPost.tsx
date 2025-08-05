@@ -113,23 +113,6 @@ export default function BlogPost({
           <h1 itemProp="headline" className="text-2xl sm:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">{title}</h1>
           
           <p itemProp="description" className="text-base sm:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed">{description}</p>
-          
-          <div className="flex items-center gap-4 pt-4 border-t border-gray-100" itemProp="author" itemScope itemType="https://schema.org/Person">
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden shrink-0">
-              <Image
-                src="/Miguel.jpg"
-                alt={author}
-                fill
-                sizes="(max-width: 640px) 48px, 56px"
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div>
-              <p className="font-medium text-gray-900 text-base sm:text-lg" itemProp="name">{author}</p>
-              <p className="text-gray-600 text-sm" itemProp="jobTitle">Immigration Expert</p>
-            </div>
-          </div>
         </header>
 
         {/* Featured Image */}
@@ -182,36 +165,7 @@ export default function BlogPost({
         >
           {content}
         </div>
-        
-        {/* Author Bio - Mobile Optimized */}
-        <footer className="mt-12 sm:mt-16 p-4 sm:p-8 bg-gray-50 rounded-lg">
-          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">About the Author</h2>
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shrink-0">
-              <Image
-                src="/Miguel.jpg"
-                alt={author}
-                fill
-                sizes="(max-width: 640px) 80px, 96px"
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <h3 className="font-bold text-lg sm:text-xl mb-2 sm:mb-3 text-center sm:text-left">{author}</h3>
-              <p className="text-gray-700 text-sm sm:text-base mb-4 leading-relaxed">
-                Miguel Pires is a certified immigration expert with over 10 years of experience helping people navigate Portuguese immigration processes. He specializes in complex AIMA cases and has helped hundreds of clients successfully obtain their visas and permits through both standard processes and legal interventions.
-              </p>
-              <div className="flex justify-center sm:justify-start gap-4">
-                <Link 
-                  href="/" 
-                  className="text-blue-600 hover:text-blue-700 font-medium text-sm sm:text-base"
-                >
-                  Get legal help →
-                </Link>
-              </div>
-            </div>
-          </div>
-        </footer>
+
       </article>
     </>
   )

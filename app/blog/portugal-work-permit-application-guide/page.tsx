@@ -3,10 +3,10 @@ import BlogPost from '../components/BlogPost'
 
 export const metadata: Metadata = {
   title: "Portugal Work Permit Application Guide",
-  description: "How to apply for work permits in Portugal",
+  description: "Comprehensive guide to applying for work permits in Portugal, including requirements, processing times, and step-by-step procedures",
   openGraph: {
     title: "Portugal Work Permit Application Guide",
-    description: "How to apply for work permits in Portugal",
+    description: "Comprehensive guide to applying for work permits in Portugal, including requirements, processing times, and step-by-step procedures",
   }
 }
 
@@ -57,8 +57,8 @@ export default function PortugalWorkPermitApplicationGuide() {
   return (
     <BlogPost
       title="Portugal Work Permit Application Guide"
-      description="How to apply for work permits in Portugal"
-      date="2025-08-04"
+      description="Comprehensive guide to applying for work permits in Portugal, including requirements, processing times, and step-by-step procedures"
+      date="2025-08-05"
       author="Miguel Pires"
       category="Work Visa"
       estimatedReadTime={12}
