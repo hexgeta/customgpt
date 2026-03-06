@@ -1,42 +1,40 @@
 import type { Metadata } from 'next'
-import { DM_Sans } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster } from "@/components/ui/toaster"
-import Script from 'next/script'
-import FooterWrapper from './FooterWrapper'
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-dm-sans',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
 })
 
 export const metadata: Metadata = {
-  title: 'Immigration Legal Support',
-  description: 'Specialized legal assistance to secure your AIMA appointment. Professional support with administrative processes in Portuguese courts.',
-  metadataBase: new URL('https://www.apoiojuridico-imigracao.com'),
+  title: 'CustomGPT.ai - Business AI for Trusted Answers',
+  description: 'Create no-code AI agents powered by your business data. No hallucinations. No guessing. Trusted by 10,000+ organizations.',
+  metadataBase: new URL('https://customgpt.ai'),
   icons: {
-    icon: '/favicon.jpg',
+    icon: '/customgpt-logo.svg',
   },
   openGraph: {
-    title: 'Immigration Legal Support',
-    description: 'Specialized legal assistance to secure your AIMA appointment. Professional support with administrative processes in Portuguese courts.',
-    url: 'https://www.apoiojuridico-imigracao.com',
-    siteName: 'Immigration Legal Support',
+    title: 'CustomGPT.ai - Business AI for Trusted Answers',
+    description: 'Create no-code AI agents powered by your business data. No hallucinations. No guessing. Trusted by 10,000+ organizations.',
+    url: 'https://customgpt.ai',
+    siteName: 'CustomGPT.ai',
     images: [{
-      url: '/social-image.png',
+      url: '/opengraph.png',
       width: 1200,
       height: 630,
-      alt: 'Immigration Legal Support Preview'
+      alt: 'CustomGPT.ai - Business AI for Trusted Answers'
     }],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Immigration Legal Support',
-    description: 'Specialized legal assistance to secure your AIMA appointment. Professional support with administrative processes in Portuguese courts.',
-    images: ['/social-image.png'],
+    title: 'CustomGPT.ai - Business AI for Trusted Answers',
+    description: 'Create no-code AI agents powered by your business data. No hallucinations. No guessing.',
+    images: ['/opengraph.png'],
   },
 }
 
@@ -46,13 +44,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable}`}>
-      <head>
-        <script defer data-domain="apoiojuridico-imigracao.com" src="https://plausible.io/js/script.js"></script>
-      </head>
-      <body className="min-h-screen bg-background font-dm-sans antialiased">
+    <html lang="en" className={`${inter.variable}`}>
+      <body className="min-h-screen bg-white font-sans antialiased">
         {children}
-        <FooterWrapper />
         <Toaster />
       </body>
     </html>
