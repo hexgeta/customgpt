@@ -617,12 +617,12 @@ export default function CustomGPTLandingPage(): ReactElement {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-[#2563eb] py-24" id="cta">
+        <section className="bg-[#2563eb] py-16 sm:py-24" id="cta">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
               Ready to Build Your AI Agent?
             </h2>
-            <p className="text-blue-100 text-lg mb-10 max-w-2xl mx-auto">
+            <p className="text-blue-100 text-base sm:text-lg mb-8 sm:mb-10 max-w-2xl mx-auto">
               Join 10,000+ organizations using CustomGPT.ai to deliver trusted, accurate answers from their own data.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -643,16 +643,16 @@ export default function CustomGPTLandingPage(): ReactElement {
         </section>
 
         {/* Footer */}
-        <footer className="bg-gray-900 text-gray-400 py-12">
+        <footer className="bg-gray-900 text-gray-400 py-8 sm:py-12">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
               <div className="flex items-center gap-3">
                 <Image
-                  src="/customgpt-logo.svg"
+                  src="/customgpt-nav-logo.svg"
                   alt="CustomGPT.ai"
-                  width={140}
-                  height={32}
-                  className="object-contain brightness-200"
+                  width={130}
+                  height={24}
+                  className="object-contain brightness-200 invert"
                 />
               </div>
               <div className="flex items-center gap-6 text-sm">
