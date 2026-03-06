@@ -180,43 +180,29 @@ export default function CustomGPTLandingPage(): ReactElement {
   return (
     <main className={`${inter.className} min-h-screen`}>
       {/* Header */}
-      <header className="w-full h-20 fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <div className="max-w-[1440px] mx-auto h-full px-4 flex items-center justify-between">
-          <div className="flex items-center ml-4">
+      <header className="w-full h-16 md:h-20 fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div className="max-w-[1440px] mx-auto h-full px-4 sm:px-6 flex items-center justify-between">
+          <div className="flex items-center">
             <Image
-              src="/customgpt-logo.svg"
+              src="/customgpt-nav-logo.svg"
               alt="CustomGPT.ai"
-              width={160}
-              height={36}
-              className="object-contain"
+              width={140}
+              height={26}
+              className="object-contain h-6 md:h-7 w-auto"
               priority
             />
           </div>
-          <div className="hidden lg:flex items-center gap-8 py-8">
-            <nav className="flex items-center gap-10 bg-white/90 backdrop-blur-md px-8 py-4 rounded-full border border-gray-200/50 shadow-sm">
-              <button onClick={() => scrollToSection('how-it-works')} className="text-gray-700 text-base font-medium leading-none hover:text-[#2563eb] transition-all duration-300 relative group">
-                How it Works
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2563eb] group-hover:w-full transition-all duration-300 rounded-full opacity-0 group-hover:opacity-100" />
-              </button>
-              <button onClick={() => scrollToSection('features')} className="text-gray-700 text-base font-medium leading-none hover:text-[#2563eb] transition-all duration-300 relative group">
-                Features
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2563eb] group-hover:w-full transition-all duration-300 rounded-full opacity-0 group-hover:opacity-100" />
-              </button>
-              <button onClick={() => scrollToSection('use-cases')} className="text-gray-700 text-base font-medium leading-none hover:text-[#2563eb] transition-all duration-300 relative group">
-                Use Cases
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2563eb] group-hover:w-full transition-all duration-300 rounded-full opacity-0 group-hover:opacity-100" />
-              </button>
-              <button onClick={() => scrollToSection('pricing')} className="text-gray-700 text-base font-medium leading-none hover:text-[#2563eb] transition-all duration-300 relative group">
-                Pricing
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2563eb] group-hover:w-full transition-all duration-300 rounded-full opacity-0 group-hover:opacity-100" />
-              </button>
-              <button onClick={() => scrollToSection('faq')} className="text-gray-700 text-base font-medium leading-none hover:text-[#2563eb] transition-all duration-300 relative group">
-                FAQ
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2563eb] group-hover:w-full transition-all duration-300 rounded-full opacity-0 group-hover:opacity-100" />
-              </button>
+          <div className="hidden lg:flex items-center gap-6">
+            <nav className="flex items-center gap-8 bg-white/90 backdrop-blur-md px-6 py-3 rounded-full border border-gray-200/50 shadow-sm">
+              {['how-it-works', 'features', 'use-cases', 'pricing', 'faq'].map((id) => (
+                <button key={id} onClick={() => scrollToSection(id)} className="text-gray-700 text-sm font-medium leading-none hover:text-[#2563eb] transition-all duration-300 relative group whitespace-nowrap">
+                  {id === 'faq' ? 'FAQ' : id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2563eb] group-hover:w-full transition-all duration-300 rounded-full opacity-0 group-hover:opacity-100" />
+                </button>
+              ))}
             </nav>
             <Button
-              className="px-6 py-6 bg-[#2563eb] text-white text-base font-medium rounded-full hover:bg-[#1d4ed8] transition-all duration-300"
+              className="px-5 py-5 bg-[#2563eb] text-white text-sm font-medium rounded-full hover:bg-[#1d4ed8] transition-all duration-300"
               onClick={() => scrollToSection('cta')}
             >
               Try for Free
@@ -225,13 +211,13 @@ export default function CustomGPTLandingPage(): ReactElement {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden flex flex-col justify-center items-center group mr-4"
+            className="lg:hidden flex flex-col justify-center items-center group p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            <span className="w-5 h-[2px] bg-gray-700 my-[3px] transition-all duration-300 group-hover:bg-[#2563eb]" />
-            <span className="w-5 h-[2px] bg-gray-700 my-[3px] transition-all duration-300 group-hover:bg-[#2563eb]" />
-            <span className="w-5 h-[2px] bg-gray-700 my-[3px] transition-all duration-300 group-hover:bg-[#2563eb]" />
+            <span className="w-5 h-[2px] bg-gray-700 my-[3px]" />
+            <span className="w-5 h-[2px] bg-gray-700 my-[3px]" />
+            <span className="w-5 h-[2px] bg-gray-700 my-[3px]" />
           </button>
         </div>
       </header>
@@ -252,7 +238,7 @@ export default function CustomGPTLandingPage(): ReactElement {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ type: 'spring', duration: 0.3 }}
-              className="absolute right-4 top-24 w-64 bg-white backdrop-blur-md p-4 shadow-lg z-50 rounded-2xl border border-gray-200"
+              className="absolute right-4 top-20 w-64 bg-white backdrop-blur-md p-4 shadow-lg z-50 rounded-2xl border border-gray-200"
             >
               {['how-it-works', 'features', 'use-cases', 'pricing', 'faq'].map((id) => (
                 <button
@@ -274,34 +260,34 @@ export default function CustomGPTLandingPage(): ReactElement {
         )}
       </AnimatePresence>
 
-      <div className="pt-20">
+      <div className="pt-16 md:pt-20">
         {/* Hero Section */}
-        <section className="min-h-[85vh] relative overflow-hidden flex items-center bg-gradient-to-b from-[#f0f5ff] to-white">
+        <section className="min-h-[80vh] md:min-h-[85vh] relative overflow-hidden flex items-center bg-gradient-to-b from-[#f0f5ff] to-white">
           <div className="relative w-full max-w-6xl mx-auto py-8 md:py-20 px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-[#2563eb] text-sm font-medium px-4 py-2 rounded-full mb-6">
-                <Zap className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-[#2563eb] text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-full mb-6">
+                <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 Trusted by 10,000+ organizations
               </div>
-              <h1 className="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1]">
+              <h1 className="text-3xl tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1]">
                 Business AI for<br />
                 <span className="text-[#2563eb]">Trusted Answers</span>
               </h1>
-              <p className="max-w-2xl mx-auto text-lg text-gray-600 mt-6 md:text-xl">
+              <p className="max-w-2xl mx-auto text-base text-gray-600 mt-4 sm:mt-6 sm:text-lg md:text-xl px-2">
                 Answer complex questions using only <em>your</em> business information.
                 No hallucinations. No guessing.
               </p>
 
-              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
                 <Button
-                  className="px-8 py-6 bg-[#2563eb] text-white text-lg font-semibold rounded-full hover:bg-[#1d4ed8] transition-all duration-200 shadow-lg shadow-blue-200"
+                  className="px-6 sm:px-8 py-5 sm:py-6 bg-[#2563eb] text-white text-base sm:text-lg font-semibold rounded-full hover:bg-[#1d4ed8] transition-all duration-200 shadow-lg shadow-blue-200"
                   onClick={() => scrollToSection('cta')}
                 >
                   Start for Free
                 </Button>
                 <Button
                   variant="outline"
-                  className="px-8 py-6 text-lg font-semibold rounded-full border-gray-300 hover:border-[#2563eb] hover:text-[#2563eb] transition-all duration-200"
+                  className="px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-semibold rounded-full border-gray-300 hover:border-[#2563eb] hover:text-[#2563eb] transition-all duration-200"
                   onClick={() => scrollToSection('how-it-works')}
                 >
                   See How It Works
@@ -311,7 +297,7 @@ export default function CustomGPTLandingPage(): ReactElement {
             </div>
 
             {/* Hero Video */}
-            <div className="mt-16 max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-blue-100 border border-gray-200">
+            <div className="mt-10 sm:mt-16 max-w-4xl mx-auto rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shadow-blue-100 border border-gray-200">
               <video
                 autoPlay
                 loop
@@ -347,13 +333,13 @@ export default function CustomGPTLandingPage(): ReactElement {
         </section>
 
         {/* Stats Section */}
-        <section className="bg-[#2563eb] py-16">
+        <section className="bg-[#2563eb] py-10 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
               {stats.map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
-                  <div className="text-blue-100 text-sm md:text-base">{stat.label}</div>
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2">{stat.value}</div>
+                  <div className="text-blue-100 text-xs sm:text-sm md:text-base">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -361,10 +347,10 @@ export default function CustomGPTLandingPage(): ReactElement {
         </section>
 
         {/* How It Works Section */}
-        <section className="bg-white py-24" id="how-it-works">
+        <section className="bg-white py-16 sm:py-24" id="how-it-works">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-10 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Launch in 3 Simple Steps
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -372,32 +358,32 @@ export default function CustomGPTLandingPage(): ReactElement {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
               {/* Steps List */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {steps.map((step, index) => (
                   <button
                     key={index}
                     onClick={() => setActiveStep(index)}
-                    className={`w-full text-left p-6 rounded-2xl border-2 transition-all duration-300 ${
+                    className={`w-full text-left p-4 sm:p-6 rounded-xl sm:rounded-2xl border-2 transition-all duration-300 ${
                       activeStep === index
                         ? 'border-[#2563eb] bg-blue-50 shadow-lg shadow-blue-100'
                         : 'border-gray-200 hover:border-gray-300 bg-white'
                     }`}
                   >
-                    <div className="flex items-start gap-4">
-                      <span className={`text-sm font-bold px-3 py-1 rounded-full ${
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <span className={`text-xs sm:text-sm font-bold px-2.5 sm:px-3 py-1 rounded-full flex-shrink-0 ${
                         activeStep === index ? 'bg-[#2563eb] text-white' : 'bg-gray-100 text-gray-500'
                       }`}>
                         {step.number}
                       </span>
                       <div>
-                        <h3 className={`text-xl font-bold mb-2 ${
+                        <h3 className={`text-lg sm:text-xl font-bold mb-1 sm:mb-2 ${
                           activeStep === index ? 'text-[#2563eb]' : 'text-gray-900'
                         }`}>
                           {step.title}
                         </h3>
-                        <p className="text-gray-600">{step.description}</p>
+                        <p className="text-gray-600 text-sm sm:text-base">{step.description}</p>
                       </div>
                     </div>
                   </button>
@@ -405,7 +391,7 @@ export default function CustomGPTLandingPage(): ReactElement {
               </div>
 
               {/* Step Video */}
-              <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-50">
+              <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-50 order-first md:order-last">
                 <video
                   key={activeStep}
                   autoPlay
@@ -422,10 +408,10 @@ export default function CustomGPTLandingPage(): ReactElement {
         </section>
 
         {/* Features Section */}
-        <section className="bg-gray-50 py-24" id="features">
+        <section className="bg-gray-50 py-16 sm:py-24" id="features">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-10 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Why Choose CustomGPT.ai?
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -433,11 +419,11 @@ export default function CustomGPTLandingPage(): ReactElement {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
               {features.map((feature) => {
                 const Icon = feature.icon
                 return (
-                  <div key={feature.title} className="bg-white p-8 rounded-2xl border border-gray-200 hover:border-[#2563eb]/30 hover:shadow-lg hover:shadow-blue-50 transition-all duration-300">
+                  <div key={feature.title} className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-[#2563eb]/30 hover:shadow-lg hover:shadow-blue-50 transition-all duration-300">
                     <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
                       <Icon className="w-6 h-6 text-[#2563eb]" />
                     </div>
@@ -451,17 +437,17 @@ export default function CustomGPTLandingPage(): ReactElement {
         </section>
 
         {/* Use Cases Section */}
-        <section className="bg-white py-24" id="use-cases">
+        <section className="bg-white py-16 sm:py-24" id="use-cases">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-10 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Built for Every Business Need
               </h2>
             </div>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               {useCases.map((uc) => (
-                <div key={uc.title} className="rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300">
-                  <div className="relative h-64">
+                <div key={uc.title} className="rounded-xl sm:rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300">
+                  <div className="relative h-48 sm:h-64">
                     <Image
                       src={uc.image}
                       alt={uc.title}
@@ -472,8 +458,8 @@ export default function CustomGPTLandingPage(): ReactElement {
                       {uc.stats}
                     </div>
                   </div>
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{uc.title}</h3>
+                  <div className="p-6 sm:p-8">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">{uc.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{uc.description}</p>
                   </div>
                 </div>
@@ -483,14 +469,14 @@ export default function CustomGPTLandingPage(): ReactElement {
         </section>
 
         {/* Testimonials Section */}
-        <section className="bg-gray-50 py-24">
+        <section className="bg-gray-50 py-16 sm:py-24">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 text-center mb-10 sm:mb-16">
               What Our Customers Say
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {testimonials.map((t) => (
-                <div key={t.name} className="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300">
+                <div key={t.name} className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300">
                   <div className="flex flex-col h-full">
                     <div className="flex items-center space-x-1 mb-6">
                       {[...Array(5)].map((_, i) => (
@@ -519,18 +505,18 @@ export default function CustomGPTLandingPage(): ReactElement {
         </section>
 
         {/* Pricing Section */}
-        <section className="bg-white py-24" id="pricing">
+        <section className="bg-white py-16 sm:py-24" id="pricing">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-10 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Simple, Transparent Pricing
               </h2>
               <p className="text-gray-600 text-lg">Start with a 7-day free trial. No credit card required.</p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
               {/* Standard */}
-              <div className="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300">
+              <div className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Standard</h3>
                 <div className="mb-6">
                   <span className="text-4xl font-bold text-gray-900">$89</span>
@@ -554,7 +540,7 @@ export default function CustomGPTLandingPage(): ReactElement {
               </div>
 
               {/* Premium */}
-              <div className="bg-[#2563eb] p-8 rounded-2xl text-white relative shadow-xl shadow-blue-200">
+              <div className="bg-[#2563eb] p-6 sm:p-8 rounded-xl sm:rounded-2xl text-white relative shadow-xl shadow-blue-200">
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-gray-900 text-sm font-bold px-4 py-1 rounded-full">
                   Most Popular
                 </div>
@@ -580,7 +566,7 @@ export default function CustomGPTLandingPage(): ReactElement {
               </div>
 
               {/* Enterprise */}
-              <div className="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300">
+              <div className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Enterprise</h3>
                 <div className="mb-6">
                   <span className="text-4xl font-bold text-gray-900">Custom</span>
@@ -606,10 +592,10 @@ export default function CustomGPTLandingPage(): ReactElement {
         </section>
 
         {/* FAQ Section */}
-        <section className="bg-gray-50 py-24" id="faq">
+        <section className="bg-gray-50 py-16 sm:py-24" id="faq">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8 sm:mb-12">
                 Frequently Asked Questions
               </h2>
               <Accordion type="single" collapsible className="w-full">
