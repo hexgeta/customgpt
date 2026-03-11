@@ -12,10 +12,8 @@ import {
   Plus,
   ChevronLeft,
   Bot,
+  Send,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
 const sidebarNav = [
@@ -35,35 +33,37 @@ export default function BackendLayout({
   const pathname = usePathname()
 
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-screen bg-[#09090b] text-zinc-100" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", fontFeatureSettings: "'cv02', 'cv03', 'cv04', 'cv11'" }}>
       {/* Sidebar */}
-      <aside className="w-64 border-r border-neutral-200 flex flex-col bg-neutral-50">
+      <aside className="w-60 border-r border-zinc-800/60 flex flex-col bg-[#0c0c0e]">
         {/* Logo */}
-        <div className="p-4 flex items-center gap-2">
-          <Bot className="h-6 w-6" />
-          <span className="font-semibold text-sm">CustomGPT.ai</span>
+        <div className="px-5 py-4 flex items-center gap-2.5">
+          <div className="h-7 w-7 rounded-lg bg-white flex items-center justify-center">
+            <Bot className="h-4 w-4 text-black" />
+          </div>
+          <span className="font-medium text-[13px] tracking-tight text-zinc-100">CustomGPT.ai</span>
         </div>
 
         {/* New Agent Button */}
-        <div className="px-3 mb-2">
-          <Button className="w-full justify-start gap-2 bg-black text-white hover:bg-neutral-800" size="sm">
-            <Plus className="h-4 w-4" />
+        <div className="px-3 mb-3">
+          <button className="w-full flex items-center justify-center gap-2 bg-white text-black rounded-lg px-3 py-2 text-[13px] font-medium hover:bg-zinc-200 transition-colors">
+            <Plus className="h-3.5 w-3.5" />
             New Agent
-          </Button>
+          </button>
         </div>
 
-        <Separator />
+        <div className="h-px bg-zinc-800/60 mx-3" />
 
         {/* Agent Name */}
         <div className="px-4 py-3">
-          <div className="flex items-center gap-2 text-sm">
-            <ChevronLeft className="h-4 w-4 text-neutral-400" />
-            <span className="font-medium text-neutral-700 truncate">My Enterprise S...</span>
+          <div className="flex items-center gap-2 text-[13px]">
+            <ChevronLeft className="h-3.5 w-3.5 text-zinc-500" />
+            <span className="font-medium text-zinc-400 truncate">My Enterprise S...</span>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-2 space-y-0.5">
+        <nav className="flex-1 px-3 space-y-0.5">
           {sidebarNav.map((item) => {
             const isActive = pathname.startsWith(item.href)
             return (
@@ -71,10 +71,10 @@ export default function BackendLayout({
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-colors",
+                  "flex items-center gap-2.5 px-3 py-2 text-[13px] rounded-lg transition-all",
                   isActive
-                    ? "bg-neutral-200 text-black font-medium"
-                    : "text-neutral-600 hover:bg-neutral-100 hover:text-black"
+                    ? "bg-zinc-800 text-white font-medium"
+                    : "text-zinc-500 hover:bg-zinc-800/50 hover:text-zinc-300"
                 )}
               >
                 <item.icon className="h-4 w-4" />
@@ -84,12 +84,18 @@ export default function BackendLayout({
           })}
         </nav>
 
-        <Separator />
+        <div className="h-px bg-zinc-800/60 mx-3" />
 
         {/* Copilot Input */}
         <div className="p-3">
-          <p className="text-xs text-neutral-500 mb-2 font-medium">CustomGPT.ai Copilot</p>
-          <Input placeholder="I need help with..." className="text-xs h-8" />
+          <p className="text-[11px] text-zinc-600 mb-2 font-medium tracking-wide uppercase">Copilot</p>
+          <div className="flex items-center gap-2 bg-zinc-800/50 border border-zinc-800 rounded-lg px-3 py-2">
+            <input
+              placeholder="I need help with..."
+              className="flex-1 bg-transparent text-[12px] text-zinc-400 placeholder:text-zinc-600 focus:outline-none"
+            />
+            <Send className="h-3 w-3 text-zinc-600" />
+          </div>
         </div>
       </aside>
 
